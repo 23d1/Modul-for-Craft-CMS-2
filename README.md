@@ -29,7 +29,7 @@ Don't upload modul-database.zip, and no need to upload the source files in `craf
 
 ### Database
 When you're done uploading the files, don't forget to update the information in `craft/config/db.php` to match that of your database.
-Once your done uploading the files to your hosting, you need to access your MySQL database to import the included zipped sql file (`modul-database.zip`) (typically through your host's phpMyAdmin or a free app like [Sequel Pro](https://www.sequelpro.com/)).
+Once you're done uploading the files to your hosting, you need to access your MySQL database to import the included zipped sql file (`modul-database.zip`) (typically through your host's phpMyAdmin or a free app like [Sequel Pro](https://www.sequelpro.com/)).
 
 ### Logging in
 The username is `admin` and the password is `password`.
