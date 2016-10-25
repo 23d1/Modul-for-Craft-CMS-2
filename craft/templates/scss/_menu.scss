@@ -61,11 +61,14 @@ $easing: cubic-bezier(.2,1,.23,1);
   transform: translateX(100%);
   transition: all $time $easing 0s;
   ul.nav {
+    list-style: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     font-size: 1rem;
     width: 100%;
     li {
       margin: 0;
-    	list-style: none;
     }
   }
   hr {
