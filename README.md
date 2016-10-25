@@ -34,6 +34,8 @@ Once your done uploading the files to your hosting, you need to access your MySQ
 ### Logging in
 The username is `admin` and the password is `password`.
 
+#### Ps. Don't forget to set your url under Settings > General, and change your user information under Users > admin.
+
 ---
 
 ## Quick Tutorial
