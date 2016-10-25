@@ -20,7 +20,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 ## Installation
 ### Server side files
 * #### The simple way
-Download Craft CMS from https://craftcms.com/ and extract on your desktop. Place the "app" folder from withing the `craft` folder into the `craft` folder inside this package and upload to your hosting platform/server.
+Download Craft CMS from https://craftcms.com/ and extract on your desktop. Place the `app` folder from withing the `craft` folder into the `craft` folder inside this package and upload to your hosting platform/server.
 
 * #### The Craft way
 You need to get Craft CMS and install on your hosting platform/server. You can download it at https://craftcms.com/ and follow the instructions for that at https://craftcms.com/docs/installing. Download this repository and replace the corresponding folders inside the `craft` folder with the stuff in the `craft` folder from this repository. Everything outside of the `craft` folder goes in the `public` folder.
