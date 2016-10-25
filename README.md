@@ -38,7 +38,7 @@ The username is `admin` and the password is `password`.
 
 ---
 
-## Quick Tutorial
+## Quick tutorial
 Start off by looking at the `Homepage` and `About` page. These are two very basic representations of what a page or post can look like. When you add things to the `Work structure`, things will not automatically show up somewhere, you have to create a page (look at the `Work` page in the `Pages structure`). If you decide to create more structures, you can then load them in like on the `Work` page (or any page/post). Keep in mind though, that in order for you to be able to add and render content, you need to add all the fields to that specific structure (look at the `Work` structure for guidance) or program your own version of that specific structure (or channel for that matter, if you want a news section or blog capabilities). Install, have a look around—and hopefully things will get a bit more clear.
 
 ---
@@ -47,7 +47,7 @@ For any other information, please refer to the [Craft CMS Documentation](https:/
 
 ---
 
-## Todo and known issues
+## To-do and known issues
 * Documentation of the back-end with front-end examples (way back on the back-burner).
 * Slideshows with "visible nearby" and no max-height set gets too much padding.
 * Various minor CSS/JS related issues for cross device support.
