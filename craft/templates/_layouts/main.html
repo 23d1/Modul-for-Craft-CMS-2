@@ -1,0 +1,169 @@
+{% if entry is defined and entry.title != "Home" %}
+  {% set title = entry.title %}
+{% endif %}
+{% includeCssFile "/fonts/Apercu/stylesheet.css" %}
+{% includeCssFile "/css/royalslider/royalslider.css" %}
+{% includeCssFile "/css/mediaelementplayer.min.css" %}
+{% includeCssFile "/scss/modul.min.css" %}
+{% includeCssFile "/css/video.min.css" %}
+
+{% includeJsFile "//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.runtime.min.js" %}
+{% includeJsFile "/js/jquery-3.1.1.min.js" %}
+{% includeJsFile "/js/plugins.min.js" %}
+{% includeJsFile "/js/mediaelement-and-player.min.js" %}
+{% includeJsFile "/js/ui.min.js" %}
+{% includeJs %}
+	// History
+	var history_transition_speed = 400;
+	var page_loader = 'Type-1';
+
+	// Interface
+	var default_easing = 'in-out';
+	var image_loaded_fade_speed = 200;
+	var slideshow_speed = 600;
+	var slideshow_control_navigation = 'bullets';
+	var cover_slideshow_autoplay_delay_time = 5000;
+	var header_bottom_margin = 0;
+
+{% if site.googleAnalytics|trim|length %}
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{{ site.googleAnalytics }}', 'auto');
+  ga('send', 'pageview');
+{% endif %}
+{% endincludejs %}
+
+{% if (site.backgroundColor|trim|length or site.textColor|trim|length or site.linkColor|trim|length or site.linkHoverColor|trim|length or site.menuBgColor|trim|length or site.menuTextColor|trim|length or site.menuLinkColor|trim|length or site.menuLinkHoverColor|trim|length) %}
+	{% set usercss %}
+		{% if site.backgroundColor|trim|length %}
+			body {
+				background-color: {{ site.backgroundColor }};
+				{% if site.textColor|trim|length %}
+					color: {{ site.textColor }};
+				{% endif %}
+			}
+		{% elseif site.textColor|trim|length %}
+			body {
+				color: {{ site.textColor }};
+			}
+		{% endif %}
+		{% if site.linkColor|trim|length %}
+		a {
+			color: {{ site.linkColor }}!important;
+		}
+		#menu-btn {
+			color: {{ site.linkColor }}!important;
+		}
+		.link-thick:after, #menu-btn:after, #menu-normal a:after, #menu-normal ul.nav li.active a:after {
+			background: {{ site.linkColor }}!important;
+		}
+		{% endif %}
+		{% if site.linkHoverColor|trim|length %}
+		a:hover {
+			color: {{ site.linkHoverColor }}!important;
+		}
+		#menu-btn:hover {
+			color: {{ site.linkHoverColor }}!important;
+		}
+		.link-thick:hover:after, #menu-btn:hover:after, #menu-normal a:hover:after, #menu-normal ul.nav li.active a:hover:after {
+			background: {{ site.linkHoverColor }}!important;
+		}
+		{% endif %}
+		{% if site.menuBgColor|trim|length %}
+			#menu-slide {
+				background: {{ site.menuBgColor }};
+				{% if site.menuTextColor|trim|length %}
+					color: {{ site.menuTextColor }};
+				{% endif %}
+			}
+		{% elseif site.menuTextColor|trim|length %}
+			#menu-slide {
+				color: {{ site.menuTextColor }};
+			}
+		{% endif %}
+		{% if site.menuLinkColor|trim|length %}
+			#menu-slide a, #menu-slide ul.nav li a, #menu-btn.open span {
+				color: {{ site.menuLinkColor }}!important;
+			}
+			#menu-slide a.link-thick:after, #menu-slide ul.nav li a.link-thick:after, body #menu-btn.open:after {
+				background: {{ site.menuLinkColor }}!important;
+			}
+		{% endif %}
+		{% if site.menuLinkHoverColor|trim|length %}
+			#menu-slide a:hover, #menu-slide ul.nav li a:hover, #menu-btn.open:hover span {
+				color: {{ site.menuLinkHoverColor }}!important;
+			}
+			#menu-slide ul.nav li a.link-thick:hover:after, body #menu-btn.open:hover:after {
+				background: {{ site.menuLinkHoverColor }}!important;
+			}
+		{% endif %}
+	{% endset %}
+{% includeCss usercss %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title>
+
+	<meta name="description" content="{{ "The module templates for Craft CMS"|t }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	{% if site.favicon|length %}<link rel="icon" href="{{ site.favicon.first().url }}">{% endif %}
+
+</head>
+<body class="{% if craft.request.isMobileBrowser(true) %}mobile{% else %}desktop{% endif %}">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+{% include "_includes/svg_defs" %}
+
+	<div id="wrap" class="is-entering">
+
+		{% block header %}
+			<div id="header" class="container-fluid pos-f-t">
+				<div class="row">
+					<div class="col-xs-12">
+
+						{% include "_includes/nav" %}
+
+					</div>
+				</div>
+			</div>
+			{% include '_includes/nav_toggle_menu' %}
+		{% endblock %}
+
+		<div id="change">
+
+			{% if entry.customCode|length %}
+				{{ entry.customCode|raw }}
+			{% endif %}
+
+			{% block body %}
+				<div id="content">
+
+					{% include '_includes/styling' %}
+
+					{% block main %}
+						<div class="row">
+							<div class="col-xs-12">
+								<h4>Default Content</h4>
+								<p>You should not see this.</p>
+							</div>
+						</div>
+					{% endblock %}
+				</div>
+			{% endblock %}
+			{% include '_includes/footer' %}
+		</div>
+
+	</div>
+
+</body>
+</html>

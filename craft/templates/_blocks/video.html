@@ -1,0 +1,10 @@
+{% set video = item.videoFile.first() %}
+{% set poster = item.imageFile.first() %}
+{% set bleed = item.bleed %}
+{% set shadow = item.shadow %}
+
+<div class="vid-holder{% if shadow %} shadow{% endif %}{% if bleed|length %} {{ bleed }}{% endif %}">
+  <video class="video" width="{{ poster.getWidth() }}" height="{{ poster.getHeight() }}" controls="controls" preload="none" poster="{{ poster.getUrl }}">
+    <source src="{{ video.getUrl }}" type="video/mp4">
+  </video>
+</div>

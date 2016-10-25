@@ -1,0 +1,17 @@
+{% set page = craft.request.getSegment(1) %}
+<nav style="font-weight: 500;">
+
+  <div class="float-xs-left">
+      <a id="logo" class="link-thick" href="{{ url('/') }}">{%- include "_images/logo" with {'class': 'logo'} -%}</a>
+  </div>
+
+  <div class="float-xs-right">
+    <div id="menu-toggle">
+      <div id="menu-btn" class="link-thick">
+        <span>menu</span>
+        <span>close</span>
+      </div>
+    </div>
+  </div>
+
+</nav>

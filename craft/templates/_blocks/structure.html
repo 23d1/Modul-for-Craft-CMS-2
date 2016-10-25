@@ -1,0 +1,6 @@
+<div class="clearfix"></div>
+<div class="packery col-12">
+    {% for entry in craft.entries.section(item.structure).limit(item.limit) %}
+      {% include '_blocks/entries_anatomy' %}
+    {% endfor %}
+</div>

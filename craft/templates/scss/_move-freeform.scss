@@ -1,0 +1,46 @@
+// Framework move generation
+
+.f-item {
+    position: relative;
+
+    // &:hover {
+    //   z-index: 997 !important;
+    // }
+}
+
+$move: 4.166666666%;
+$move-distances: 20;
+
+@include media-breakpoint-down(md) {
+ @for $i from 0 through $move-distances {
+    .f-h-#{$i} {
+      transform: translateX( 0 );
+    }
+    .f-h-n-#{$i} {
+      transform: translateX( 0 );
+    }
+    .f-v-#{$i} .move {
+      transform: translateY( 0 );
+    }
+    .f-v-n-#{$i} .move {
+      transform: translateY( 0 );
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  @for $i from 0 through $move-distances {
+    .f-h-#{$i} {
+      transform: translateX( ( $move * $i ) );
+    }
+    .f-h-n-#{$i} {
+      transform: translateX( - ( $move * $i ) );
+    }
+    .f-v-#{$i} .move {
+      transform: translateY( ( $move * $i ) );
+    }
+    .f-v-n-#{$i} .move {
+      transform: translateY( - ( $move * $i ) );
+    }
+  }
+}

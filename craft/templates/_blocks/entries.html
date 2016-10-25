@@ -1,0 +1,10 @@
+{% set entries = item.entries %}
+
+<div class="clearfix"></div>
+<div class="packery col-12">
+  {% if entries|length %}
+    {% for entry in entries %}
+      {% include '_blocks/entries_anatomy' %}
+    {% endfor %}
+  {% endif %}
+</div>

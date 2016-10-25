@@ -1,0 +1,68 @@
+{% set bgColor = entry.backgroundColor %}
+{% set textColor = entry.textColor %}
+{% set linkColor = entry.linkColor %}
+{% set linkHoverColor = entry.linkHoverColor %}
+
+{% if (bgColor|trim|length or textColor|trim|length or linkColor|trim|length or linkHoverColor|trim|length)  %}
+  {% set styling = true %}
+  <style>
+    {% if bgColor|trim|length %}
+      body {
+        background-color: {{ bgColor }};
+        {% if textColor|trim|length %}
+          color: {{ textColor }} !important;
+        {% endif %}
+      }
+
+      .has-styling #block {
+        background-color: {{ bgColor }} !important;
+      }
+    {% elseif textColor|trim|length %}
+      body {
+        color: {{ textColor }} !important;
+      }
+    {% endif %}
+    {% if linkColor|trim|length %}
+      a, #header a, #menu-btn, #header .nav-item svg {
+        color: {{ linkColor }} !important;
+        fill: {{ linkColor }} !important;
+      }
+      #change a:after, #change .link-thick:after, #header a:after, #menu-btn:after {
+        background: {{ linkColor }} !important;
+      }
+    {% endif %}
+    {% if linkHoverColor|trim|length %}
+      #change a:hover, #header a:hover, #menu-btn:hover {
+        color: {{ linkHoverColor }} !important;
+        fill: {{ linkHoverColor }} !important;
+      }
+      #change a:hover:after, #change .link-thick:hover:after, #change .link-thick:hover:after, #header a:hover:after, #menu-btn:hover:after, #menu-normal ul.nav li.active a:hover:after {
+        background: {{ linkHoverColor }} !important;
+      }
+      .menu-open #menu-btn span {
+        color: #222222 !important;
+      }
+      .menu-open #menu-btn:after {
+        background: #222222 !important;
+      }
+      .menu-open #menu-btn:hover {
+        color: #222222 !important;
+      }
+      .menu-open #menu-btn:hover:after {
+        background: #222222 !important;
+      }
+      #menu-slide {
+        color: #222222 !important;
+      }
+      #menu-slide a {
+        color: #222222 !important;
+      }
+    {% endif %}
+  </style>
+  <div id="block" class="is-entering" {% if styling %}data-styling="{{ styling }}"{% endif %}></div>
+
+{% else %}
+
+  <div id="block" class="is-entering"></div>
+
+{% endif %}

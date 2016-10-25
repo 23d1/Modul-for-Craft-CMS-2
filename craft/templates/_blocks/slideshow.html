@@ -1,0 +1,26 @@
+{% set transform = 'large' %}
+{% set type = item.slideshowType %}
+{% set bleed = item.bleed %}
+{% set maxHeight = item.maxHeight %}
+{% set arrows = item.showArrows %}
+{% set indicator = item.indicator %}
+{% set transition = item.transition %}
+{% set timer = item.autoplayTimer %}
+
+<div class="slideshow-holder{% if bleed|length %} {{ bleed }}{% endif %}{% if maxHeight|length %} vh-{{ maxHeight }}{% endif %}{% if loop.parent.loop.index == 1 and loop.index == 1 and entry.topAligned and type == "visibleNearby" %} py-4{% endif %}">
+	<div id="slideshow{{ loop.index }}" class="royalSlider rsDefault default-slideshow{% if type == "visibleNearby" %} visibleNearby{% endif %}" data-slideshow-transition="{{ transition }}" data-slideshow-arrows="{{ arrows }}"{% if indicator|length %} data-slideshow-indicator="{{ indicator }}"{% endif %} data-slideshow-autoplay="{{ item.autoplay }}" data-slideshow-delay="{{ timer }}" data-slideshow-type="{{ type }}"{% if maxHeight|length %} data-slideshow-viewportheight="{{ maxHeight }}"{% endif %}>
+		{% for slide in item.children %}
+			{% set image = slide.imageFile.first() %}
+      {% set originalWidth = image.getWidth(false) %}
+      {% set transformedWidth = image.getWidth(transform) %}
+      {% if transformedWidth < originalWidth %}
+        {% set imageOutput = image.getUrl(transform) %}
+      {% else %}
+        {% set imageOutput = image.getUrl(transform) %}
+      {% endif %}
+			{% set rsw = image.getWidth(transform) %}
+			{% set rsh = image.getHeight(transform) %}
+			<img class="notme rsImg" src="{{ imageOutput }}" alt="{{ slide.text }}" data-rsw="{{ rsw }}" data-rsh="{{ rsh }}">
+		{% endfor %}
+	</div>
+</div>

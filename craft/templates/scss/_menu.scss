@@ -1,0 +1,136 @@
+//
+// Menu Icon
+//
+
+$time: 0.8s;
+$easing: cubic-bezier(.2,1,.23,1);
+
+#menu-toggle {
+  pointer-events: auto;
+  top: 50%;
+  float: right;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+#menu-btn {
+  position: relative;
+  cursor: pointer;
+  width: 40px;
+  margin: 0 0 5px;
+  color: $link-color;
+  span {
+    display: block;
+    text-align: center;
+    transition: transform $time $easing 0s;
+  }
+  &>span:last-child {
+    position: absolute;
+    bottom: 2px;
+    left: 100%;
+    width: 100%;
+  }
+}
+
+#menu-btn.open {
+  color: $link-color !important;
+  &:after {
+      background: $link-color !important;
+  }
+  &:hover:after {
+      background: $link-color !important;
+  }
+}
+
+//
+// Menu
+//
+#menu-slide {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  padding: ($grid-gutter-width-base * 1.5);
+  overflow-y: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60%;
+  background: white;
+  z-index: 9997;
+  visibility: hidden;
+  transform: translateX(100%);
+  transition: all $time $easing 0s;
+  ul.nav {
+    font-size: 1rem;
+    width: 100%;
+    li {
+      margin: 0;
+    	list-style: none;
+    }
+  }
+  hr {
+  	margin: ($spacer-y * 1) 0;
+  }
+}
+
+//
+// Menu open
+//
+
+#change {
+  transition: all $time $easing 0s;
+}
+
+#page-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  background: #000;
+  cursor: pointer;
+  z-index: 9996;
+  transition: opacity .5s $easing, visibility .5s steps(1,end);
+}
+
+.menu-open {
+  #change {
+  	-webkit-transform: translate3d(-30%, 0, 0);
+  	transform: translate3d(-30%, 0, 0);
+  }
+  #menu-btn {
+    span {
+      transform: translateX(-100%);
+    }
+  }
+  #menu-slide {
+    visibility: visible;
+    transform: translateX(0);
+  }
+  #page-cover {
+    opacity: .3;
+    visibility: visible;
+    transition: opacity .6s $easing, visibility .6s steps(1,start);
+  }
+  #logo {
+    opacity: 0;
+    transition: opacity .5s $easing, visibility .5s steps(1,end);
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  body {
+    #menu-slide {
+      width: 90%;
+    }
+  }
+}
+@include media-breakpoint-down(lg) {
+  body {
+    #menu-slide {
+      padding: 0;
+    }
+  }
+}

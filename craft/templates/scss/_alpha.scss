@@ -1,0 +1,13 @@
+// Framework move generation
+
+$alpha-values: 10;
+
+@for $i from 0 through $alpha-values {
+  .a-#{$i} {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha((10 * $i));
+    -moz-opacity: (0.1 * $i);
+    -khtml-opacity: (0.1 * $i);
+    opacity: (0.1 * $i);
+  }
+}

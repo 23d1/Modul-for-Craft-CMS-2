@@ -1,0 +1,37 @@
+{% set image = entry.imageFile.first() %}
+{% set grid = entry.grid %}
+{% set offset = entry.offset %}
+{% set pull = entry.pull %}
+{% set bleed = entry.bleed %}
+{% set moveHorizontal = entry.moveHorizontal %}
+{% set moveVertical = entry.moveVertical %}
+{% set layer = entry.layer %}
+{% set shadow = entry.shadow %}
+
+{% set originalWidth = image.getWidth(false) %}
+{% set transformedWidth = image.getWidth(transform) %}
+{% if transformedWidth < originalWidth %}
+  {% set thumbnail = image.getUrl(transform) %}
+{% else %}
+  {% set thumbnail = image.getUrl() %}
+{% endif %}
+
+<div class="masonry-item {% if grid|length %}col-xs-12 {% if grid == 1 or grid == 2 or grid == 3 or grid == 4 or grid == 5 %}col-sm-6{% else %}col-sm-12{% endif %} col-md-{{ grid }} col-lg-{{ grid }} col-xl-{{ grid }}{% endif %}{% if offset|length %} col-sm-offset-0 col-md-offset-{{ offset }} col-lg-offset-{{ offset }} col-xl-offset-{{ offset }}{% endif %}{% if bleed == "left" %} bleed-left{% elseif bleed == "right" %} bleed-right{% elseif bleed == "both" %} bleed-both{% endif %}{% if item.pull|length %} {{ item.pull }}{% endif %}">
+  <div class="hv-item {{ moveHorizontal }} {{ moveVertical }}">
+    <div class="move" style="z-index: {{ layer }};">
+      <a href="{{ entry.url }}" class="thumb">
+        <div class="image-holder{% if shadow %} shadow{% endif %}">
+          <img class="img-fluid" src="{{ thumbnail }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
+          <div class="thumb-hover">
+            <div class="thumb-hover-title">
+              <h5>
+                {{ entry.title }}
+              </h5>
+            </div>
+            <div class="thumb-hover-bg"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
