@@ -1,16 +1,31 @@
 # Craft Storage (cache) [http://buildwithcraft.com/help/craft-storage-gitignore]
+# ------------------------------------------------------------
 /craft/app/
 /craft/storage/*
 !/craft/storage/logo/*
 
-# OS generated files #
-######################
+
+# LOCAL CONFIG SETTINGS
+# Exclude local config files so we don't overwrite other local setups.
+# Leave example files that can be renamed to get setup
+# ------------------------------------------------------------
+craft/config/local/*
+
+
+# MISC FILES
+# ------------------------------------------------------------
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+.cache
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-workspace
+*.sublime-project
+_notes
+dwsync.xml
+logs/*
+node_modules
 License.key
 license.key
