@@ -2,6 +2,7 @@
 # ------------------------------------------------------------
 /craft/app/
 /craft/storage/*
+!/craft/storage/.htaccess
 !/craft/storage/logo/*
 
 
