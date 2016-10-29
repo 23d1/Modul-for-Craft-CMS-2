@@ -516,8 +516,21 @@ $(document).ready(function () {
 
   // Set mobile
   function setmobile() {
-    // Disable link hover states
-    $('body.mobile a').addClass('hover');
+    // Disable link hover states and enable thumb hover states
+    $('body.mobile a').not('a.thumb').addClass('hover');
+    $('body.mobile a.thumb').on('click', function (e) {
+      'use strict';
+      var link = $(this);
+      if (link.hasClass('hover')) {
+        return true;
+      }
+      else {
+       link.addClass('hover');
+       $('a').not(this).removeClass('hover');
+       e.preventDefault();
+       return false; //extra, and to make sure the function has consistent return points
+      }
+    });
   }
 
   // Check background image

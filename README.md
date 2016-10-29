@@ -47,7 +47,7 @@ For any other information, please refer to the [Craft CMS Documentation](https:/
 ## To-do and known issues
 * Documentation of the back-end with front-end examples (way back on the back-burner).
 * Slideshows with "visible nearby" and no max-height set gets too much padding.
-* Various minor CSS/JS related issues for cross device support.
+* CSS and Twig spaghetti needs cleaning up.
 * Pasting SVG code for the logo in the Globals / Site doesn't work yet.
 * Add more customization options to the backend.
 * Next/Prev only works for work section. Will make it work for all structures except "pages".

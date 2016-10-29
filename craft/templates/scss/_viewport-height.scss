@@ -6,7 +6,7 @@ $height-distances: 10;
 @include media-breakpoint-down(md) {
  @for $i from 0 through $height-distances {
     .vh-#{($i*$height)+50} {
-      height: auto;
+      height: 50vh;
     }
   }
 }
