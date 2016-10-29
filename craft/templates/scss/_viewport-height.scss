@@ -3,15 +3,15 @@
 $height: 5;
 $height-distances: 10;
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
  @for $i from 0 through $height-distances {
     .vh-#{($i*$height)+50} {
-      height: 50vh;
+      height: 55vh;
     }
   }
 }
 
-@include media-breakpoint-up(lg) {
+@include media-breakpoint-up(md) {
   @for $i from 0 through $height-distances {
     .vh-#{($i*$height)+50} {
       height: (($i*$height)+50)+vh;

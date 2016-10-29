@@ -316,9 +316,7 @@ $(document).ready(function () {
 			slideshow_firstimg_h = t.find('.rsImg').first().attr('data-rsh');
 			slideshow_dim = slideshow_firstimg_w / slideshow_firstimg_h;
 			slideshow_w = t.parent().width();
-      if (t.hasAttr("data-slideshow-viewportheight") && $(window).width() <= 768) {
-        slideshow_h = 55+'vh';
-      } else if (t.hasAttr("data-slideshow-viewportheight")) {
+      if (t.hasAttr("data-slideshow-viewportheight")) {
         slideshow_h = parentheight;
         // slideshow_h = 50+'vh';
       } else {
