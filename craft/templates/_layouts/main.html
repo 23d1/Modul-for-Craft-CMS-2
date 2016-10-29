@@ -1,7 +1,9 @@
 {% if entry is defined and entry.title != "Home" %}
   {% set title = entry.title %}
 {% endif %}
-{% includeCssFile "/fonts/Apercu/stylesheet.css" %}
+
+{% import '_includes/macros' as macros %}
+
 {% includeCssFile "/css/royalslider/royalslider.css" %}
 {% includeCssFile "/css/mediaelementplayer.min.css" %}
 {% includeCssFile "/scss/modul.min.css" %}
@@ -36,7 +38,7 @@
 {% endif %}
 {% endincludejs %}
 
-{% if (site.backgroundColor|trim|length or site.textColor|trim|length or site.linkColor|trim|length or site.linkHoverColor|trim|length or site.menuBgColor|trim|length or site.menuTextColor|trim|length or site.menuLinkColor|trim|length or site.menuLinkHoverColor|trim|length) %}
+{% if (site.backgroundColor|trim|length or site.textColor|trim|length or site.linkColor|trim|length or site.linkHoverColor|trim|length or site.menuBgColor|trim|length or site.menuTextColor|trim|length or site.menuLinkColor|trim|length or site.menuLinkHoverColor|trim|length) or typography.defaultFont|length %}
 	{% set usercss %}
 		{% if site.backgroundColor|trim|length %}
 			body {
@@ -44,12 +46,62 @@
 				{% if site.textColor|trim|length %}
 					color: {{ site.textColor }};
 				{% endif %}
+        {% if typography.defaultFont|length %}
+          font-family: {{ typography.defaultFont|raw }};
+        {% endif %}
+        {% if typography.defaultFontSize|length %}
+          font-size: {{ typography.defaultFontSize|raw }};
+        {% endif %}
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
 			}
 		{% elseif site.textColor|trim|length %}
 			body {
 				color: {{ site.textColor }};
+        {% if typography.defaultFont|length %}
+          font-family: {{ typography.defaultFont|raw }};
+        {% endif %}
+        {% if typography.defaultFontSize|length %}
+          font-size: {{ typography.defaultFontSize|raw }};
+        {% endif %}
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
 			}
-		{% endif %}
+		{% elseif typography.defaultFont|length %}
+      body {
+        font-family: {{ typography.defaultFont|raw }};
+        {% if typography.defaultFontSize|length %}
+          font-size: {{ typography.defaultFontSize|raw }};
+        {% endif %}
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
+      }
+    {% elseif typography.defaultFontSize|length %}
+      body {
+        font-size: {{ typography.defaultFontSize|raw }};
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
+      }
+    {% elseif typography.defaultFontLineHeight > 0 %}
+      body {
+        line-height: {{ typography.defaultFontLineHeight|raw }};
+      }
+    {% endif %}
+    {{ macros.customfont("h1", typography.h1Font, typography.h1FontSize) }}
+    {{ macros.customfont("h2", typography.h2Font, typography.h2FontSize) }}
+    {{ macros.customfont("h3", typography.h3Font, typography.h3FontSize) }}
+    {{ macros.customfont("h4", typography.h4Font, typography.h4FontSize) }}
+    {{ macros.customfont("h5", typography.h5Font, typography.h5FontSize) }}
+    {{ macros.customfont("h6", typography.h6Font, typography.h6FontSize) }}
+    {% if typography.headerLineHeight > 0 %}
+      h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+        line-height: {{ typography.headerLineHeight|raw }};
+      }
+    {% endif %}
 		{% if site.linkColor|trim|length %}
 		a {
 			color: {{ site.linkColor }}!important;
@@ -117,6 +169,9 @@
 
 	{% if site.favicon|length %}<link rel="icon" href="{{ site.favicon.first().url }}">{% endif %}
 
+  {% if typography.webFontSnippets is defined %}
+    {{ typography.webFontSnippets|raw }}
+  {% endif %}
 </head>
 <body class="{% if craft.request.isMobileBrowser(true) %}mobile{% else %}desktop{% endif %}">
 <!--[if lt IE 8]>

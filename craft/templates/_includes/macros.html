@@ -1,0 +1,14 @@
+{% macro customFont(selector, font, size) %}
+  {% if font|length %}
+    {{ selector }}, .{{ selector }} {
+      font-family: {{ font }};
+      {% if size|length %}
+        font-size: {{ size }};
+      {% endif %}
+    }
+  {% elseif size|length %}
+    {{ selector }}, .{{ selector }} {
+      font-size: {{ size }};
+    }
+  {% endif %}
+{% endmacro %}
