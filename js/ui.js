@@ -49,6 +49,7 @@ $(document).ready(function () {
             render: function render($container) {
                 $container.addClass('is-exiting');
                 hidemenu();
+                addpageloader();
             }
         },
         onReady: {
@@ -64,6 +65,7 @@ $(document).ready(function () {
             }
             $('#wrap').removeClass('is-exiting')
             resize();
+            removepageloader();
         }
   });
 
@@ -73,6 +75,15 @@ $(document).ready(function () {
       ga('send', 'pageview', window.location.pathname);
     }
   });
+
+  /*** Page-loading ***/
+  function addpageloader() {
+    $('#pageloader').fadeIn(400);
+  }
+
+  function removepageloader() {
+    $('#pageloader').fadeOut(400);
+  }
 
   /*** Pre-loading ***/
   // Pre-resize the images before they are loaded (to prevent loading flicker)
@@ -292,18 +303,47 @@ $(document).ready(function () {
   // When scrolling the window
   function bodyscrolling() {
     bodyscrollpos = $(window).scrollTop();
-
+    docheight = $(document).height();
     if (bodyscrollpos < 0) {
       bodyscrollpos = 0;
     }
-
     // Archive the old pos
     bodyoldscrollpos = bodyscrollpos;
   }
 
-  // Bundle bind scrollers
-  function bindScrollers() {
-    $(window).bind('scroll', bodyscrolling);
+  // Use this function to scroll to a y pos of the body. You can also insert a speed value.
+  var maxspeed = 800;
+  var minspeed = 400;
+  var normdistance = 1000;
+
+  function bodyscrollto(pos, s) {
+    newspeed = s;
+    docheight = $(document).height();
+
+    distance = pos - bodyscrollpos;
+    distance = Math.abs(distance);
+    ratio = distance / normdistance;
+    newspeed = newspeed * ratio;
+    newspeed = Math.round(newspeed);
+    if (newspeed > maxspeed) {
+      newspeed = maxspeed;
+    }
+
+    newspeed = Math.round(newspeed / 10) * 10;
+    pos = Math.round(pos);
+
+    if (newspeed < minspeed) {
+      newspeed = minspeed;
+    }
+
+    if (bodyscrollpos != pos) {
+      $('body, html').animate({
+        scrollTop: '' + pos + 'px'
+      }, newspeed, 'easeInOutQuart', function () {
+        // Animation complete.
+      });
+
+    }
   }
 
   function resizeslideshows() {
@@ -473,6 +513,7 @@ $(document).ready(function () {
   			slider.ev.on('rsAfterSlideChange', function(event) {
   				// triggers after slide change
   				slide_id = slider.currSlideId;
+          BackgroundCheck.refresh();
   			});
 
         default_slideshow.find('.rsArrowLeft .rsArrowIcn').html('<svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"><use x="0" y="0" xlink:href="#arrowLeft" /></svg>');
@@ -484,6 +525,21 @@ $(document).ready(function () {
     resize();
 
 	}
+
+  // Royalslider img click
+  $('body').on('click', '.royalSlider.default-slideshow img.rsImg, .royalSlider.default-slideshow .rsArrow', function (e) {
+    e.preventDefault();
+    slide = $(this).parent().parent().parent().parent();
+
+    slideoffset = slide.offset().top;
+    slideheight = slide.height();
+    slidecorrection = (viewportHeight - slideheight) / 2;
+    if (slidecorrection < 0) {
+      slidecorrection = 0;
+    }
+    position = slideoffset - slidecorrection;
+    bodyscrollto(position, 600);
+  });
 
   // Menu toggle
   $('body').on('click', '#menu-btn', function() {
@@ -548,7 +604,6 @@ $(document).ready(function () {
     setmobile();
     prepreloading();
     preloadimages();
-    bindScrollers();
 		setslideshow();
     checkbackground();
     resize();
@@ -577,7 +632,6 @@ $(document).ready(function () {
 		setmediaelements();
     prepreloading();
     preloadimages();
-    bindScrollers();
     checkbackground();
 		resize();
 		setTimeout(function () {

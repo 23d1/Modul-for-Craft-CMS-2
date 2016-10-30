@@ -53,6 +53,7 @@
 .mejs-controls div.mejs-time-rail { width: 200px; background: rgba(23, 23, 23, 0.35) !important; }
 .mejs-controls .mejs-time-rail span { display: block; position: absolute; width: 180px; height: 10px; cursor: pointer; border-radius: 0; }
 .mejs-controls .mejs-time-rail .mejs-time-total { margin: 11px 10px 0 10px;	background: rgba(255, 255, 255, 0.2); }
+.mejs-controls .mejs-time-rail .mejs-time-total:focus { outline: 0; }
 .mejs-controls .mejs-time-rail .mejs-time-buffering { width: 100%; background: rgba(255, 255, 255, 0.2); z-index: 1;
 	background-image: -webkit-linear-gradient(-45deg, #464849 25%, #262929 25%, #262929 50%, #464849 50%, #464849 75%, #262929 75%, #262929);
 	background-image: -webkit-linear-gradient(135deg, #464849 25%, #262929 25%, #262929 50%, #464849 50%, #464849 75%, #262929 75%, #262929);

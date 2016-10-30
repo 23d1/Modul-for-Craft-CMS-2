@@ -19,7 +19,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 
 ## Installation
 ### Server side files
-Download Craft CMS from https://craftcms.com/ and extract on your desktop. Place the `app` folder from withing the `craft` folder into the `craft` folder inside this package and upload to your hosting platform/server.
+Download Craft CMS from https://craftcms.com/ and extract on your desktop. Place the `app` folder from within the `craft` folder into the `craft` folder inside this package and upload to your hosting platform/server.
 
 #### Note
 Don't upload modul-database.zip, and no need to upload the source files in `craft/templates/scss` just `modul.min.css`. And don't forget to include the `.htaccess` file in the root of this directory. I've included a `_htaccess` file just in case, that you can upload and rename (OSX and Linux hides files with a period in front).
@@ -46,9 +46,12 @@ For any other information, please refer to the [Craft CMS Documentation](https:/
 
 ## To-do and known issues
 * Documentation of the back-end with front-end examples (way back on the back-burner).
-* Slideshows with "visible nearby" and no max-height set gets too much padding.
+* Slideshows with "visible nearby" and no max-height set gets too much vertical padding.
 * CSS and Twig spaghetti needs cleaning up.
-* Pasting SVG code for the logo in the Globals / Site doesn't work yet.
+* Pasting SVG code for the logo in the `Globals/Site` doesn't work yet.
 * Add more customization options to the backend.
 * Next/Prev only works for work section. Will make it work for all structures except "pages".
 * Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
+* Add cover style background video functionality.
+* Add the front-end functionality for text content in slider blocks.
+* Add video functionality to thumbnails.
