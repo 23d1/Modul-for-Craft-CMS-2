@@ -1,10 +1,48 @@
 {% set entries = item.entries %}
 
 <div class="clearfix"></div>
-<div class="packery col-12">
-  {% if entries|length %}
+
+<div class="structure">
+
+  {% if item.display == 'index' %}
+  <div class="col-xs-12 pt-1">
     {% for entry in entries %}
-      {% include '_blocks/entries_anatomy' %}
+    <div class="row">
+      <div class="col-xs-12 py-0">
+        <hr style="border-top-width: 1px;">
+      </div>
+      <div class="col-xs-12 col-sm-6 py-0">
+        <a href="{{ entry.url }}">{{ entry.title }}</a>
+      </div>
+      <div class="col-xs-8 col-sm-4 offset-xs-1 offset-sm-0 col-sm-2 py-0">
+        {% for tag in entry.tags %}
+          <div class="d-block">
+            — {{ tag.title }}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="col-xs-3 col-sm-2 py-0">
+        {{ entry.dateCreated|date("M d") }}<br>
+        {{ entry.dateCreated|date("Y") }}
+      </div>
+    </div>
     {% endfor %}
+  </div>
+
+  {% elseif item.display == 'full' %}
+    <div class="col-xs-12 py-0">
+      <div class="bleed-both">
+        {% for entry in entries %}
+          {% include '_layouts/page' %}
+        {% endfor %}
+      </div>
+    </div>
+
+  {% else %}
+    <div class="packery">
+      {% for entry in entries %}
+        {% include '_blocks/entries_anatomy' %}
+      {% endfor %}
+    </div>
   {% endif %}
 </div>

@@ -6,6 +6,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
  - [Bootstrap 4 Alpha](https://v4-alpha.getbootstrap.com/)
 - Craft CMS Plugins
  - [Craft Neo](https://github.com/benjamminf/craft-neo)
+ - [Craft Relabel](https://github.com/benjamminf/craft-relabel)
  - [a&m nav](https://github.com/am-impact/amnav)
  - [LJ Dynamic Fields](https://github.com/lewisjenkins/craft-lj-dynamicfields)
  - [Redactor Extras](https://github.com/elliotlewis/Redactor-Extras)

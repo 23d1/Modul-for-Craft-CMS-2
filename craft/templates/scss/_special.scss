@@ -280,6 +280,11 @@ body.mobile {
 .align-top {
 	margin-top: -($grid-gutter-width-base / 2) !important;
 }
+.structure {
+  .align-top {
+  	margin-top: 0;
+  }
+}
 .pull-up-bottom-row {
 	margin-bottom: -$grid-gutter-width-base !important;
 }

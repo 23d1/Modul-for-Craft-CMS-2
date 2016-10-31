@@ -84,5 +84,7 @@
   		  {% if row.rowBgColor|trim|length %}</div>{% endif %}
 
       {% endfor %}
-      {% include '_includes/nextprev' %}
+      {% if craft.request.getSegment(2)|length %}
+        {% include '_includes/nextprev' %}
+      {% endif %}
   </div>

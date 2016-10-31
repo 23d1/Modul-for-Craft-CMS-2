@@ -1,4 +1,5 @@
 {% set image = entry.imageFile.first() %}
+{% set video = entry.videoFile.first() %}
 {% set grid = entry.grid %}
 {% set offset = entry.offset %}
 {% set pull = entry.pull %}
@@ -21,6 +22,16 @@
     <div class="move" style="z-index: {{ layer }};">
       <a href="{{ entry.url }}" class="thumb">
         <div class="image-holder{% if shadow %} shadow{% endif %}">
+          {% if video|length %}
+            <div class="video-bg">
+              <div class="video-inline cover align-center align-middle">
+                <div class="video-padding"></div>
+                <video poster="{{ thumbnail }}" playsinline autoplay muted loop>
+                  <source src="{{ video.getUrl() }}" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          {% endif %}
           <img class="img-fluid" src="{{ thumbnail }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
           <div class="thumb-hover">
             <div class="thumb-hover-title">
