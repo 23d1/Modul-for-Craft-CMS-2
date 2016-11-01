@@ -43,6 +43,7 @@ If you've already installed a previous version, and don't want to lose any conte
 * Click on `update.json`.
 * Scroll all the way down and click `Construct`
 * Don't worry about errors and warnings, you should now be good to go with all the latest features.
+* When you're done, you can go back to `Settings > Plugins` and `Uninstall` The Architect.
 * Enjoy a beer.
 
 #### Ps. You can skip uploading the `uploads` folder.
