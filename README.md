@@ -28,8 +28,8 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 ---
 
 ## A brief summary of functionality
-* #### Fully fluid and responsive.
-* #### Different block types can be added to rows of content.
+* **Fully fluid and responsive.**
+* **Different block types can be added to rows of content.**
   * **Row** Either `Normal` or `Masonry` (using jQuery Packery to fill gaps in columns)
     * **Content**
       * Text
@@ -44,18 +44,18 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
       * Separator
       * Clear
       * Code
-* #### Singles > Homepage
+* **Singles > Homepage**
   * This is the landing page
   * Build landing page however you want
   * Style landing page however you want
-* #### Entries > Structures
+* **Entries > Structures**
   * **Pages**
     * Add a page and build it however you want
     * Style the page however you want
   * **Work**
     * The difference between this structure and the `Pages` structure is that you have a `thumbnail` tab. This is so you can render thumbnails when loading the structure/taxonomy on other pages.
   * *If you add another structure, don't forget to set up the fields as they are set up in the `Work` structure. Just drag-and-drop to match.*
-* #### Globals
+* **Globals**
   * **Footer**
     * Build your `Footer` in a similar fashion to how you build `Pages`
   * **Header** (coming soon)
@@ -75,7 +75,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
       * Add custom fonts
       * Change font sizes
       * Change line heights
-* #### Navigation
+* **Navigation**
   * Main Menu (renders larger links to the left in the menu)
     * Add links to any entry or url
   * Sub Menu (renders smaller links to the left in the menu, below the larger main menu items)
