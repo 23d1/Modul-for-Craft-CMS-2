@@ -11,6 +11,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
  - [LJ Dynamic Fields](https://github.com/lewisjenkins/craft-lj-dynamicfields)
  - [Redactor Extras](https://github.com/elliotlewis/Redactor-Extras)
  - [Spectrum FieldType](https://github.com/alecritson/craft-spectrum-fieldtype)
+ - [The Architect](https://github.com/Pennebaker/craftcms-thearchitect)
 
 ## Example websites running Modul
 - http://23d.one
