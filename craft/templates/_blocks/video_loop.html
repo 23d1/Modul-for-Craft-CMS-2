@@ -3,7 +3,7 @@
 {% set shadow = item.shadow %}
 {% set bleed = item.bleed %}
 {% set transform = 'large' %}
-{% set height = item.height %}
+{% set height = item.maxHeight %}
 
 {% set originalWidth = image.getWidth(false) %}
 {% set transformedWidth = image.getWidth(transform) %}
@@ -23,7 +23,7 @@
     </div>
   </div>
   {% if height|length %}
-    <div class="img-bg" style="height: {{ height }}; background: url({{ poster }}) center no-repeat; background-size: cover;"></div>
+    <div class="img-bg vh-{{ height }}" style="background: url({{ poster }}) center no-repeat; background-size: cover;"></div>
   {% else %}
     <img class="img-fluid" src="{{ poster }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
   {% endif %}
