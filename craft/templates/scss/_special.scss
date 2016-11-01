@@ -284,6 +284,9 @@ body.mobile {
   .align-top {
   	margin-top: 0;
   }
+  > .pt-3 {
+    padding-top: 0;
+  }
 }
 .pull-up-bottom-row {
 	margin-bottom: -$grid-gutter-width-base !important;

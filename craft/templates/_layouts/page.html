@@ -1,4 +1,4 @@
-<div class="{% if entry.topAligned %} align-top{% else %} pt-3{% endif %}">
+<div class="{% if entry.topAligned %}align-top{% else %}pt-3{% endif %}">
   {% for row in entry.postContent.level(1) %}
 
   	{% if row.rowBgColor|trim|length %}
@@ -38,6 +38,15 @@
   							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
   								<div class="move">
   								{% include '_blocks/video' %}
+  								</div>
+  							</div>
+  						</div>
+
+              {% case 'videoLoop' %}
+  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
+  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
+  								<div class="move">
+  								{% include '_blocks/video_loop' %}
   								</div>
   							</div>
   						</div>

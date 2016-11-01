@@ -2,11 +2,11 @@
     "groups": [
         "Posts",
         "Styling",
+        "Default",
         "Typography",
         "Site",
         "Footer",
-        "Menu",
-        "Default"
+        "Menu"
     ],
     "sections": [
         {
@@ -97,6 +97,18 @@
             "type": "Lj_DynamicFields_Dropdown",
             "typesettings": {
                 "json": "{% include '_dynamicfields\/bleed' ignore missing %}"
+            }
+        },
+        {
+            "group": "Default",
+            "name": "Body",
+            "handle": "body",
+            "instructions": null,
+            "required": false,
+            "type": "RichText",
+            "typesettings": {
+                "configFile": "Standard.json",
+                "columnType": "text"
             }
         },
         {
@@ -1127,7 +1139,7 @@
                     ],
                     "sortOrder": [
                         2,
-                        10
+                        11
                     ]
                 },
                 "blockTypes": {
@@ -1141,6 +1153,7 @@
                             "image",
                             "slideshow",
                             "video",
+                            "videoLoop",
                             "taxonomy",
                             "structure",
                             "spacer",
@@ -1297,6 +1310,42 @@
                     },
                     "new6": {
                         "sortOrder": 8,
+                        "name": "Video Loop",
+                        "handle": "videoLoop",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "topLevel": 0,
+                        "fieldLayout": {
+                            "Content": [
+                                "imageFile",
+                                "videoFile",
+                                "grid",
+                                "offset",
+                                "bleed"
+                            ],
+                            "Settings": [
+                                "pull",
+                                "moveHorizontal",
+                                "moveVertical",
+                                "layer",
+                                "shadow",
+                                "height",
+                                "noPadding",
+                                "responsiveVisibility",
+                                "classes",
+                                "style"
+                            ]
+                        },
+                        "relabel": [
+                            {
+                                "field": "imageFile",
+                                "name": null,
+                                "instructions": "This is your poster\/fallback. Without it, the video loop will not work."
+                            }
+                        ]
+                    },
+                    "new7": {
+                        "sortOrder": 9,
                         "name": "Taxonomy",
                         "handle": "taxonomy",
                         "maxBlocks": null,
@@ -1309,8 +1358,8 @@
                             ]
                         }
                     },
-                    "new7": {
-                        "sortOrder": 9,
+                    "new8": {
+                        "sortOrder": 10,
                         "name": "Structure",
                         "handle": "structure",
                         "maxBlocks": null,
@@ -1324,8 +1373,8 @@
                             ]
                         }
                     },
-                    "new8": {
-                        "sortOrder": 11,
+                    "new9": {
+                        "sortOrder": 12,
                         "name": "Spacer",
                         "handle": "spacer",
                         "maxBlocks": null,
@@ -1343,8 +1392,8 @@
                             ]
                         }
                     },
-                    "new9": {
-                        "sortOrder": 12,
+                    "new10": {
+                        "sortOrder": 13,
                         "name": "Separator",
                         "handle": "separator",
                         "maxBlocks": null,
@@ -1362,8 +1411,8 @@
                             ]
                         }
                     },
-                    "new10": {
-                        "sortOrder": 13,
+                    "new11": {
+                        "sortOrder": 14,
                         "name": "Clear",
                         "handle": "clear",
                         "maxBlocks": null,
@@ -1373,8 +1422,8 @@
                             "Clear": []
                         }
                     },
-                    "new11": {
-                        "sortOrder": 14,
+                    "new12": {
+                        "sortOrder": 15,
                         "name": "Code",
                         "handle": "code",
                         "maxBlocks": null,
@@ -1483,9 +1532,54 @@
                 {
                     "field": "imageFile",
                     "name": null,
-                    "instructions": "This will be your thumbnail. If you add video (below), this will be the video poster, and the scale of the video is dictated by the dimensions of the thumbnail image."
+                    "instructions": "This will be your thumbnail. If you add video (below), this will be the video poster\/fallback, and the scale of the video is dictated by the dimensions of the thumbnail image."
                 }
             ]
+        }
+    ],
+    "sources": [
+        {
+            "name": "Uploads",
+            "handle": "uploads",
+            "type": "Local",
+            "settings": {
+                "path": "uploads\/",
+                "publicURLs": 1,
+                "url": "\/uploads\/"
+            },
+            "fieldLayout": []
+        }
+    ],
+    "transforms": [
+        {
+            "name": "Large",
+            "handle": "large",
+            "mode": "fit",
+            "position": "center-center",
+            "width": 2560,
+            "height": null,
+            "quality": null,
+            "format": null
+        },
+        {
+            "name": "Medium",
+            "handle": "medium",
+            "mode": "fit",
+            "position": "center-center",
+            "width": 1280,
+            "height": null,
+            "quality": null,
+            "format": null
+        },
+        {
+            "name": "Small",
+            "handle": "small",
+            "mode": "fit",
+            "position": "center-center",
+            "width": 640,
+            "height": null,
+            "quality": null,
+            "format": null
         }
     ],
     "globals": [
