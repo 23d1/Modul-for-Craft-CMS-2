@@ -1,21 +1,85 @@
 # Modul for Craft CMS
-Website Builder Skeleton Template for Craft CMS aimed primarily at creatives, designers, photographers and other visual thinkers who enjoys a nice and tidy grid structure, with the ability to tastefully break it.
+Website Builder Skeleton Template for Craft CMS aimed primarily at (but not limited to) creatives, designers, photographers and other visual thinkers who enjoys a nice and tidy grid structure, with the ability to tastefully break it.
 
 Modul is built for Craft CMS, using the following dependencies, all of which are included in their current version as of writing this, and will be updated as they are updated:
-- CSS
- - [Bootstrap 4 Alpha](https://v4-alpha.getbootstrap.com/)
-- Craft CMS Plugins
- - [Craft Neo](https://github.com/benjamminf/craft-neo)
- - [Craft Relabel](https://github.com/benjamminf/craft-relabel)
- - [a&m nav](https://github.com/am-impact/amnav)
- - [LJ Dynamic Fields](https://github.com/lewisjenkins/craft-lj-dynamicfields)
- - [Redactor Extras](https://github.com/elliotlewis/Redactor-Extras)
- - [Spectrum FieldType](https://github.com/alecritson/craft-spectrum-fieldtype)
- - [The Architect](https://github.com/Pennebaker/craftcms-thearchitect)
+* Craft CMS Plugins
+  * [Craft Neo](https://github.com/benjamminf/craft-neo)
+  * [Craft Relabel](https://github.com/benjamminf/craft-relabel)
+  * [a&m nav](https://github.com/am-impact/amnav)
+  * [LJ Dynamic Fields](https://github.com/lewisjenkins/craft-lj-dynamicfields)
+  * [Redactor Extras](https://github.com/elliotlewis/Redactor-Extras)
+  * [Spectrum FieldType](https://github.com/alecritson/craft-spectrum-fieldtype)
+  * [The Architect](https://github.com/Pennebaker/craftcms-thearchitect)
+* CSS
+  * [Bootstrap 4 Alpha 5](https://v4-alpha.getbootstrap.com)
+* JavaScript / jQuery 3.1.1
+  * [jquery.imgpreload 1.6.2](https://github.com/farinspace/jquery.imgpreload)
+  * [jQuery Easing v1.3](http://gsgd.co.uk/sandbox/jquery/easing)
+  * [Packery 2.1.1](http://packery.metafizzy.co)
+  * [RoyalSlider 9.5.7](http://dimsemenov.com)
+  * [smoothState.js](http://smoothstate.com)
+  * [BackgroundCheck](http://kennethcachia.com/background-check)
+  * [MediaElement.js](http://mediaelementjs.com)
 
 ## Example websites running Modul
-- http://23d.one
-- http://askrembla.com
+* http://23d.one
+* http://askrembla.com
+
+---
+
+## A brief summary of functionality
+* #### Fully fluid and responsive.
+* #### Different block types can be added to rows of content.
+  * **Row** Either `Normal` or `Masonry` (using jQuery Packery to fill gaps in columns)
+    * **Content**
+      * Text
+      * Image
+      * Slideshow
+      * Video
+      * Video Loop (like an animated gif, but better)
+      * Taxonomy (should rename this eventually, it's the ability to add a list with any individual entry, or multiple entries in any order and render as index, thumbs or full)
+      * Structure (this loads a structure, like `Work` for example, and renders either as index, thumbs or full, with the ability to limit how many are shown)
+    * **Utilities**
+      * Spacer
+      * Separator
+      * Clear
+      * Code
+* #### Singles > Homepage
+  * This is the landing page
+  * Build landing page however you want
+  * Style landing page however you want
+* #### Entries > Structures
+  * **Pages**
+    * Add a page and build it however you want
+    * Style the page however you want
+  * **Work**
+    * The difference between this structure and the `Pages` structure is that you have a `thumbnail` tab. This is so you can render thumbnails when loading the structure/taxonomy on other pages.
+  * *If you add another structure, don't forget to set up the fields as they are set up in the `Work` structure. Just drag-and-drop to match.*
+* #### Globals
+  * **Footer**
+    * Build your `Footer` in a similar fashion to how you build `Pages`
+  * **Header** (coming soon)
+    * The ability to render the header different ways.
+      * Show menu items in header (responsively collapses to button)
+      * Menu button as text or sandwich icon
+  * **Menu**
+    * Here you can add text content to the menu
+  * **Site**
+    * Settings that affect the whole site
+      * Favicon
+      * Page Loader
+      * Google Analytics
+      * Logo SVG code (not yet correctly implemented)
+      * Colors
+    * **Typography**
+      * Add custom fonts
+      * Change font sizes
+      * Change line heights
+* #### Navigation
+  * Main Menu (renders larger links to the left in the menu)
+    * Add links to any entry or url
+  * Sub Menu (renders smaller links to the left in the menu, below the larger main menu items)
+    * Add links to any entry or url
 
 ---
 
