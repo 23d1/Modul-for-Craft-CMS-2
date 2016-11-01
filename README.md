@@ -37,7 +37,7 @@ The username is `admin` and the password is `password`.
 
 ---
 
-## Updating (This only works on certain releases, the latest does not support this yet).
+## Updating (This only works between certain releases, the latest does not support this yet).
 If you've already installed a previous version, and don't want to lose any content, skip importing the database and follow these steps:
 * Go `Settings > Plugins` and `Install` The Architect (if already installed, go to the next step).
 * Go to `The Architext` go to the `Available Files`.
@@ -47,7 +47,7 @@ If you've already installed a previous version, and don't want to lose any conte
 * When you're done, you can go back to `Settings > Plugins` and `Uninstall` The Architect.
 * Enjoy a beer.
 
-#### Ps. You can skip uploading the `uploads` folder.
+#### Ps. You should skip uploading the `uploads` folder when updating.
 
 ---
 
