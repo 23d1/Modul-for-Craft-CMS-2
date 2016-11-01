@@ -1,5 +1,5 @@
 # Modul for Craft CMS
-Website Builder Skeleton Template for Craft CMS aimed primarily at creatives, designers, photographers and other visual thinkers who enjoys a nice and tidy grid structure, with the ability to tastefully break it.
+Website builder template skeleton for Craft CMS aimed primarily at creatives, designers, photographers and other visual thinkers who enjoys a nice and tidy grid structure, with the ability to tastefully break it.
 
 Modul is built for Craft CMS, using the following dependencies, all of which are included in their current version as of writing this, and will be updated as they are updated:
 - CSS
