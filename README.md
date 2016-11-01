@@ -1,5 +1,5 @@
 # Modul for Craft CMS
-Website Builder Skeleton Template for Craft CMS aimed primarily at (but not limited to) creatives, designers, photographers and other visual thinkers who enjoys a nice and tidy grid structure, with the ability to tastefully break it.
+Website builder template skeleton for Craft CMS aimed primarily at (but not limited to) creatives, designers, photographers and other visual thinkers who enjoys a nice and tidy grid structure, with the ability to tastefully break it.
 
 Modul is built for Craft CMS, using the following dependencies, all of which are included in their current version as of writing this, and will be updated as they are updated:
 * Craft CMS Plugins
@@ -101,7 +101,7 @@ The username is `admin` and the password is `password`.
 
 ---
 
-## Updating (This only works on certain releases, the latest does not support this yet).
+## Updating (This only works between certain releases, the latest does not support this yet).
 If you've already installed a previous version, and don't want to lose any content, skip importing the database and follow these steps:
 * Go `Settings > Plugins` and `Install` The Architect (if already installed, go to the next step).
 * Go to `The Architext` go to the `Available Files`.
@@ -111,7 +111,7 @@ If you've already installed a previous version, and don't want to lose any conte
 * When you're done, you can go back to `Settings > Plugins` and `Uninstall` The Architect.
 * Enjoy a beer.
 
-#### Ps. You can skip uploading the `uploads` folder.
+#### Ps. You should skip uploading the `uploads` folder when updating.
 
 ---
 
