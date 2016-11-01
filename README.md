@@ -66,8 +66,6 @@ For any other information, please refer to the [Craft CMS Documentation](https:/
 * CSS and Twig spaghetti needs cleaning up.
 * Pasting SVG code for the logo in the `Globals/Site` doesn't work yet.
 * Add more customization options to the backend.
-* Next/Prev only works for work section. Will make it work for all structures except "pages".
 * Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
 * Add cover style background video functionality.
 * Add the front-end functionality for text content in slider blocks.
-* Add video functionality to thumbnails.
