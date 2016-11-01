@@ -36,6 +36,19 @@ The username is `admin` and the password is `password`.
 
 ---
 
+## Updating
+If you've already installed a previous version, and don't want to lose any content, skip importing the database and follow these steps:
+* Go `Settings > Plugins` and `Install` The Architect (if already installed, go to the next step).
+* Go to `The Architext` go to the `Available Files`.
+* Click on `update.json`.
+* Scroll all the way down and click `Construct`
+* Don't worry about errors and warnings, you should now be good to go with all the latest features.
+* Enjoy a beer.
+
+#### Ps. You can skip uploading the `uploads` folder.
+
+---
+
 ## Quick tutorial
 Start off by looking at the `Homepage` and `About` page. These are two very basic representations of what a page or post can look like. When you add things to the `Work structure`, things will not automatically show up somewhere, you have to create a page (look at the `Work` page in the `Pages structure`). If you decide to create more structures, you can then load them in like on the `Work` page (or any page/post). Keep in mind though, that in order for you to be able to add and render content, you need to add all the fields to that specific structure (look at the `Work` structure for guidance) or program your own version of that specific structure (or channel for that matter, if you want a news section or blog capabilities). Install, have a look around—and hopefully things will get a bit more clear.
 
