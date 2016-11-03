@@ -1,7 +1,27 @@
 //
-// 23d
+// Modul
 //
 
 .shadow {
-	box-shadow: 0 0 40px 0 rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.2);
+}
+
+// Positioning
+
+.pos-a-t {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $zindex-navbar-fixed;
+}
+
+
+// Typography
+
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
 }

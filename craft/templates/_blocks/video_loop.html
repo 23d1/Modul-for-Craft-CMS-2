@@ -23,7 +23,7 @@
     </div>
   </div>
   {% if height|length %}
-    <div class="img-bg vh-{{ height }}" style="background: url({{ poster }}) center no-repeat; background-size: cover;"></div>
+    <div class="img-bg vh-{{ height }}" style="background: url({{ poster }}) center center / cover no-repeat;"></div>
   {% else %}
     <img class="img-fluid" src="{{ poster }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
   {% endif %}

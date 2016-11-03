@@ -1,5 +1,9 @@
 {% extends '_layouts/main' %}
 
 {% block main %}
-	{% include '_layouts/page' %}
+	{% if entry.section.type == 'channel' %}
+		{% include '_layouts/channel' %}
+	{% else %}
+		{% include '_layouts/page' %}
+	{% endif %}
 {% endblock %}

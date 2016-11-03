@@ -2,11 +2,12 @@
     "groups": [
         "Posts",
         "Styling",
-        "Default",
         "Typography",
         "Site",
         "Footer",
-        "Menu"
+        "Header",
+        "Menu",
+        "Default"
     ],
     "sections": [
         {
@@ -17,6 +18,18 @@
             "typesettings": {
                 "template": "index",
                 "urlFormat": "__home__",
+                "nestedUrlFormat": null
+            }
+        },
+        {
+            "name": "News",
+            "handle": "news",
+            "type": "channel",
+            "enableVersioning": 1,
+            "typesettings": {
+                "hasUrls": 1,
+                "template": "index",
+                "urlFormat": "news\/{slug}",
                 "nestedUrlFormat": null
             }
         },
@@ -100,15 +113,14 @@
             }
         },
         {
-            "group": "Default",
-            "name": "Body",
-            "handle": "body",
-            "instructions": null,
+            "group": "Posts",
+            "name": "Channel",
+            "handle": "channel",
+            "instructions": "Select the channel to pull in.",
             "required": false,
-            "type": "RichText",
+            "type": "Lj_DynamicFields_Dropdown",
             "typesettings": {
-                "configFile": "Standard.json",
-                "columnType": "text"
+                "json": "{% include '_dynamicfields\/channels' ignore missing %}"
             }
         },
         {
@@ -229,16 +241,16 @@
         },
         {
             "group": "Site",
-            "name": "Google Analytics Tracking ID",
+            "name": "Google Analytics Code Snippet",
             "handle": "googleAnalytics",
-            "instructions": "Enter your Google Analytics Tracking ID (UA-XXXXXXXX-X) here to enable tracking of the site.",
+            "instructions": "Paste your Google Analytics code snippet here, including the `<script><\/script>` tags.",
             "required": false,
             "type": "PlainText",
             "typesettings": {
                 "placeholder": "",
                 "maxLength": "",
-                "multiline": "",
-                "initialRows": 4
+                "multiline": 1,
+                "initialRows": 10
             }
         },
         {
@@ -421,6 +433,17 @@
             }
         },
         {
+            "group": "Header",
+            "name": "Header Fixed",
+            "handle": "headerFixed",
+            "instructions": "Keeps the header at the top of the window when scrolling.",
+            "required": false,
+            "type": "Lightswitch",
+            "typesettings": {
+                "default": 1
+            }
+        },
+        {
             "group": "Typography",
             "name": "Header Line Height",
             "handle": "headerLineHeight",
@@ -574,7 +597,7 @@
             "typesettings": {
                 "allowEmpty": 1,
                 "showInput": 1,
-                "showAlpha": "",
+                "showAlpha": 1,
                 "showPalette": 1,
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
@@ -645,6 +668,17 @@
             }
         },
         {
+            "group": "Header",
+            "name": "Menu Toggle Type",
+            "handle": "menuToggleType",
+            "instructions": "Even if you set the navigation type to show as items in the header, it will responsively fall back to this option on smaller viewports.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/menu_toggle_type' ignore missing %}"
+            }
+        },
+        {
             "group": "Posts",
             "name": "Move Horizontal",
             "handle": "moveHorizontal",
@@ -664,6 +698,17 @@
             "type": "Lj_DynamicFields_Dropdown",
             "typesettings": {
                 "json": "{% include '_dynamicfields\/move_vertical' %}"
+            }
+        },
+        {
+            "group": "Header",
+            "name": "Navigation Type",
+            "handle": "navigationType",
+            "instructions": "Choose how to show your navigation items in the header.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/navigation_type' ignore missing %}"
             }
         },
         {
@@ -947,6 +992,120 @@
             }
         },
         {
+            "group": "Posts",
+            "name": "Channel Post Content",
+            "handle": "channelPostContent",
+            "instructions": "This is where you build your channel entry, which is a lot more basic than a page, as it's more akin to a blog post.",
+            "required": false,
+            "type": "Neo",
+            "typesettings": {
+                "maxBlocks": null,
+                "groups": {
+                    "name": [
+                        "Content"
+                    ],
+                    "sortOrder": [
+                        1
+                    ]
+                },
+                "blockTypes": {
+                    "new0": {
+                        "sortOrder": 2,
+                        "name": "Text",
+                        "handle": "text",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": 1,
+                        "fieldLayout": {
+                            "Content": [
+                                "text"
+                            ]
+                        }
+                    },
+                    "new1": {
+                        "sortOrder": 3,
+                        "name": "Image",
+                        "handle": "image",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": 1,
+                        "fieldLayout": {
+                            "Content": [
+                                "imageFile",
+                                "text"
+                            ]
+                        }
+                    },
+                    "new2": {
+                        "sortOrder": 4,
+                        "name": "Slideshow",
+                        "handle": "slideshow",
+                        "maxBlocks": null,
+                        "childBlocks": [
+                            "slideshowSlide"
+                        ],
+                        "maxChildBlocks": null,
+                        "topLevel": 1,
+                        "fieldLayout": []
+                    },
+                    "new3": {
+                        "sortOrder": 5,
+                        "name": "Slideshow Slide",
+                        "handle": "slideshowSlide",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": 0,
+                        "fieldLayout": {
+                            "Content": [
+                                "imageFile",
+                                "text"
+                            ]
+                        }
+                    },
+                    "new4": {
+                        "sortOrder": 6,
+                        "name": "Video",
+                        "handle": "video",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": 1,
+                        "fieldLayout": {
+                            "Content": [
+                                "imageFile",
+                                "videoFile"
+                            ]
+                        }
+                    },
+                    "new5": {
+                        "sortOrder": 7,
+                        "name": "Video Loop",
+                        "handle": "videoLoop",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": 1,
+                        "fieldLayout": {
+                            "Content": [
+                                "imageFile",
+                                "videoFile"
+                            ]
+                        },
+                        "relabel": [
+                            {
+                                "field": "imageFile",
+                                "name": null,
+                                "instructions": "This is your poster\/fallback. Without it, the video loop will not work."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
             "group": "Footer",
             "name": "Footer Content",
             "handle": "footerContent",
@@ -979,6 +1138,7 @@
                             "clear",
                             "code"
                         ],
+                        "maxChildBlocks": null,
                         "topLevel": 1,
                         "fieldLayout": {
                             "Content": [
@@ -1002,6 +1162,7 @@
                         "handle": "text",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1027,6 +1188,7 @@
                         "handle": "image",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1055,6 +1217,7 @@
                         "handle": "spacer",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Spacer": [
@@ -1074,6 +1237,7 @@
                         "handle": "separator",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Separator": [
@@ -1092,6 +1256,7 @@
                         "handle": "clear",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": []
                     },
@@ -1101,6 +1266,7 @@
                         "handle": "code",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1127,7 +1293,7 @@
             "group": "Posts",
             "name": "Post Content",
             "handle": "postContent",
-            "instructions": "",
+            "instructions": "This is where you build your page or entry. You have to add at least one row\u2014which can house as many blocks as you want. You can also split up the content nicely with more rows.",
             "required": false,
             "type": "Neo",
             "typesettings": {
@@ -1139,7 +1305,7 @@
                     ],
                     "sortOrder": [
                         2,
-                        11
+                        12
                     ]
                 },
                 "blockTypes": {
@@ -1156,11 +1322,13 @@
                             "videoLoop",
                             "taxonomy",
                             "structure",
+                            "channel",
                             "spacer",
                             "separator",
                             "clear",
                             "code"
                         ],
+                        "maxChildBlocks": null,
                         "topLevel": 1,
                         "fieldLayout": {
                             "Content": [
@@ -1184,6 +1352,7 @@
                         "handle": "text",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1209,6 +1378,7 @@
                         "handle": "image",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1240,6 +1410,7 @@
                         "childBlocks": [
                             "slideshowSlide"
                         ],
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1272,6 +1443,7 @@
                         "handle": "slideshowSlide",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Slide": [
@@ -1286,6 +1458,7 @@
                         "handle": "video",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1314,6 +1487,7 @@
                         "handle": "videoLoop",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1329,8 +1503,8 @@
                                 "moveVertical",
                                 "layer",
                                 "shadow",
-                                "height",
                                 "noPadding",
+                                "maxHeight",
                                 "responsiveVisibility",
                                 "classes",
                                 "style"
@@ -1350,6 +1524,7 @@
                         "handle": "taxonomy",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1364,6 +1539,7 @@
                         "handle": "structure",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1374,11 +1550,27 @@
                         }
                     },
                     "new9": {
-                        "sortOrder": 12,
+                        "sortOrder": 11,
+                        "name": "Channel",
+                        "handle": "channel",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": 0,
+                        "fieldLayout": {
+                            "Content": [
+                                "channel",
+                                "limit"
+                            ]
+                        }
+                    },
+                    "new10": {
+                        "sortOrder": 13,
                         "name": "Spacer",
                         "handle": "spacer",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Spacer": [
@@ -1392,12 +1584,13 @@
                             ]
                         }
                     },
-                    "new10": {
-                        "sortOrder": 13,
+                    "new11": {
+                        "sortOrder": 14,
                         "name": "Separator",
                         "handle": "separator",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Separator": [
@@ -1411,23 +1604,25 @@
                             ]
                         }
                     },
-                    "new11": {
-                        "sortOrder": 14,
+                    "new12": {
+                        "sortOrder": 15,
                         "name": "Clear",
                         "handle": "clear",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Clear": []
                         }
                     },
-                    "new12": {
-                        "sortOrder": 15,
+                    "new13": {
+                        "sortOrder": 16,
                         "name": "Code",
                         "handle": "code",
                         "maxBlocks": null,
                         "childBlocks": "",
+                        "maxChildBlocks": null,
                         "topLevel": 0,
                         "fieldLayout": {
                             "Content": [
@@ -1471,6 +1666,19 @@
                 ],
                 "Custom Code": [
                     "customCode"
+                ]
+            }
+        },
+        {
+            "sectionHandle": "news",
+            "hasTitleField": 1,
+            "titleLabel": "Title",
+            "name": "News",
+            "handle": "news",
+            "fieldLayout": {
+                "Content": [
+                    "channelPostContent",
+                    "tags"
                 ]
             }
         },
@@ -1593,11 +1801,26 @@
             }
         },
         {
+            "name": "Header",
+            "handle": "header",
+            "fieldLayout": {
+                "Content": [
+                    "headerFixed",
+                    "navigationType",
+                    "menuToggleType"
+                ]
+            }
+        },
+        {
             "name": "Menu",
             "handle": "menu",
             "fieldLayout": {
                 "Content": [
-                    "menuContent"
+                    "menuContent",
+                    "menuBgColor",
+                    "menuTextColor",
+                    "menuLinkColor",
+                    "menuLinkHoverColor"
                 ]
             }
         },
@@ -1613,11 +1836,7 @@
                     "backgroundColor",
                     "textColor",
                     "linkColor",
-                    "linkHoverColor",
-                    "menuBgColor",
-                    "menuTextColor",
-                    "menuLinkColor",
-                    "menuLinkHoverColor"
+                    "linkHoverColor"
                 ]
             }
         },

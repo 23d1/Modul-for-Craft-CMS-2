@@ -1,5 +1,7 @@
+{% set page = craft.request.getSegment(1) %}
 {% set nav = craft.amNav.getNavRaw("mainMenu") %}
 {% set navSub = craft.amNav.getNavRaw("subMenu") %}
+
 <div id="menu-slide">
   <div class="container-fluid flex-container">
     <div class="row">

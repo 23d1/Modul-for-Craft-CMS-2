@@ -1,0 +1,11 @@
+{% set entries = craft.entries.section(item.channel).limit(item.limit) %}
+
+<div class="clearfix"></div>
+
+<div class="col-xs-12 py-0">
+  <div class="structure bleed-both">
+    {% for entry in entries %}
+      {% include '_layouts/channel' %}
+    {% endfor %}
+  </div>
+</div>

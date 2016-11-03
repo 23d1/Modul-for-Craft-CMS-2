@@ -1,0 +1,65 @@
+<div class="container-fluid pt-3">
+  <div class="row">
+    <div class="col-xs-12 pb-0">
+      <hr class="my-0" style="border-top-width: 1px;">
+    </div>
+    <div class="col-xs-12 col-md-6 py-0">
+      <div class="row">
+        <div class="col-xs-12 col-xl-6 pb-0">
+          <h5>{{ entry.dateCreated|date("M d") }}, {{ entry.dateCreated|date("Y") }}</h5>
+        </div>
+        <div class="col-xs-12 col-xl-6 pb-0">
+          <h5><a href="{{ entry.url }}">{{ entry.title }}</a></h5>
+          {% if entry.tags|length %}
+            <div class="pt-1">
+              {% for tag in entry.tags %}
+                <div class="d-block">
+                  — {{ tag.title }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 py-0">
+      <div class="row">
+        {% for item in entry.channelPostContent.level(1) %}
+        		{% switch item.type.handle %}
+
+        			{% case 'text' %}
+        			<div class="col-xs-12">
+        				{% include '_blocks/text' %}
+        			</div>
+
+        			{% case 'image' %}
+        			<div class="col-xs-12">
+        				{% include '_blocks/image' %}
+        			</div>
+
+        			{% case 'video' %}
+        			<div class="col-xs-12">
+        				{% include '_blocks/video' %}
+        			</div>
+
+              {% case 'videoLoop' %}
+        			<div class="col-xs-12">
+        				{% include '_blocks/video_loop' %}
+        			</div>
+
+        			{% case 'slideshow' %}
+        			<div class="col-xs-12">
+        				{% include '_blocks/slideshow' %}
+        			</div>
+
+        		{% endswitch %}
+        {% endfor %}
+
+        {# {% if craft.request.getSegment(2)|length %}
+          {% include '_includes/nextprev' %}
+        {% endif %} #}
+      </div>
+    </div>
+  </div>
+</div>

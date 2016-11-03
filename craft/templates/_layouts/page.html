@@ -1,4 +1,4 @@
-<div class="{% if entry.topAligned %}align-top{% else %}pt-3{% endif %}">
+<div class="{% if entry.topAligned %}pull-top{% else %}pt-3{% endif %}">
   {% for row in entry.postContent.level(1) %}
 
   	{% if row.rowBgColor|trim|length %}
@@ -66,6 +66,9 @@
               {% case 'structure' %}
   						  {% include '_blocks/structure' %}
 
+              {% case 'channel' %}
+  						  {% include '_blocks/channel' %}
+
               {% case 'spacer' %}
   							{% include '_blocks/spacer' %}
 
@@ -75,7 +78,7 @@
   						{% case 'clear' %}
   							<div class="clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"></div>
 
-                {% case 'code' %}
+              {% case 'code' %}
                 <div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
                   <div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
                     <div class="move">

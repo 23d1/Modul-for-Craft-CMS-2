@@ -24,19 +24,33 @@
 	var slideshow_control_navigation = 'bullets';
 	var cover_slideshow_autoplay_delay_time = 5000;
 	var header_bottom_margin = 0;
-
-{% if site.googleAnalytics|trim|length %}
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', '{{ site.googleAnalytics }}', 'auto');
-  ga('send', 'pageview');
-{% endif %}
 {% endincludejs %}
 
-{% if (site.backgroundColor|trim|length or site.textColor|trim|length or site.linkColor|trim|length or site.linkHoverColor|trim|length or site.menuBgColor|trim|length or site.menuTextColor|trim|length or site.menuLinkColor|trim|length or site.menuLinkHoverColor|trim|length) or typography.defaultFont|length %}
+{% if (site.backgroundColor|trim|length or
+  site.textColor|trim|length or
+  site.linkColor|trim|length or
+  site.linkHoverColor|trim|length or
+  menu.menuBgColor|trim|length or
+  menu.menuTextColor|trim|length or
+  menu.menuLinkColor|trim|length or
+  menu.menuLinkHoverColor|trim|length) or
+  typography.defaultFont|length or
+  typography.defaultFontSize|length or
+  typography.defaultFontLineHeight|length or
+  typography.headerLineHeight|length or
+  typography.h1Font|length or
+  typography.h1FontSize|length or
+  typography.h2Font|length or
+  typography.h2FontSize|length or
+  typography.h3Font|length or
+  typography.h3FontSize|length or
+  typography.h4Font|length or
+  typography.h4FontSize|length or
+  typography.h5Font|length or
+  typography.h5FontSize|length or
+  typography.h6Font|length or
+  typography.h6FontSize|length
+%}
 	{% set usercss %}
 		{% if site.backgroundColor|trim|length %}
 			body {
@@ -122,32 +136,32 @@
 			background: {{ site.linkHoverColor }}!important;
 		}
 		{% endif %}
-		{% if site.menuBgColor|trim|length %}
+		{% if menu.menuBgColor|trim|length %}
 			#menu-slide {
-				background: {{ site.menuBgColor }};
-				{% if site.menuTextColor|trim|length %}
-					color: {{ site.menuTextColor }};
+				background: {{ menu.menuBgColor }};
+				{% if menu.menuTextColor|trim|length %}
+					color: {{ menu.menuTextColor }};
 				{% endif %}
 			}
-		{% elseif site.menuTextColor|trim|length %}
+		{% elseif menu.menuTextColor|trim|length %}
 			#menu-slide {
-				color: {{ site.menuTextColor }};
+				color: {{ menu.menuTextColor }};
 			}
 		{% endif %}
-		{% if site.menuLinkColor|trim|length %}
+		{% if menu.menuLinkColor|trim|length %}
 			#menu-slide a, #menu-slide ul.nav li a, #menu-btn.open span {
-				color: {{ site.menuLinkColor }}!important;
+				color: {{ menu.menuLinkColor }}!important;
 			}
 			#menu-slide a.link-thick:after, #menu-slide ul.nav li a.link-thick:after, body #menu-btn.open:after {
-				background: {{ site.menuLinkColor }}!important;
+				background: {{ menu.menuLinkColor }}!important;
 			}
 		{% endif %}
-		{% if site.menuLinkHoverColor|trim|length %}
+		{% if menu.menuLinkHoverColor|trim|length %}
 			#menu-slide a:hover, #menu-slide ul.nav li a:hover, #menu-btn.open:hover span {
-				color: {{ site.menuLinkHoverColor }}!important;
+				color: {{ menu.menuLinkHoverColor }}!important;
 			}
 			#menu-slide ul.nav li a.link-thick:hover:after, body #menu-btn.open:hover:after {
-				background: {{ site.menuLinkHoverColor }}!important;
+				background: {{ menu.menuLinkHoverColor }}!important;
 			}
 		{% endif %}
 	{% endset %}
@@ -176,19 +190,12 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 {% include "_includes/svg_defs" %}
-
 	<div id="wrap" class="is-entering">
     {% include '_includes/loader' %}
 
 		{% block header %}
-			<div id="header" class="container-fluid pos-f-t">
-				<div class="row">
-					<div class="col-xs-12">
-
+			<div id="header" class="container-fluid{% if header.headerFixed %} pos-f-t{% else %} pos-a-t{% endif %}">
 						{% include "_includes/nav" %}
-
-					</div>
-				</div>
 			</div>
 			{% include '_includes/nav_toggle_menu' %}
 		{% endblock %}
@@ -218,6 +225,8 @@
 		</div>
 
 	</div>
-
+  {% if site.googleAnalytics|trim|length %}
+    {{ site.googleAnalytics|raw }}
+  {% endif %}
 </body>
 </html>

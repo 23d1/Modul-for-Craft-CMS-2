@@ -101,15 +101,8 @@ The username is `admin` and the password is `password`.
 
 ---
 
-## Updating (This only works between certain releases, the latest does not support this yet).
-If you've already installed a previous version, and don't want to lose any content, skip importing the database and follow these steps:
-* Go `Settings > Plugins` and `Install` The Architect (if already installed, go to the next step).
-* Go to `The Architext` go to the `Available Files`.
-* Click on `update.json`.
-* Scroll all the way down and click `Construct`
-* Don't worry about errors and warnings, you should now be good to go with all the latest features.
-* When you're done, you can go back to `Settings > Plugins` and `Uninstall` The Architect.
-* Enjoy a beer.
+## Updating
+Working on a solution to not have to do a fresh install with every release. Functionality-wise though, it is approaching feature-complete, which should mean that hopefully future updates will most likely not require a fresh install.
 
 #### Ps. You should skip uploading the `uploads` folder when updating.
 
