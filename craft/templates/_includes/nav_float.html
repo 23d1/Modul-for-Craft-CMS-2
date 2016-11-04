@@ -44,21 +44,24 @@
       </div>
     {% endmacro %}
 
-  {% if header.navigationType == 'floatLeft' or header.navigationType == 'girdLeftWide' %}
-    {% set first = nav %}
-    {% set second = navSub %}
-  {% else %}
-    {% set first = navSub|reverse %}
-    {% set second = nav|reverse %}
-  {% endif %}
+    {% if
+      header.navigationType == 'floatLeft' or
+      header.navigationType == 'floatLeftWide'
+    %}
+      {% set first = nav %}
+      {% set second = navSub %}
+    {% else %}
+      {% set first = navSub|reverse %}
+      {% set second = nav|reverse %}
+    {% endif %}
 
-    {% if nav|length or navSub|length %}
-        {% if nav|length %}
+    {% if first|length or second|length %}
+        {% if first|length %}
           {% for node in first %}
             {{ _self.addNodeToNavigation(node, loop.index) }}
           {% endfor %}
         {% endif %}
-        {% if navSub|length %}
+        {% if second|length %}
           {% for node in second %}
               {{ _self.addNodeToNavigation(node, loop.index) }}
           {% endfor %}
