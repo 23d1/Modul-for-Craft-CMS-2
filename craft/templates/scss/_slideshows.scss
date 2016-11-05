@@ -488,6 +488,12 @@
 *
 ****************/
 
+.rsPreloader {
+  ~ .rsImg {
+		opacity: 0 !important;
+	}
+}
+
 .rsDefault .rsPreloader { background: transparent; position: absolute; width: 20px; height: 20px; top: 50%; left: 50%; margin-top: -10px; margin-left: -10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; z-index: 99; border-top: 5px solid rgba(128, 128, 128, 0.25); border-right: 5px solid rgba(128, 128, 128, 0.25); border-bottom: 5px solid; border-left: 5px solid; animation: loadr 1s infinite linear; -webkit-animation: loadr 1s infinite linear; -moz-animation: loadr 1s infinite linear; }
 @keyframes loadr { from { -webkit-transform: rotate(0deg) } to { -webkit-transform: rotate(360deg) } }
 @-webkit-keyframes loadr { from { -webkit-transform: rotate(0deg) } to { -webkit-transform: rotate(360deg) } }

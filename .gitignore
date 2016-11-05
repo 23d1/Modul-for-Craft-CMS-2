@@ -30,3 +30,4 @@ logs/*
 node_modules
 License.key
 license.key
+*.scss*

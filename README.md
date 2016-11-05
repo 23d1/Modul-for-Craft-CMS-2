@@ -13,7 +13,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 * CSS
   * [Bootstrap 4 Alpha 5](https://v4-alpha.getbootstrap.com)
 * JavaScript / jQuery 3.1.1
-  * [jquery.imgpreload 1.6.2](https://github.com/farinspace/jquery.imgpreload)
+  * [lazysizes 2.0.6](https://github.com/aFarkas/lazysizes)
   * [jQuery Easing v1.3](http://gsgd.co.uk/sandbox/jquery/easing)
   * [Packery 2.1.1](http://packery.metafizzy.co)
   * [RoyalSlider 9.5.7](http://dimsemenov.com)
@@ -102,7 +102,7 @@ The username is `admin` and the password is `password`.
 ---
 
 ## Updating
-Working on a solution to not have to do a fresh install with every release. Functionality-wise though, it is approaching feature-complete, which should mean that hopefully future updates will most likely not require a fresh install.
+Read the [UPDATE.md](https://github.com/aFarkas/lazysizes/blob/gh-pages/UPDATE.md) for information on updating Modul from 0.2.5 Alpha to 0.3.0 Alpha. Updates from prior versions require fresh install. This work-in-progress process will be simplified in future releases.
 
 #### Ps. You should skip uploading the `uploads` folder when updating.
 

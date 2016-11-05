@@ -7,7 +7,6 @@
 }
 
 // Positioning
-
 .pos-a-t {
   position: absolute;
   top: 0;
@@ -16,12 +15,35 @@
   z-index: $zindex-navbar-fixed;
 }
 
-
 // Typography
-
 .text-center {
 	text-align: center;
 }
 .text-right {
 	text-align: right;
+}
+
+// lazysizes.js classes
+.lazyload {
+	opacity: 0;
+	background: transparent;
+	~ .slide-spin {
+		display: none;
+	}
+}
+.lazyloading {
+  opacity: 0.1;
+	background: #7f7f7f !important;
+	transition: opacity 0.3s;
+}
+.lazyloaded {
+	opacity: 1;
+	transition: opacity 0.3s;
+	&.img-fluid {
+		width: 100% !important;
+		height: auto !important;
+	}
+	~ .slide-spin {
+		display: none;
+	}
 }

@@ -20,7 +20,6 @@ $(document).ready(function () {
   var viewportWidth = $(window).width();
   var docheight = $(document).height();
 	// X-tra variables for misc. needs
-	var imagefadespeed = image_loaded_fade_speed;
   var footerheight = $('#footer').height();
 
   /*** Browser support detection ***/
@@ -85,183 +84,24 @@ $(document).ready(function () {
     $('#pageloader').fadeOut(400);
   }
 
-  /*** Pre-loading ***/
-  // Pre-resize the images before they are loaded (to prevent loading flicker)
-  function prepreloading() {
+  /*** Pre-sizing ***/
+  // Pre-size the images before they are loaded (to prevent loading flicker)
+  function presize() {
     $('#content img').each(function () {
-      if (!$(this).hasClass('ready')) {
-        if ($(this).hasClass('notme')) {
-          // Escape
-        } else if ($(this).hasClass('reverse')) {
-          parentheight = $(this).parent().height();
-          imgwidth = $(this).attr('data-width');
-          imgheight = $(this).attr('data-height');
-          imgdim = imgwidth / imgheight;
-          newwidth = parentheight * imgdim;
-          newwidth = Math.round(newwidth);
-          // Apply
-          $(this).width(newwidth);
-          $(this).height(parentheight);
-          $(this).fadeTo(0, 0);
-        } else {
-          parentwidth = $(this).parent().width();
-          imgwidth = $(this).attr('data-width');
-          imgheight = $(this).attr('data-height');
-          imgdim = imgwidth / imgheight;
-          newheight = parentwidth / imgdim;
-          newheight = Math.round(newheight);
-          // Apply
-          $(this).width(parentwidth);
-          $(this).height(newheight);
-          $(this).fadeTo(0, 0);
-        }
-      }
-    });
-  }
-
-  // Image preloading
-  function preloadimages() {
-
-    // Add spinner if
-    $('#content img').each(function (i) {
       if ($(this).hasClass('notme')) {
         // Escape
       } else {
-        var pt = $(this).parent();
-        var t = $(this);
-        setTimeout(function () {
-          if (pt.hasClass('bing')) {
-            // Escape
-            //t.fadeTo(0, 1);
-          } else {
-            pt.prepend('<div class="slide-spinn">&nbsp;</div>');
-            t.addClass('bong');
-            pt.css({'background': 'rgba(127, 127, 127, 0.1)'})
-          }
-        }, 600);
+        parentwidth = $(this).parent().width();
+        imgwidth = $(this).attr('data-width');
+        imgheight = $(this).attr('data-height');
+        imgdim = imgwidth / imgheight;
+        newheight = parentwidth / imgdim;
+        newheight = Math.round(newheight);
+        // Apply
+        $(this).width(parentwidth);
+        $(this).height(newheight);
       }
     });
-
-    // Preload
-    $('#content img').imgpreload({
-      each: function () {
-        // Selectors
-        var t = $(this);
-        var tp = $(this).parent();
-        var tpp = $(this).parent().parent();
-        var tppp = $(this).parent().parent().parent();
-
-        if ($(this).hasClass('notme')) {
-          // Escape
-        } else {
-          if (tpp.hasClass('thumb')) {
-            tpp.addClass('ready');
-          }
-
-          t.addClass('ready');
-          tp.addClass('ready');
-
-          bgcolor = 'transparent';
-
-          // Force color
-          // ... & Hide circle loader
-          if (tp.hasClass('row-img')) {
-            // IF row item = keep bg color
-            tp.addClass('bing').find('.slide-spinn').fadeTo(0, 0, function () {
-              $(this).remove();
-            });
-          } else {
-            // Set color
-            if (tp.hasClass('bleed')) {
-              tp.addClass('bing').css({
-                'background': 'transparent'
-              }).find('.slide-spinn').fadeTo(0, 0, function () {
-                $(this).remove();
-              });
-            } else {
-              tp.addClass('bing').css({
-                'background': '' + bgcolor + ''
-              }).find('.slide-spinn').fadeTo(0, 0, function () {
-                $(this).remove();
-              });
-            }
-          }
-
-          // Fade in loaded images
-          if (t.hasClass('reverse')) {
-            if (t.hasClass('bong')) {
-              $(this).css({
-                'height': '100%',
-                'width': 'auto'
-              }).fadeTo(imagefadespeed, 1);
-            } else {
-              $(this).css({
-                'height': '100%',
-                'width': 'auto'
-              }).fadeTo(0, 1);
-            }
-          } else {
-            if (t.hasClass('bong')) {
-              $(this).css({
-                'width': '100%',
-                'height': 'auto'
-              }).fadeTo(imagefadespeed, 1);
-            } else {
-              $(this).css({
-                'width': '100%',
-                'height': 'auto'
-              }).fadeTo(0, 1);
-            }
-          }
-
-          resize();
-
-        }
-
-      },
-      all: function () {
-        // Executes when all images are loaded
-        resize();
-        imagefadespeed = image_loaded_fade_speed;
-        $('.slide-spinn').remove();
-      }
-    });
-
-
-    $('body .royalSlider .rsImg').imgpreload({
-      each: function () {
-        // Executes on each slideshow image load
-        resize();
-      },
-      all: function () {
-        // Executes when all slideshow images are loaded
-        resize();
-      }
-    });
-    /*
-    // Preload thumb hover images (if any)
-      // Fill array with all hover images so we can preload them
-    var hover_thumb_src_array = [];
-    var arraycount = 0;
-    $('.module .thumb .image-holder img').each(function(i){
-      if ($(this).hasAttr('data-hoversrc')) {
-        hs = $(this).attr('data-hoversrc');
-        if (hs) {
-          hover_thumb_src_array[arraycount] = hs;
-          arraycount++;
-        }
-      }
-    });
-    // Now preload thumb hover images
-    $.imgpreload(hover_thumb_src_array, {
-      each: function() {
-        // Executes after each image
-      },
-      all: function() {
-        // Executes when all images are loaded
-      }
-    });
-    */
   }
 
 	// Setup mediaelements
@@ -603,14 +443,36 @@ $(document).ready(function () {
     });
   }
 
+  function stickynav() {
+    if (header_autohide) {
+      var top, bottom = 0,
+        doc = $(document),
+        win = $(window),
+        head = $("#header");
+      top = Modernizr.touch ? 150 : 25, win.scroll(function() {
+        var topdist = $(this).scrollTop();
+        if (Math.abs(bottom - topdist) >= top && topdist > 0) {
+          if (topdist > bottom) {
+            var topoffset = doc.height() - (doc.scrollTop() + win.height());
+            topoffset > 50 ? head.addClass("is-hidden") : head.removeClass("is-hidden")
+          } else topdist > 50 ? head.removeClass("is-hidden")/*.addClass("is-small")*/ : head.removeClass("is-hidden")/*.removeClass("is-small")*/;
+          bottom = topdist
+        }
+      });
+      BackgroundCheck.refresh();
+    }
+  }
+
   // Check background image
   function checkbackground() {
-    if( $('.img-fluid')[0] || $('.img-bg')[0] ) {
-      BackgroundCheck.init({
+    setTimeout(function () {
+      if( $('.image-holder')[0] ) {
+        BackgroundCheck.init({
           targets: '#logo, #header a, #menu-btn, #menu-sandwich',
-          images: 'img, .img-bg'
-      });
-    }
+          images: '.img-fluid, .img-bg'
+        });
+      }
+    }, 100);
     BackgroundCheck.refresh();
   }
 
@@ -618,10 +480,9 @@ $(document).ready(function () {
 	// Trigger A$AP
 	function preinit() {
     setmobile();
-    prepreloading();
-    preloadimages();
+    stickynav();
+    presize();
 		setslideshow();
-    checkbackground();
     resize();
     if ($('#block').attr('data-styling') == '1') {
       $('#wrap').addClass('has-styling');
@@ -644,11 +505,11 @@ $(document).ready(function () {
   // Trigger after ajax injection
 	function reinit() {
     setmobile();
+    stickynav();
+    presize();
 		setslideshow();
 		setpackery();
 		setmediaelements();
-    prepreloading();
-    preloadimages();
     checkbackground();
 		resize();
 		setTimeout(function () {
@@ -684,5 +545,12 @@ $(document).ready(function () {
 	$(window).bind('orientationchange', function () {
     $(window).resize();
   });
+
+  $(document).on('lazybeforeunveil', function() {
+    resize();
+    // checkbackground();
+    BackgroundCheck.refresh();
+  });
+
 
 });

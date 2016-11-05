@@ -13,17 +13,9 @@
 {% includeJsFile "/js/mediaelement-and-player.min.js" %}
 {% includeJsFile "/js/ui.min.js" %}
 {% includeJs %}
-	// History
-	var history_transition_speed = 400;
-	var page_loader = 'Type-1';
-
 	// Interface
-	var default_easing = 'in-out';
-	var image_loaded_fade_speed = 200;
 	var slideshow_speed = 600;
-	var slideshow_control_navigation = 'bullets';
-	var cover_slideshow_autoplay_delay_time = 5000;
-	var header_bottom_margin = 0;
+  var header_autohide = {% if header.headerAutohide and header.headerFixed %}true{% else %}false{% endif %};
 {% endincludejs %}
 
 {% if (site.backgroundColor|trim|length or

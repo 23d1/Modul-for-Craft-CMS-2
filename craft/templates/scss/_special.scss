@@ -97,8 +97,15 @@ a.svg {
 #header {
 	z-index: 9999;
 	pointer-events: none;
+  transition: transform $time $easing;
   a {
     pointer-events: auto;
+  }
+  &.is-small {
+    top: -1rem;
+  }
+  &.is-hidden {
+    transform: translate(0, -100%);
   }
 }
 #menu-slide, #header {

@@ -32,7 +32,8 @@
               </div>
             </div>
           {% endif %}
-          <img class="img-fluid" src="{{ thumbnail }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
+          <img class="img-fluid lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ thumbnail }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
+          <div class="slide-spin"></div>
           <div class="thumb-hover">
             <div class="thumb-hover-title">
               <h5>
