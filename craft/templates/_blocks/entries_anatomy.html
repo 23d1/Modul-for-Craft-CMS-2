@@ -8,6 +8,7 @@
 {% set moveVertical = entry.moveVertical %}
 {% set layer = entry.layer %}
 {% set shadow = entry.shadow %}
+{% set transform = 'medium' %}
 
 {% set originalWidth = image.getWidth(false) %}
 {% set transformedWidth = image.getWidth(transform) %}
@@ -19,8 +20,23 @@
 
 <div class="masonry-item {% if grid|length %}col-xs-12 {% if grid == 1 or grid == 2 or grid == 3 or grid == 4 or grid == 5 %}col-sm-6{% else %}col-sm-12{% endif %} col-md-{{ grid }} col-lg-{{ grid }} col-xl-{{ grid }}{% endif %}{% if offset|length %} col-sm-offset-0 col-md-offset-{{ offset }} col-lg-offset-{{ offset }} col-xl-offset-{{ offset }}{% endif %}{% if bleed == "left" %} bleed-left{% elseif bleed == "right" %} bleed-right{% elseif bleed == "both" %} bleed-both{% endif %}{% if item.pull|length %} {{ item.pull }}{% endif %}">
   <div class="hv-item {{ moveHorizontal }} {{ moveVertical }}">
+
     <div class="move" style="z-index: {{ layer }};">
       <a href="{{ entry.url }}" class="thumb">
+
+        {% if thumbnails.thumbTextPosition in ['aboveCenter', 'aboveLeft', 'aboveRight'] %}
+          <div class="thumb-hover above">
+            <div class="thumb-hover-title
+            {% if thumbnails.thumbTextPosition == 'aboveLeft' %} left
+            {% elseif thumbnails.thumbTextPosition == 'aboveRight' %} right
+            {% endif %}">
+              <div{% if thumbnails.thumbTextSize|length %} class="{{ thumbnails.thumbTextSize }}"{% endif %}>
+                {{ entry.title }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
         <div class="image-holder{% if shadow %} shadow{% endif %}">
           {% if video|length %}
             <div class="video-bg">
@@ -34,15 +50,45 @@
           {% endif %}
           <img class="img-fluid lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ thumbnail }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
           <div class="slide-spin"></div>
-          <div class="thumb-hover">
-            <div class="thumb-hover-title">
-              <h5>
-                {{ entry.title }}
-              </h5>
+
+          {% if not thumbnails.thumbTextPosition|length or thumbnails.thumbTextPosition in ['middleLeftOn', 'middleRightOn', 'topCenterOn', 'topLeftOn', 'topRightOn', 'bottomCenterOn', 'bottomLeftOn', 'bottomRightOn'] %}
+            <div class="thumb-hover
+            {% if thumbnails.thumbTextPosition in ['topCenterOn', 'topLeftOn', 'topRightOn'] %} top
+            {% elseif thumbnails.thumbTextPosition in ['bottomCenterOn', 'bottomLeftOn', 'bottomRightOn'] %} bottom
+            {% endif %}">
+              <div class="thumb-hover-title
+              {% if thumbnails.thumbTextPosition in ['middleLeftOn', 'topLeftOn', 'bottomLeftOn'] %} left
+              {% elseif thumbnails.thumbTextPosition in ['middleRightOn', 'topRightOn', 'bottomRightOn'] %} right
+              {% endif %}">
+                <div{% if thumbnails.thumbTextSize|length %} class="{{ thumbnails.thumbTextSize }}"{% endif %}>
+                  {{ entry.title }}
+                </div>
+              </div>
+              <div class="thumb-hover-bg"{% if thumbnails.thumbHoverOverlayColor|trim|length %} style="background: {{ thumbnails.thumbHoverOverlayColor }}"{% endif %}></div>
             </div>
-            <div class="thumb-hover-bg"></div>
-          </div>
+          {% endif %}
+
+          {% if thumbnails.thumbTextPosition in ['aboveCenter', 'aboveLeft', 'aboveRight', 'belowCenter', 'belowLeft', 'belowRight'] %}
+            <div class="thumb-hover">
+              <div class="thumb-hover-bg"{% if thumbnails.thumbHoverOverlayColor|trim|length %} style="background: {{ thumbnails.thumbHoverOverlayColor }}"{% endif %}></div>
+            </div>
+          {% endif %}
+
         </div>
+
+        {% if thumbnails.thumbTextPosition in ['belowCenter', 'belowLeft', 'belowRight'] %}
+          <div class="thumb-hover below">
+            <div class="thumb-hover-title
+            {% if thumbnails.thumbTextPosition == 'belowLeft' %} left
+            {% elseif thumbnails.thumbTextPosition == 'belowRight' %} right
+            {% endif %}">
+              <div{% if thumbnails.thumbTextSize|length %} class="{{ thumbnails.thumbTextSize }}"{% endif %}>
+                {{ entry.title }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
       </a>
     </div>
   </div>

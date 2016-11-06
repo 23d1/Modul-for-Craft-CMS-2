@@ -1,11 +1,11 @@
-{% if entry is defined and entry.title != "Home" %}
+{% if entry is defined and craft.request.getSegment(1)|length %}
   {% set title = entry.title %}
 {% endif %}
 
 {% import '_includes/macros' as macros %}
 
 {% includeCssFile "/css/royalslider/royalslider.css" %}
-{% includeCssFile "/scss/modul.min.css" %}
+{% includeCssFile "/css/modul.min.css" %}
 
 {% includeJsFile "//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.runtime.min.js" %}
 {% includeJsFile "/js/jquery-3.1.1.min.js" %}
@@ -13,9 +13,9 @@
 {% includeJsFile "/js/mediaelement-and-player.min.js" %}
 {% includeJsFile "/js/ui.min.js" %}
 {% includeJs %}
-	// Interface
 	var slideshow_speed = 600;
   var header_autohide = {% if header.headerAutohide and header.headerFixed %}true{% else %}false{% endif %};
+  var slide_objects = {% if interface.slideObjectsIntoView %}true{% else %}false{% endif %};
 {% endincludejs %}
 
 {% if (site.backgroundColor|trim|length or

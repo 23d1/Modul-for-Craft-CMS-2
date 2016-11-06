@@ -1,9 +1,0 @@
-// Framework move generation
-
-$alpha-values: 10;
-
-@for $i from 0 through $alpha-values {
-  .a-#{$i} {
-    opacity: (0.1 * $i);
-  }
-}

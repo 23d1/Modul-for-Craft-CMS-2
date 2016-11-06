@@ -20,6 +20,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
   * [smoothState.js](http://smoothstate.com)
   * [BackgroundCheck](http://kennethcachia.com/background-check)
   * [MediaElement.js](http://mediaelementjs.com)
+  * [Waypoints](http://imakewebthings.com/waypoints)
 
 ## Example websites running Modul
 * http://23d.one

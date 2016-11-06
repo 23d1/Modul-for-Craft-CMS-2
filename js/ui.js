@@ -463,6 +463,34 @@ $(document).ready(function () {
     }
   }
 
+  function slideobjects() {
+    if (slide_objects) {
+      $("#content div.hv-item").each(function() {
+        var elemvisibility = visibility($(this))[1];
+        0 === elemvisibility ? $(this).css("transform", "translate(0, 150px)") : 1 === elemvisibility && $(this).css("transform", "translate(0, -150px)"), new Waypoint.Inview({
+          element: $(this)[0],
+          enter: function(direction) {
+            $(this.element).css("transform", "translate(0, 0)");
+          },
+          exited: function(direction) {
+            "down" === direction ? $(this.element).css("transform", "translate(0, -150px)") : $(this.element).css("transform", "translate(0, 150px)");
+          }
+        });
+      });
+    }
+  }
+  function visibility(element) {
+    var windowsize = ($(window).width(), $(window).height()),
+        width = element.width(),
+        height = element.height(),
+        bbox = element[0].getBoundingClientRect(),
+        hpos = bbox.left - windowsize,
+        hedge = bbox.left + width,
+        vpos = bbox.top - windowsize,
+        vedge = bbox.top + height;
+    return [Math.max(0, Math.min((0 - hpos) / (hedge - hpos), 1)), Math.max(0, Math.min((0 - vpos) / (vedge - vpos), 1))]
+  }
+
   // Check background image
   function checkbackground() {
     setTimeout(function () {
@@ -491,13 +519,14 @@ $(document).ready(function () {
 
 	// Trigger on window ready
 	function init() {
+    slideobjects();
 		setslideshow();
 		setpackery();
 		setmediaelements();
     setinlinevideos();
-    checkbackground();
 		resize();
 		setTimeout(function () {
+      checkbackground();
 			resize();
 		}, 100);
 	}
@@ -510,11 +539,12 @@ $(document).ready(function () {
 		setslideshow();
 		setpackery();
 		setmediaelements();
-    checkbackground();
 		resize();
 		setTimeout(function () {
 			resize();
+      checkbackground();
       setinlinevideos();
+      slideobjects();
 		}, 100);
 	}
 

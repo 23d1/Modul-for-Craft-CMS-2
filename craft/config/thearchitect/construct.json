@@ -7,7 +7,9 @@
         "Footer",
         "Header",
         "Menu",
-        "Default"
+        "Interface",
+        "Default",
+        "Thumbnails"
     ],
     "sections": [
         {
@@ -22,18 +24,6 @@
             }
         },
         {
-            "name": "News",
-            "handle": "news",
-            "type": "channel",
-            "enableVersioning": 1,
-            "typesettings": {
-                "hasUrls": 1,
-                "template": "index",
-                "urlFormat": "news\/{slug}",
-                "nestedUrlFormat": null
-            }
-        },
-        {
             "name": "Pages",
             "handle": "pages",
             "type": "structure",
@@ -43,6 +33,18 @@
                 "template": "index",
                 "maxLevels": 1,
                 "urlFormat": "{slug}",
+                "nestedUrlFormat": null
+            }
+        },
+        {
+            "name": "Resources",
+            "handle": "resources",
+            "type": "channel",
+            "enableVersioning": 1,
+            "typesettings": {
+                "hasUrls": 1,
+                "template": "index",
+                "urlFormat": "resources\/{slug}",
                 "nestedUrlFormat": null
             }
         },
@@ -430,6 +432,17 @@
                 "maxLength": "",
                 "multiline": "",
                 "initialRows": 4
+            }
+        },
+        {
+            "group": "Header",
+            "name": "Header Autohide",
+            "handle": "headerAutohide",
+            "instructions": "Hide the header automatically when the user scrolls down (it reappears when the user scrolls up or hits the bottom of the page). Only works for fixed navigation.",
+            "required": false,
+            "type": "Lightswitch",
+            "typesettings": {
+                "default": ""
             }
         },
         {
@@ -854,6 +867,17 @@
             }
         },
         {
+            "group": "Interface",
+            "name": "Slide Objects Into View",
+            "handle": "slideObjectsIntoView",
+            "instructions": "Slide images, texts, videos and everything else into view as you scroll up and down. A very nice and subtle effect.",
+            "required": false,
+            "type": "Lightswitch",
+            "typesettings": {
+                "default": ""
+            }
+        },
+        {
             "group": "Posts",
             "name": "Slideshow Type",
             "handle": "slideshowType",
@@ -930,6 +954,44 @@
                 "showPalette": 1,
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
+            }
+        },
+        {
+            "group": "Thumbnails",
+            "name": "Thumbnail Hover Overlay Color",
+            "handle": "thumbHoverOverlayColor",
+            "instructions": "Set the color and transparency of the overlay that appears when you hover over or tap thumbnails.",
+            "required": false,
+            "type": "Spectrum_ColorPicker",
+            "typesettings": {
+                "allowEmpty": 1,
+                "showInput": 1,
+                "showAlpha": 1,
+                "showPalette": 1,
+                "showPaletteOnly": "",
+                "preferredFormat": "rgb"
+            }
+        },
+        {
+            "group": "Thumbnails",
+            "name": "Thumbnail Text Position",
+            "handle": "thumbTextPosition",
+            "instructions": "Set the position of the text that goes together with thumbnails.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/thumb_text_position' ignore missing %}"
+            }
+        },
+        {
+            "group": "Thumbnails",
+            "name": "Thumbnail Text Size",
+            "handle": "thumbTextSize",
+            "instructions": "Set the thumbnail text size.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/thumb_text_size' ignore missing %}"
             }
         },
         {
@@ -1479,7 +1541,14 @@
                                 "classes",
                                 "style"
                             ]
-                        }
+                        },
+                        "relabel": [
+                            {
+                                "field": "imageFile",
+                                "name": null,
+                                "instructions": "This is your poster\/fallback, for when before the video is playing or have stopped playing."
+                            }
+                        ]
                     },
                     "new6": {
                         "sortOrder": 8,
@@ -1670,19 +1739,6 @@
             }
         },
         {
-            "sectionHandle": "news",
-            "hasTitleField": 1,
-            "titleLabel": "Title",
-            "name": "News",
-            "handle": "news",
-            "fieldLayout": {
-                "Content": [
-                    "channelPostContent",
-                    "tags"
-                ]
-            }
-        },
-        {
             "sectionHandle": "pages",
             "hasTitleField": 1,
             "titleLabel": "Title",
@@ -1702,6 +1758,19 @@
                 ],
                 "Custom Code": [
                     "customCode"
+                ]
+            }
+        },
+        {
+            "sectionHandle": "resources",
+            "hasTitleField": 1,
+            "titleLabel": "Title",
+            "name": "Resources",
+            "handle": "resources",
+            "fieldLayout": {
+                "Content": [
+                    "channelPostContent",
+                    "tags"
                 ]
             }
         },
@@ -1740,7 +1809,7 @@
                 {
                     "field": "imageFile",
                     "name": null,
-                    "instructions": "This will be your thumbnail. If you add video (below), this will be the video poster\/fallback, and the scale of the video is dictated by the dimensions of the thumbnail image."
+                    "instructions": "This will be your thumbnail. If you add video (below), this will be the video poster, and the scale of the video is dictated by the dimensions of the thumbnail image."
                 }
             ]
         }
@@ -1806,8 +1875,18 @@
             "fieldLayout": {
                 "Content": [
                     "headerFixed",
+                    "headerAutohide",
                     "navigationType",
                     "menuToggleType"
+                ]
+            }
+        },
+        {
+            "name": "Interface",
+            "handle": "interface",
+            "fieldLayout": {
+                "Content": [
+                    "slideObjectsIntoView"
                 ]
             }
         },
@@ -1837,6 +1916,17 @@
                     "textColor",
                     "linkColor",
                     "linkHoverColor"
+                ]
+            }
+        },
+        {
+            "name": "Thumbnails",
+            "handle": "thumbnails",
+            "fieldLayout": {
+                "Content": [
+                    "thumbHoverOverlayColor",
+                    "thumbTextPosition",
+                    "thumbTextSize"
                 ]
             }
         },
