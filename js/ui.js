@@ -578,8 +578,8 @@ $(document).ready(function () {
 
   $(document).on('lazybeforeunveil', function() {
     resize();
-    // checkbackground();
-    BackgroundCheck.refresh();
+    checkbackground();
+    // BackgroundCheck.refresh();
   });
 
 

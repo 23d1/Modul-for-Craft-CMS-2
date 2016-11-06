@@ -324,7 +324,7 @@ a._i7:a.slider}),a.ev.on("rsAfterSizePropSet",function(){var b,c=a.st.visibleNea
           list[e].img.src = url;
           log('CSS Image - ' + url);
         } else {
-          throw 'Element is not an <img> but does not have a background-image';
+          // throw 'Element is not an <img> but does not have a background-image';
         }
       }
     }
