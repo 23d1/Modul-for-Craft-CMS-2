@@ -8,7 +8,7 @@
 
 # Updating
 ## Updating from 0.2.5 Alpha or 0.3.0 Alpha to 0.4.0 Alpha
-1. Replace the templates folder on your ftp with the one in this package (`craft/templates`).
+1. Replace the templates folder on your ftp with the one in this package (`craft/templates`) and replace the `js` folder with the one in this package.
 2. Replace the `thearchitect` folder in `/craft/config/`
 3. Replace the js folder on your ftp with the one in this package.
 4. Go to your admin and log in. Then go to `Settings > Plugins` and `Install` The Architect.
