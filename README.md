@@ -4,6 +4,7 @@ Website builder template skeleton for Craft CMS aimed primarily at (but not limi
 ## Example websites running Modul
 * http://23d.one
 * http://askrembla.com
+* http://studiosloan.com
 
 ---
 
