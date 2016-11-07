@@ -24,6 +24,18 @@
             }
         },
         {
+            "name": "News",
+            "handle": "news",
+            "type": "channel",
+            "enableVersioning": 1,
+            "typesettings": {
+                "hasUrls": 1,
+                "template": "index",
+                "urlFormat": "news\/{slug}",
+                "nestedUrlFormat": null
+            }
+        },
+        {
             "name": "Pages",
             "handle": "pages",
             "type": "structure",
@@ -33,18 +45,6 @@
                 "template": "index",
                 "maxLevels": 1,
                 "urlFormat": "{slug}",
-                "nestedUrlFormat": null
-            }
-        },
-        {
-            "name": "Resources",
-            "handle": "resources",
-            "type": "channel",
-            "enableVersioning": 1,
-            "typesettings": {
-                "hasUrls": 1,
-                "template": "index",
-                "urlFormat": "resources\/{slug}",
                 "nestedUrlFormat": null
             }
         },
@@ -1110,7 +1110,17 @@
                         ],
                         "maxChildBlocks": null,
                         "topLevel": 1,
-                        "fieldLayout": []
+                        "fieldLayout": {
+                            "Content": [],
+                            "Settings": [
+                                "slideshowType",
+                                "transition",
+                                "autoplay",
+                                "autoplayTimer",
+                                "showArrows",
+                                "indicator"
+                            ]
+                        }
                     },
                     "new3": {
                         "sortOrder": 5,
@@ -1541,14 +1551,7 @@
                                 "classes",
                                 "style"
                             ]
-                        },
-                        "relabel": [
-                            {
-                                "field": "imageFile",
-                                "name": null,
-                                "instructions": "This is your poster\/fallback, for when before the video is playing or have stopped playing."
-                            }
-                        ]
+                        }
                     },
                     "new6": {
                         "sortOrder": 8,
@@ -1739,6 +1742,19 @@
             }
         },
         {
+            "sectionHandle": "news",
+            "hasTitleField": 1,
+            "titleLabel": "Title",
+            "name": "News",
+            "handle": "news",
+            "fieldLayout": {
+                "Content": [
+                    "channelPostContent",
+                    "tags"
+                ]
+            }
+        },
+        {
             "sectionHandle": "pages",
             "hasTitleField": 1,
             "titleLabel": "Title",
@@ -1758,19 +1774,6 @@
                 ],
                 "Custom Code": [
                     "customCode"
-                ]
-            }
-        },
-        {
-            "sectionHandle": "resources",
-            "hasTitleField": 1,
-            "titleLabel": "Title",
-            "name": "Resources",
-            "handle": "resources",
-            "fieldLayout": {
-                "Content": [
-                    "channelPostContent",
-                    "tags"
                 ]
             }
         },
@@ -1809,7 +1812,7 @@
                 {
                     "field": "imageFile",
                     "name": null,
-                    "instructions": "This will be your thumbnail. If you add video (below), this will be the video poster, and the scale of the video is dictated by the dimensions of the thumbnail image."
+                    "instructions": "This will be your thumbnail. If you add video (below), this will be the video poster\/fallback, and the scale of the video is dictated by the dimensions of the thumbnail image."
                 }
             ]
         }
