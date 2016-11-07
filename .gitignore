@@ -5,13 +5,11 @@
 !/craft/storage/.htaccess
 !/craft/storage/logo/*
 
-
 # LOCAL CONFIG SETTINGS
 # Exclude local config files so we don't overwrite other local setups.
 # Leave example files that can be renamed to get setup
 # ------------------------------------------------------------
 craft/config/local/*
-
 
 # MISC FILES
 # ------------------------------------------------------------
