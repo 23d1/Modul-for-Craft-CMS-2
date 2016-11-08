@@ -494,7 +494,7 @@ $(document).ready(function () {
   // Check background image
   function checkbackground() {
     setTimeout(function () {
-      if( $('.image-holder')[0] ) {
+      if( $('.image-holder, .rsImg, .mejs-poster')[0] ) {
         BackgroundCheck.init({
           targets: '#logo, #header a, #menu-btn, #menu-sandwich',
           images: '.img-fluid, .img-bg'
