@@ -13,7 +13,7 @@ Website builder template skeleton for Craft CMS aimed primarily at (but not limi
 Download Craft CMS from https://craftcms.com/ and extract on your desktop. Place the `app` folder from within the `craft` folder into the `craft` folder inside this package and upload to your hosting platform/server.
 
 #### Note
-Don't upload modul-database.zip, and no need to upload the source files in `craft/templates/scss` just `modul.min.css`. And don't forget to include the `.htaccess` file in the root of this directory. I've included a `_htaccess` file just in case, that you can upload and rename (OSX and Linux hides files with a period in front).
+Don't upload modul-database.zip. And don't forget to include the `.htaccess` file in the root of this directory. I've included a `_htaccess` file just in case, that you can upload and rename (OSX and Linux hides files with a period in front).
 
 ### Database
 When you're done uploading the files, don't forget to update the information in `craft/config/db.php` to match that of your database.
