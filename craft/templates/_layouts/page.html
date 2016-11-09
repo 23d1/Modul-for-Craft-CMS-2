@@ -45,7 +45,7 @@
               {% case 'videoLoop' %}
   						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
   							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move{% if bleed|length %} {{ bleed }}{% endif %}">
+  								<div class="move{% if item.bleed|length %} {{ item.bleed }}{% endif %}">
   								{% include '_blocks/video_loop' %}
   								</div>
   							</div>
