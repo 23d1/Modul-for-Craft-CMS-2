@@ -129,5 +129,4 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 * Pasting SVG code for the logo in the `Globals/Site` doesn't work yet.
 * Add more customization options to the backend.
 * Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
-* Add cover style background video functionality.
 * Add the front-end functionality for text content in slider blocks.
