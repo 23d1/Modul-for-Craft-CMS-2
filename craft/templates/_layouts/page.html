@@ -45,7 +45,7 @@
               {% case 'videoLoop' %}
   						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
   							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move">
+  								<div class="move{% if bleed|length %} {{ bleed }}{% endif %}">
   								{% include '_blocks/video_loop' %}
   								</div>
   							</div>
@@ -54,7 +54,7 @@
   						{% case 'slideshow' %}
   						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
   							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move{% if bleed|length %} {{ bleed }}{% endif %}">
+  								<div class="move">
   								{% include '_blocks/slideshow' %}
   								</div>
   							</div>
