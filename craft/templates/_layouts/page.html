@@ -4,7 +4,7 @@
   	{% if row.rowBgColor|trim|length %}
   		<div class="container-bg mx-0 px-0{% if row.pullUpBelow %} pull-up-bottom-bg{% endif %}" style="background:{{ row.rowBgColor }};{% if row.rowTextColor|trim|length %}color:{{ row.rowTextColor }};{% endif %}">
   	{% elseif row.rowTextColor|trim|length %}
-  		<div class="container-bg mx-0 px-0" style="color:{{ row.rowTextColor }};">
+  		<div class="mx-0 px-0" style="color:{{ row.rowTextColor }};">
   	{% endif %}
       <div class="container-fluid{% if row.pullUpBelow and not row.rowBgColor|trim|length %} pull-up-bottom-row{% endif %}">
   	{% if row.rowType == 'normal' %}
@@ -93,7 +93,7 @@
   			   </div>
         </div>
 
-  		  {% if row.rowBgColor|trim|length %}</div>{% endif %}
+  		  {% if row.rowBgColor|trim|length %}</div>{% elseif row.rowTextColor|trim|length %}</div>{% endif %}
 
       {% endfor %}
       {% if craft.request.getSegment(2)|length %}
