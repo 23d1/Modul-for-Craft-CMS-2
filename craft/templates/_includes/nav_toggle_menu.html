@@ -37,20 +37,16 @@
         {% if nav|length or navSub|length %}
           <nav>
             {% if nav|length %}
-              <ul class="nav mb-2">
+              <ul class="nav mb-2 h2">
                 {% for node in nav %}
-                  <div class="h2">
-                    {{ _self.addNodeToNavigation(node, loop.index) }}
-                  </div>
+                  {{ _self.addNodeToNavigation(node, loop.index) }}
                 {% endfor %}
               </ul>
             {% endif %}
             {% if navSub|length %}
-              <ul class="nav">
+              <ul class="nav h5">
                 {% for node in navSub %}
-                  <div class="h5">
-                    {{ _self.addNodeToNavigation(node, loop.index) }}
-                  </div>
+                  {{ _self.addNodeToNavigation(node, loop.index) }}
                 {% endfor %}
               </ul>
             {% endif %}
