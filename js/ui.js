@@ -411,16 +411,17 @@ $(document).ready(function () {
       }, 600);
   });
   $('body').on('click', '#menu-slide a', function() {
-    $('body').removeClass('menu-open');
+    hidemenu();
     //$('body').css('overflow', 'auto');
   });
   $('body').on('click', '#page-cover', function() {
-    $('body').removeClass('menu-open');
+    hidemenu();
     //$('body').css('overflow', 'auto');
   });
 
   // Hide toggle-menu when clicking item
   function hidemenu() {
+    $("#sandwich").prop("checked", false);
     $('body').removeClass('menu-open');
   }
 
@@ -579,7 +580,7 @@ $(document).ready(function () {
   $(document).on('lazybeforeunveil', function() {
     resize();
     checkbackground();
-    // BackgroundCheck.refresh();
+    BackgroundCheck.refresh();
   });
 
 

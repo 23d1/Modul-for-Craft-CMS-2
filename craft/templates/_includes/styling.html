@@ -30,6 +30,9 @@
       #change a:after, #change .link-thick:after, #header a:after, #menu-btn:after {
         background: {{ linkColor }} !important;
       }
+      #sandwich:not(:checked) ~ .menu-icon .menu-icon-inner {
+        background: {{ linkColor }} !important;
+      }
     {% endif %}
     {% if linkHoverColor|trim|length %}
       #change a:hover, #header a:hover, #menu-btn:hover {
@@ -39,7 +42,7 @@
       #change a:hover:after, #change .link-thick:hover:after, #change .link-thick:hover:after, #header a:hover:after, #menu-btn:hover:after, #menu-normal ul.nav li.active a:hover:after {
         background: {{ linkHoverColor }} !important;
       }
-      .menu-open #menu-btn span {
+      .menu-open #menu-btn span, .menu-open #sandwich:checked ~ .menu-icon .menu-icon-inner {
         color: #222222 !important;
       }
       .menu-open #menu-btn:after {

@@ -59,9 +59,7 @@
 
   			</div></div>
 
-  	{% if row.rowBgColor|trim|length %}
-      </div>
-    {% endif %}
+  	{% if row.rowBgColor|trim|length %}</div>{% elseif row.rowTextColor|trim|length %}</div>{% endif %}
 
   {% endfor %}
 </div>
