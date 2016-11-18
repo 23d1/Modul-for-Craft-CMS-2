@@ -383,19 +383,19 @@ $(document).ready(function () {
 	}
 
   // Royalslider img click
-  $('body').on('click', '.slideshow-holder', function (e) {
-    e.preventDefault();
-    slide = $(this).parent().parent();
-
-    slideoffset = slide.offset().top;
-    slideheight = slide.height();
-    slidecorrection = (viewportHeight - slideheight) / 2;
-    if (slidecorrection < 0) {
-      slidecorrection = 0;
-    }
-    position = slideoffset - slidecorrection;
-    bodyscrollto(position, 600);
-  });
+  // $('body').on('click', '.slideshow-holder', function (e) {
+  //   e.preventDefault();
+  //   slide = $(this).parent().parent();
+  //
+  //   slideoffset = slide.offset().top;
+  //   slideheight = slide.height();
+  //   slidecorrection = (viewportHeight - slideheight) / 2;
+  //   if (slidecorrection < 0) {
+  //     slidecorrection = 0;
+  //   }
+  //   position = slideoffset - slidecorrection;
+  //   bodyscrollto(position, 600);
+  // });
 
   // Menu toggle
   $('body').on('click', '#menu-btn, #menu-sandwich .menu-icon', function() {
