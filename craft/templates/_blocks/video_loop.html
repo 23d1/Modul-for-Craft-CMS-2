@@ -13,19 +13,24 @@
   {% set poster = image.getUrl() %}
 {% endif %}
 
-
-<div class="video-holder{% if shadow %} shadow{% endif %}{% if bleed|length %} {{ bleed }}{% endif %}">
-  <div class="video-bg">
-    <div class="video-inline cover align-center align-middle">
-      <div class="video-padding"></div>
-      <video poster="{{ poster }}" playsinline autoplay muted loop>
-        <source src="{{ video.getUrl() }}" type="video/mp4">
-      </video>
+{% if bleed|length %}
+<div class="{{ bleed }}">
+{% endif %}
+  <div class="video-holder{% if shadow %} shadow{% endif %}{% endif %}{% if bleed|length %} {{ bleed }}{% endif %}">
+    <div class="video-bg">
+      <div class="video-inline cover align-center align-middle">
+        <div class="video-padding"></div>
+        <video poster="{{ poster }}" playsinline autoplay muted loop>
+          <source src="{{ video.getUrl() }}" type="video/mp4">
+        </video>
+      </div>
     </div>
+    {% if height|length %}
+      <div class="img-bg vh-{{ height }}" style="background: url({{ poster }}) center center / cover no-repeat;"></div>
+    {% else %}
+      <img class="img-fluid lazyload" src="{{ poster }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
+    {% endif %}
   </div>
-  {% if height|length %}
-    <div class="img-bg vh-{{ height }}" style="background: url({{ poster }}) center center / cover no-repeat;"></div>
-  {% else %}
-    <img class="img-fluid lazyload" src="{{ poster }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
-  {% endif %}
+{% if bleed|length %}
 </div>
+{% endif %}
