@@ -18,7 +18,7 @@
   {% set thumbnail = image.getUrl() %}
 {% endif %}
 
-<div class="masonry-item {% if grid|length %}col-xs-12 {% if grid == 1 or grid == 2 or grid == 3 or grid == 4 or grid == 5 %}col-sm-6{% else %}col-sm-12{% endif %} col-md-{{ grid }} col-lg-{{ grid }} col-xl-{{ grid }}{% endif %}{% if offset|length %} col-sm-offset-0 col-md-offset-{{ offset }} col-lg-offset-{{ offset }} col-xl-offset-{{ offset }}{% endif %}{% if bleed == "left" %} bleed-left{% elseif bleed == "right" %} bleed-right{% elseif bleed == "both" %} bleed-both{% endif %}{% if item.pull|length %} {{ item.pull }}{% endif %}">
+<div class="masonry-item {% if grid|length %}col-xs-12 {% if grid == 1 or grid == 2 or grid == 3 or grid == 4 or grid == 5 %}col-sm-6{% else %}col-sm-12{% endif %} col-md-{{ grid }} col-lg-{{ grid }} col-xl-{{ grid }}{% endif %}{% if offset|length %} offset-sm-0 offset-md-{{ offset }} offset-lg-{{ offset }} offset-xl-{{ offset }}{% endif %}{% if bleed == "left" %} bleed-left{% elseif bleed == "right" %} bleed-right{% elseif bleed == "both" %} bleed-both{% endif %}{% if item.pull|length %} {{ item.pull }}{% endif %}">
   <div class="hv-item {{ moveHorizontal }} {{ moveVertical }}">
 
     <div class="move" style="z-index: {{ layer }};">
