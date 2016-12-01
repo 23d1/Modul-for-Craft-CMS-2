@@ -10,17 +10,41 @@
 <div class="slideshow-holder{% if bleed|length %} {{ bleed }}{% endif %}{% if maxHeight|length %} vh-{{ maxHeight }}{% endif %}{% if loop.parent.loop.index == 1 and loop.index == 1 and entry.topAligned and type == "visibleNearby" %} py-4{% endif %}">
 	<div id="slideshow{{ loop.index }}" class="royalSlider rsDefault default-slideshow{% if type == "visibleNearby" %} visibleNearby{% endif %}" data-slideshow-transition="{{ transition }}" data-slideshow-arrows="{{ arrows }}"{% if indicator|length %} data-slideshow-indicator="{{ indicator }}"{% endif %} data-slideshow-autoplay="{{ item.autoplay }}" data-slideshow-delay="{{ timer }}" data-slideshow-type="{{ type }}"{% if maxHeight|length %} data-slideshow-viewportheight="{{ maxHeight }}"{% endif %}>
 		{% for slide in item.children %}
+
 			{% set image = slide.imageFile.first() %}
-      {% set originalWidth = image.getWidth(false) %}
-      {% set transformedWidth = image.getWidth(transform) %}
-      {% if transformedWidth < originalWidth %}
-        {% set imageOutput = image.getUrl(transform) %}
-      {% else %}
-        {% set imageOutput = image.getUrl(transform) %}
-      {% endif %}
+			{% set originalWidth = image.getWidth(false) %}
+			{% set transformedWidth = image.getWidth(transform) %}
+			{% if transformedWidth < originalWidth %}
+				{% set imageOutput = image.getUrl(transform) %}
+			{% else %}
+				{% set imageOutput = image.getUrl(transform) %}
+			{% endif %}
 			{% set rsw = image.getWidth(transform) %}
 			{% set rsh = image.getHeight(transform) %}
-			<img class="notme rsImg" src="{{ imageOutput }}" alt="{{ slide.text }}" data-rsw="{{ rsw }}" data-rsh="{{ rsh }}">
+			{% if slide.videoFile|length %}
+				{% set video = slide.videoFile.first() %}
+				{% if type == "normal" %}
+					<div class="video-bg">
+						<div class="pos-a trbl lazyload" data-bgset="{{ imageOutput }}" data-sizes="auto" style="background: center center / cover no-repeat;"></div>
+					    <div class="video-inline cover align-center align-middle">
+					        <div class="video-padding"></div>
+					        <video playsinline autoplay muted loop>
+					            <source src="{{ video.getUrl() }}" type="video/mp4">
+					        </video>
+					    </div>
+					</div>
+				{% else %}
+					<div class="rsAlignCenter">
+						<video class="w-100" poster="{{ imageOutput }}" playsinline autoplay muted loop width="{{ rsw }}" height="{{ rsh }}" style="max-height: 100%;">
+							<source src="{{ video.getUrl() }}" type="video/mp4">
+						</video>
+					</div>
+				{% endif %}
+			{% else %}
+				<img class="notme rsImg" src="{{ imageOutput }}" alt="{{ slide.text }}" data-rsw="{{ rsw }}" data-rsh="{{ rsh }}">
+			{% endif %}
+
+
 		{% endfor %}
 	</div>
 </div>

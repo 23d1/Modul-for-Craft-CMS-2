@@ -212,6 +212,8 @@ $(document).ready(function() {
             slideshow_w = t.parent().width();
             if (t.hasAttr("data-slideshow-viewportheight")) {
                 slideshow_h = parentheight;
+                // t.find('video').width(t.find('.video-holder').find('img').outerWidth());
+                // t.find('video').height(t.find('.video-holder').find('img').outerHeight());
             } else {
                 slideshow_h = slideshow_w / slideshow_dim;
             }
@@ -219,6 +221,8 @@ $(document).ready(function() {
             t.width(parentwidth).height(slideshow_h);
             t.royalSlider('updateSliderSize', true);
         });
+
+        console.log(slider.width);
     }
 
     // Logic for #footer
@@ -373,15 +377,45 @@ $(document).ready(function() {
                     // triggers after slide change
                     slide_id = slider.currSlideId;
                     BackgroundCheck.refresh();
+                    playSlideVideo();
                 });
                 slider.ev.on('rsAfterContentSet', function(e, default_slideshow) {
                     // fires when every time when slide content is loaded and added to DOM
                     resizeslideshows();
                 });
+                // slider.ev.on('rsOnCreateVideoElement', function(e, url) {
+                //     // url - path to video from data-rsVideo attribute
+                //     // slider.videoObj - jQuery object that holds video HTML code
+                //     // slider.videoObj must be IFRAME, VIDEO or EMBED element, or have class rsVideoObj
+                //     slider.videoObj = $('<video playsinline autoplay muted loop><source src="' + url + '" type="video/mp4"></video>');
+                // });
+
+                // var prevSlideVideo,
+                //     playSlideVideo = function() {
+                //     if(prevSlideVideo) {
+                //       prevSlideVideo.pause();
+                //     }
+                //     var video = slider.currSlide.content.find('video');
+                //     if(video.length) {
+                //       prevSlideVideo = video[0];
+                //       prevSlideVideo.play();
+                //     } else {
+                //       prevSlideVideo = null;
+                //     }
+                //
+                // };
+                playSlideVideo = function() {
+                    var video = slider.currSlide.content.find('video');
+                    if(video.length) {
+                      slideVideo = video[0];
+                      slideVideo.play();
+                    }
+
+                };
+                playSlideVideo();
 
                 default_slideshow.find('.rsArrowLeft .rsArrowIcn').html('<svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"><use x="0" y="0" xlink:href="#arrowLeft" /></svg>');
                 default_slideshow.find('.rsArrowRight .rsArrowIcn').html('<svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"><use x="0" y="0" xlink:href="#arrowRight" /></svg>');
-
             }
         });
 

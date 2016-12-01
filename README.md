@@ -27,7 +27,7 @@ The username is `admin` and the password is `password`.
 ---
 
 ## Updating
-Read the [UPDATE.md](https://github.com/23d1/Modul/blob/master/UPDATE.md) for information on updating Modul from 0.2.5 Alpha to 0.3.0 Alpha. Updates from prior versions require fresh install. This work-in-progress process will be simplified in future releases.
+Read the [UPDATE.md](https://github.com/23d1/Modul/blob/master/UPDATE.md)
 
 #### Ps. You should skip uploading the `uploads` folder when updating.
 
