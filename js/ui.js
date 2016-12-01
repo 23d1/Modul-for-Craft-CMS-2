@@ -212,8 +212,6 @@ $(document).ready(function() {
             slideshow_w = t.parent().width();
             if (t.hasAttr("data-slideshow-viewportheight")) {
                 slideshow_h = parentheight;
-                // t.find('video').width(t.find('.video-holder').find('img').outerWidth());
-                // t.find('video').height(t.find('.video-holder').find('img').outerHeight());
             } else {
                 slideshow_h = slideshow_w / slideshow_dim;
             }
@@ -221,8 +219,6 @@ $(document).ready(function() {
             t.width(parentwidth).height(slideshow_h);
             t.royalSlider('updateSliderSize', true);
         });
-
-        console.log(slider.width);
     }
 
     // Logic for #footer
