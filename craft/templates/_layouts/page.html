@@ -14,62 +14,56 @@
   	{% endif %}
 
   				{% for item in row.children %}
+                    {% set blockOpen %}
+                        <div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
+                            {% if interface.slideObjectsIntoView %}<div class="slide-object">{% endif %}
+                                <div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
+                                    <div class="move">
+                    {% endset %}
+                    {% set blockClose %}
+                                    </div>
+                                </div>
+                            {% if interface.slideObjectsIntoView %}</div>{% endif %}
+                        </div>
+                    {% endset %}
+
   					{% switch item.type.handle %}
   						{% case 'text' %}
-  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
-  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move">
-  								{% include '_blocks/text' %}
-  								</div>
-  							</div>
-  						</div>
+  						    {{ blockOpen }}
+                                {% include '_blocks/text' %}
+                            {{ blockClose }}
+
 
   						{% case 'image' %}
-  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
-  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move">
+  						    {{ blockOpen }}
   								{% include '_blocks/image' %}
-  								</div>
-  							</div>
-  						</div>
+  							{{ blockClose }}
 
   						{% case 'video' %}
-  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
-  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move">
+  						    {{ blockOpen }}
   								{% include '_blocks/video' %}
-  								</div>
-  							</div>
-  						</div>
+  							{{ blockClose }}
 
-              {% case 'videoLoop' %}
-  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
-  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move">
+                        {% case 'videoLoop' %}
+      						{{ blockOpen }}
   								{% include '_blocks/video_loop' %}
-  								</div>
-  							</div>
-  						</div>
+  							{{ blockClose }}
 
   						{% case 'slideshow' %}
-  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
-  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-  								<div class="move">
+      						{{ blockOpen }}
   								{% include '_blocks/slideshow' %}
-  								</div>
-  							</div>
-  						</div>
+  							{{ blockClose }}
 
-              {% case 'taxonomy' %}
-  						  {% include '_blocks/entries' %}
+                        {% case 'taxonomy' %}
+  						    {% include '_blocks/entries' %}
 
-              {% case 'structure' %}
-  						  {% include '_blocks/structure' %}
+                        {% case 'structure' %}
+  						    {% include '_blocks/structure' %}
 
-              {% case 'channel' %}
-  						  {% include '_blocks/channel' %}
+                        {% case 'channel' %}
+  						    {% include '_blocks/channel' %}
 
-              {% case 'spacer' %}
+                        {% case 'spacer' %}
   							{% include '_blocks/spacer' %}
 
   						{% case 'separator' %}
@@ -78,14 +72,10 @@
   						{% case 'clear' %}
   							<div class="clearfix col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"></div>
 
-              {% case 'code' %}
-                <div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
-                  <div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
-                    <div class="move">
-                      {% include '_blocks/code' %}
-                    </div>
-                  </div>
-                </div>
+                        {% case 'code' %}
+                            {{ blockOpen }}
+                                {% include '_blocks/code' %}
+                            {{ blockClose }}
 
   					{% endswitch %}
   				{% endfor %}

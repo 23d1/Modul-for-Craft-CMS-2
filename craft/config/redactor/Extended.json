@@ -1,4 +1,22 @@
 {
 	"buttons": ["format","bold","italic","lists","link","file","horizontalrule"],
-	"plugins": ["source","fullscreen","alignment","style","properties"]
+	"plugins": ["source","fullscreen","alignment","style","properties"],
+	"formattingAdd": {
+        "display-1": {
+            title: "Display-1",
+            args: ["p", "class", "display-1", "toggle"]
+        },
+		"display-2": {
+            title: "Display-2",
+            args: ["p", "class", "display-2", "toggle"]
+        },
+		"display-3": {
+            title: "Display-3",
+            args: ["p", "class", "display-3", "toggle"]
+        },
+		"display-4": {
+            title: "Display-4",
+            args: ["p", "class", "display-4", "toggle"]
+        }
+    }
 }

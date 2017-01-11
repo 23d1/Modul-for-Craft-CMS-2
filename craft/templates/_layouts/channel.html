@@ -32,44 +32,45 @@
     <div class="col-xs-12 col-md-6 py-0">
       <div class="row">
         {% for item in entry.channelPostContent.level(1) %}
-        		{% switch item.type.handle %}
-
-        			{% case 'text' %}
-        			<div class="col-xs-12">
-                <div class="hv-item">
-                  {% include '_blocks/text' %}
+            {% set blockOpen %}
+                <div class="col-xs-12">
+                    {% if interface.slideObjectsIntoView %}<div class="slide-object">{% endif %}
+                        <div class="hv-item">
+            {% endset %}
+            {% set blockClose %}
+                        </div>
+                    {% if interface.slideObjectsIntoView %}</div>{% endif %}
                 </div>
-        			</div>
+            {% endset %}
 
-        			{% case 'image' %}
-        			<div class="col-xs-12">
-                <div class="hv-item">
-                  {% include '_blocks/image' %}
-                </div>
-        			</div>
+    		{% switch item.type.handle %}
 
-        			{% case 'video' %}
-        			<div class="col-xs-12">
-                <div class="hv-item">
-                  {% include '_blocks/video' %}
-                </div>
-        			</div>
+    			{% case 'text' %}
+                    {{ blockOpen }}
+                        {% include '_blocks/text' %}
+                    {{ blockClose }}
 
-              {% case 'videoLoop' %}
-        			<div class="col-xs-12">
-                <div class="hv-item">
-                  {% include '_blocks/video_loop' %}
-                </div>
-        			</div>
+    			{% case 'image' %}
+                    {{ blockOpen }}
+                        {% include '_blocks/image' %}
+                    {{ blockClose }}
 
-        			{% case 'slideshow' %}
-        			<div class="col-xs-12">
-                <div class="hv-item">
-                  {% include '_blocks/slideshow' %}
-                </div>
-        			</div>
+    			{% case 'video' %}
+                    {{ blockOpen }}
+                        {% include '_blocks/video' %}
+                    {{ blockClose }}
 
-        		{% endswitch %}
+                {% case 'videoLoop' %}
+                    {{ blockOpen }}
+                        {% include '_blocks/video_loop' %}
+                    {{ blockClose }}
+
+    			{% case 'slideshow' %}
+                    {{ blockOpen }}
+                        {% include '_blocks/slideshow' %}
+                    {{ blockClose }}
+
+    		{% endswitch %}
         {% endfor %}
 
         {# {% if craft.request.getSegment(2)|length %}
