@@ -131,3 +131,4 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 * Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
 * Add the front-end functionality for text content in slider blocks.
 * Make full render taxonomy/structure items page styling carry through.
+* Make menu toggle off enforceable on mobile devices.
