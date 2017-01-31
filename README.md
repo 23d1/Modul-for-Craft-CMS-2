@@ -132,3 +132,4 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 * Add the front-end functionality for text content in slider blocks.
 * Make full render taxonomy/structure items page styling carry through.
 * Make menu toggle off enforceable on mobile devices.
+* Update to the latest Bootstrap 4 Alpha.
