@@ -4,13 +4,13 @@
 
 {% import '_includes/macros' as macros %}
 
-{% includeCssFile "/css/royalslider/royalslider.css" %}
-{% includeCssFile "/css/modul.min.css" %}
+{% includeCssFile siteUrl ~ "css/royalslider/royalslider.css" %}
+{% includeCssFile siteUrl ~ "css/modul.min.css" %}
 
-{% includeJsFile "/js/jquery-3.1.1.min.js" %}
-{% includeJsFile "/js/plugins.min.js" %}
-{% includeJsFile "/js/mediaelement-and-player.min.js" %}
-{% includeJsFile "/js/ui.min.js" %}
+{% includeJsFile siteUrl ~ "js/jquery-3.1.1.min.js" %}
+{% includeJsFile siteUrl ~ "js/plugins.min.js" %}
+{% includeJsFile siteUrl ~ "js/mediaelement-and-player.min.js" %}
+{% includeJsFile siteUrl ~ "js/ui.min.js" %}
 {% includeJs %}
 	var slideshow_speed = 600;
   var header_autohide = {% if header.headerAutohide and header.headerFixed %}true{% else %}false{% endif %};
