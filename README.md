@@ -134,3 +134,4 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 * Make menu toggle off enforceable on mobile devices.
 * Add background image functionality to rows (containers).
 * Update to the latest Bootstrap 4 Alpha.
+* Add thumbnail block; will be possible to override thumb settings on specified project in page/project layouts, for the ability to make more irregular grids of work, as opposed to floats and masonry only.
