@@ -5,6 +5,7 @@ Website builder template skeleton for Craft CMS aimed primarily at (but not limi
 * http://23d.one
 * http://askrembla.com
 * http://studiosloan.com
+* http://tombiskup.com
 
 ---
 
