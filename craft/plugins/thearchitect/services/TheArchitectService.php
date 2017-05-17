@@ -21,12 +21,12 @@ class TheArchitectService extends BaseApplicationComponent
     {
         $return = craft()->updates->backupDatabase();
         $dbBackupPath = $return['dbBackupPath'];
+
+        $notice = array();
         try {
             $result = json_decode($json);
 
             $this->stripHandleSpaces($result);
-
-            $notice = array();
 
             // Add Groups from JSON
             if (isset($result->groups)) {
@@ -298,9 +298,13 @@ class TheArchitectService extends BaseApplicationComponent
                     if ($field->type == 'Neo' && $addFieldResult[0]) {
                         $generatedField = $addFieldResult[3];
                         $blockTypes = craft()->neo->getBlockTypesByFieldId($generatedField->id);
+                        $blockTypeKey = 0;
                         foreach ($field->typesettings['blockTypes'] as $key => $value) {
-                            $blockTypeKey = intval(substr($key, 3));
+                            if ($migration) {
+                                $blockTypeKey = intval(substr($key, 3));
+                            }
                             $fieldLayoutId = $blockTypes[$blockTypeKey]->getFieldLayout()->id;
+                            $blockTypeKey++;
                             if (craft()->plugins->getPlugin('relabel')) {
                                 if (isset($value['relabel'])) {
                                     foreach ($value['relabel'] as $relabel) {
@@ -668,8 +672,6 @@ class TheArchitectService extends BaseApplicationComponent
                     );
                 }
             }
-
-            return $notice;
         } catch (\Exception $e) {
             $re = '/Property "Craft\\\\ContentModel\..*" is not defined\./';
              // TODO: Figure out why this happens at all.
@@ -677,14 +679,18 @@ class TheArchitectService extends BaseApplicationComponent
              // This field does not even have to be used on any global to trigger.
             preg_match_all($re, $e->getMessage(), $matches);
             if (!$matches) {
-                Craft::log('Rolling back any database changes.', LogLevel::Info, true);
-                UpdateHelper::rollBackDatabaseChanges($dbBackupPath);
-                Craft::log('Done rolling back any database changes.', LogLevel::Info, true);
+                // Craft::log('Rolling back any database changes.', LogLevel::Info, true);
+                // UpdateHelper::rollBackDatabaseChanges($dbBackupPath);
+                // Craft::log('Done rolling back any database changes.', LogLevel::Info, true);
                 // unlink(craft()->path->getDbBackupPath().$dbBackupPath.'.sql'); // NOTE: Delete DB Backups after rollback?
                 throw $e;
             }
+            return $notice;
         }
+
         unlink(craft()->path->getDbBackupPath().$dbBackupPath.'.sql');
+
+        return $notice;
     }
 
     /**
@@ -698,12 +704,20 @@ class TheArchitectService extends BaseApplicationComponent
     {
         list($sections, $entryTypes) = $this->sectionExport($post, $includeID);
         list($groups, $fields) = $this->fieldExport($post, $includeID);
+
         $sources = $this->assetSourceExport($post, $includeID);
         $transforms = $this->transformExport($post, $includeID);
         $globals = $this->globalSetExport($post, $includeID);
         $categories = $this->categoryGroupExport($post, $includeID);
         $routes = $this->routeExport($post, $includeID);
         $tags = $this->tagExport($post, $includeID);
+
+        // Get user groups info before uses. This seems to fix an issue with stripGroupPermissions. Where asking for userGroupPermissions returns null.
+        if (craft()->getEdition() == Craft::Pro) {
+            $userGroups = $this->userGroupsExport($post, $includeID);
+        } else {
+            $userGroups = null;
+        }
         $users = $this->usersExport($post, $includeID);
 
         // Add all Arrays into the final output array
@@ -719,15 +733,9 @@ class TheArchitectService extends BaseApplicationComponent
             'routes' => $routes,
             'tags' => $tags,
             'users' => $users,
+            'userGroups' => (is_array($userGroups)) ? $userGroups[0] : null,
+            'userGroupPermissions' => (is_array($userGroups)) ? $userGroups[1] : null,
         ];
-
-        if (craft()->getEdition() == Craft::Pro) {
-            $userGroups = $this->userGroupsExport($post, $includeID);
-            if (is_array($userGroups)) {
-                $output['userGroups'] = $userGroups[0];
-                $output['userGroupPermissions'] = $userGroups[1];
-            }
-        }
 
         // Remove empty sections from the output array
         foreach ($output as $key => $value) {
@@ -751,7 +759,7 @@ class TheArchitectService extends BaseApplicationComponent
         $export = $this->exportConstruct($post);
 
         // Converting arrays to objects.
-        $json = json_encode($export, JSON_NUMERIC_CHECK);
+        $json = json_encode($export/*, JSON_NUMERIC_CHECK*/);
 
         $object = json_decode($json);
 
@@ -872,7 +880,7 @@ class TheArchitectService extends BaseApplicationComponent
         $post = $this->getAllIDs();
 
         $output = $this->exportConstruct($post, true);
-        $json = json_encode($output, JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT);
+        $json = json_encode($output, /*JSON_NUMERIC_CHECK | */JSON_PRETTY_PRINT);
 
         $masterJson = craft()->config->get('modelsPath', 'theArchitect').'_master_.json';
         file_put_contents($masterJson, $json);
@@ -1081,6 +1089,11 @@ class TheArchitectService extends BaseApplicationComponent
                 if (!isset($blockType->maxChildBlocks)) {
                     $blockType->maxChildBlocks = '';
                 }
+
+                $problemFields = $this->checkFieldLayout($blockType->fieldLayout);
+                if ($problemFields !== ['handle' => []]) {
+                    return [false, $problemFields, false, false];
+                }
             }
         }
 
@@ -1213,7 +1226,7 @@ class TheArchitectService extends BaseApplicationComponent
                 ));
             }
         }
-        if ($section->attributes['hasUrls'] === false || $section->attributes['hasUrls'] === 0 || $section->attributes['hasUrls'] === '0') {
+        if (($section->attributes['hasUrls'] === false || $section->attributes['hasUrls'] === 0 || $section->attributes['hasUrls'] === '0') && isset($jsonSection->typesettings->locales)) {
             foreach ($jsonSection->typesettings->locales as $localeId => $defaultLocaleStatus) {
                 $locales[$localeId] = new SectionLocaleModel(array(
                     'locale' => $localeId,
@@ -1421,7 +1434,10 @@ class TheArchitectService extends BaseApplicationComponent
             foreach ($fields as $fieldHandle) {
                 $field = craft()->fields->getFieldByHandle($fieldHandle);
                 if ($field === null) {
-                    array_push($problemFields['handle'], 'Handle "'.$fieldHandle.'" is not a valid field.');
+                    $field = craft()->fields->getFieldById($fieldHandle);
+                    if ($field === null) {
+                        array_push($problemFields['handle'], 'Handle "'.$fieldHandle.'" is not a valid field.');
+                    }
                 }
             }
         }
@@ -2002,9 +2018,11 @@ class TheArchitectService extends BaseApplicationComponent
     {
         foreach ($userGroups as $group) {
             $userGroupPermissions = craft()->userPermissions->getPermissionsByGroupId($group->id);
-            foreach ($userPermissions as &$permission) {
-                if (in_array($permission, $userGroupPermissions)) {
-                    $permission = null;
+            if (is_array($userGroupPermissions)) {
+                foreach ($userPermissions as &$permission) {
+                    if (in_array($permission, $userGroupPermissions)) {
+                        $permission = null;
+                    }
                 }
             }
         }
@@ -2709,6 +2727,13 @@ class TheArchitectService extends BaseApplicationComponent
                     'type' => $blockField->type,
                     'typesettings' => $blockField->settings,
                 ];
+                if ($blockField->type == 'PositionSelect') {
+                    $options = [];
+                    foreach ($blockField->settings['options'] as $value) {
+                        $options[$value] = true;
+                    }
+                    $newField['typesettings']['blockTypes'][$blockId]['fields'][$fieldId]['typesettings']['options'] = $options;
+                }
                 if ($blockField->type == 'Neo') {
                     $this->setNeoField($newField['typesettings']['blockTypes'][$blockId]['fields'][$fieldId], $blockField->id, $includeID);
                 }
@@ -2811,9 +2836,16 @@ class TheArchitectService extends BaseApplicationComponent
                     'instructions' => $sTField->instructions,
                     'required' => $sTField->required,
                     'type' => $sTField->type,
-                    'width' => $columns[$sTFieldCount - 1]['width'],
+                    'width' => isset($columns[$sTFieldCount - 1]['width']) ? $columns[$sTFieldCount - 1]['width'] : '',
                     'typesettings' => $sTField->settings,
                 ];
+                if ($sTField->type == 'PositionSelect') {
+                    $options = [];
+                    foreach ($sTField->settings['options'] as $value) {
+                        $options[$value] = true;
+                    }
+                    $newField['typesettings']['blockTypes'][$blockId]['fields'][$fieldId]['typesettings']['options'] = $options;
+                }
                 if ($sTField->type == 'Matrix') {
                     $this->setMatrixField($newField['typesettings']['blockTypes'][$blockId]['fields'][$fieldId], $sTField->id);
                 }
@@ -2858,7 +2890,7 @@ class TheArchitectService extends BaseApplicationComponent
     private function parseFieldSources(&$field, &$newField)
     {
         if ($field->type == 'Assets') {
-            if ($newField['typesettings']['sources'] !== '*') {
+            if (is_array(isset($newField['typesettings']['sources']))) {
                 foreach ($newField['typesettings']['sources'] as $key => $value) {
                     if (substr($value, 0, 7) == 'folder:') {
                         $source = craft()->assetSources->getSourceById(intval(substr($value, 7)));
