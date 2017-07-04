@@ -13,7 +13,6 @@
     * Make full render taxonomy/structure items page styling carry through.
     * Make menu toggle off enforceable on mobile devices.
 
-
 # Changes in 0.4.4 Alpha
 * Major CSS and JS bug fixes as well as template cleanup
 * Added video loop functionality to slideshows
