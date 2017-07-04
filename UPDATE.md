@@ -1,32 +1,27 @@
+# Changes in 0.5.0 Beta
+#### This release requires a fresh install as there has been some major backend overhaul.
+* Major update to features, templates, CSS and JS as well as bug fixes all over.
+* New features
+    * A new `Thumbnail` block that you can place anywhere and override settings for, like image/video/grid/offset/bleed etc. You can even override the thumbnail settings found in `Globals`.
+    * Rows can now have background images, with loads of useful settings.
+    * Added functionality to have overlay content on images, slideshows and videos. This content can be text, images, videos, video loops and so forth. It functions just like the standard page building blocks with rows and content blocks.
+* TODO for next update
+    * Slideshows with "visible nearby" and no max-height set gets too much vertical padding.
+    * Pasting SVG code for the logo in the `Globals/Site` doesn't work yet. Will likely be a different approach.
+    * Add more customization options to the backend, like gutter widths and so forth.
+    * Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
+    * Make full render taxonomy/structure items page styling carry through.
+    * Make menu toggle off enforceable on mobile devices.
+
+
 # Changes in 0.4.4 Alpha
-* Major CSS and JS bugfixes as well as template cleanup
+* Major CSS and JS bug fixes as well as template cleanup
 * Added video loop functionality to slideshows
 
 # Changes in 0.4.0 Alpha from 0.3.0 Alpha
-* Added a `Thumbnails` section under `Globals` where you can modify how thumnails are displayed.
+* Added a `Thumbnails` section under `Globals` where you can modify how thumbnails are displayed.
 * Added a `Interface` section under `Globals` where you can activate sliding of objects as they enter the viewport. This section will have a lot more in future releases.
 
 # Changes in 0.3.0 Alpha from 0.2.5 Alpha
 * Completely revamped the image preloading to a lazy load hybrid which should greatly increase the page load speeds.
 * Added functionality to autohide the header when it's set to fixed.
-
-# Updating
-## Updating from 0.4.X Alpha to 0.4.4 Alpha
-To make use of the slideshow video functionality follow these steps;
-1. Go to `Settings > Fields > All Fields`.
-2. Go to `Post Content`.
-3. In the field area, go to `Slideshow Slide`.
-4. Go to the `Field Layout` tab.
-5. Drag the `VIDEO FILE` field from the available fields to just below `IMAGE FILE` in the active `SLIDE` tab.
-6. Save, and you're all set.
-
-## Updating from 0.2.5 Alpha or 0.3.0 Alpha to 0.4.0 Alpha
-1. Replace the templates folder on your ftp with the one in this package (`craft/templates`) and replace the `js` folder with the one in this package.
-2. Replace the `thearchitect` folder in `/craft/config/`
-3. Replace the js folder on your ftp with the one in this package.
-4. Go to your admin and log in. Then go to `Settings > Plugins` and `Install` The Architect.
-5. Go to `The Architect` and then the `Available Files` tab.
-6. Click on `construct.json` then click the `Construct` button at the very bottom of the page.
-7. You can ignore all/any errors, it's just a safety measure for fields that are already in the system.
-8. Go to `Settings > Plugins` and `Uninstall` The Architect.
-9. Have another beer, you can now modify more aspects of Modul.

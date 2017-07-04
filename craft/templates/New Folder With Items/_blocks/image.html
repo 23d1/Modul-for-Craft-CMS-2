@@ -1,0 +1,28 @@
+{% set image = item.imageFile.first() %}
+{% set shadow = item.shadow %}
+{% set bleed = item.bleed %}
+{% set text = item.text %}
+{% set transform = 'large' %}
+{% set maxHeight = item.maxHeight %}
+
+{% set originalWidth = image.getWidth(false) %}
+{% set transformedWidth = image.getWidth(transform) %}
+{% if transformedWidth < originalWidth %}
+  {% set imageOutput = image.getUrl(transform) %}
+{% else %}
+  {% set imageOutput = image.getUrl() %}
+{% endif %}
+
+<div class="image-holder{% if shadow %} shadow{% endif %}{% if bleed|length %} {{ bleed }}{% endif %}">
+  {% if maxHeight|length %}
+    <div class="img-bg vh-{{ maxHeight }} lazyload" data-bgset="{{ imageOutput }}" data-sizes="auto" style="background: center center / cover no-repeat;"></div>
+  {% else %}
+    <img class="img-fluid lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ imageOutput }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
+  {% endif %}
+  <div class="slide-spin"></div>
+</div>
+{% if text|raw|length %}
+  <div class="pt-1 a-7">
+    {{ text|raw }}
+  </div>
+{% endif %}

@@ -1,0 +1,231 @@
+{% if entry is defined and craft.request.getSegment(1)|length %}
+  {% set title = entry.title %}
+  {% set seomaticMeta = {
+    seoTitle: title
+  } %}
+{% else %}
+{% set seomaticMeta = {
+  seoTitle: title
+} %}
+{% endif %}
+
+{% import '_includes/macros' as macros %}
+
+{% includeCssFile siteUrl ~ "css/royalslider/royalslider.css" %}
+{% includeCssFile siteUrl ~ "css/modul.min.css" %}
+
+{% includeJsFile siteUrl ~ "js/jquery-3.1.1.min.js" %}
+{% includeJsFile siteUrl ~ "js/plugins.min.js" %}
+{% includeJsFile siteUrl ~ "js/mediaelement-and-player.min.js" %}
+{% includeJsFile siteUrl ~ "js/ui.min.js" %}
+{% includeJs %}
+	var slideshow_speed = 600;
+  var header_autohide = {% if header.headerAutohide and header.headerFixed %}true{% else %}false{% endif %};
+  var slide_objects = {% if interface.slideObjectsIntoView %}true{% else %}false{% endif %};
+{% endincludejs %}
+
+{% if (site.backgroundColor|trim|length or
+  site.textColor|trim|length or
+  site.linkColor|trim|length or
+  site.linkHoverColor|trim|length or
+  menu.menuBgColor|trim|length or
+  menu.menuTextColor|trim|length or
+  menu.menuLinkColor|trim|length or
+  menu.menuLinkHoverColor|trim|length) or
+  typography.defaultFont|length or
+  typography.defaultFontSize|length or
+  typography.defaultFontLineHeight|length or
+  typography.headerLineHeight|length or
+  typography.h1Font|length or
+  typography.h1FontSize|length or
+  typography.h2Font|length or
+  typography.h2FontSize|length or
+  typography.h3Font|length or
+  typography.h3FontSize|length or
+  typography.h4Font|length or
+  typography.h4FontSize|length or
+  typography.h5Font|length or
+  typography.h5FontSize|length or
+  typography.h6Font|length or
+  typography.h6FontSize|length
+%}
+	{% set usercss %}
+		{% if site.backgroundColor|trim|length %}
+			body {
+				background-color: {{ site.backgroundColor }};
+				{% if site.textColor|trim|length %}
+					color: {{ site.textColor }};
+				{% endif %}
+        {% if typography.defaultFont|length %}
+          font-family: {{ typography.defaultFont|raw }};
+        {% endif %}
+        {% if typography.defaultFontSize|length %}
+          font-size: {{ typography.defaultFontSize|raw }};
+        {% endif %}
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
+			}
+		{% elseif site.textColor|trim|length %}
+			body {
+				color: {{ site.textColor }};
+        {% if typography.defaultFont|length %}
+          font-family: {{ typography.defaultFont|raw }};
+        {% endif %}
+        {% if typography.defaultFontSize|length %}
+          font-size: {{ typography.defaultFontSize|raw }};
+        {% endif %}
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
+			}
+		{% elseif typography.defaultFont|length %}
+      body {
+        font-family: {{ typography.defaultFont|raw }};
+        {% if typography.defaultFontSize|length %}
+          font-size: {{ typography.defaultFontSize|raw }};
+        {% endif %}
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
+      }
+    {% elseif typography.defaultFontSize|length %}
+      body {
+        font-size: {{ typography.defaultFontSize|raw }};
+        {% if typography.defaultFontLineHeight > 0 %}
+          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {% endif %}
+      }
+    {% elseif typography.defaultFontLineHeight > 0 %}
+      body {
+        line-height: {{ typography.defaultFontLineHeight|raw }};
+      }
+    {% endif %}
+    {{ macros.customfont("h1", typography.h1Font, typography.h1FontSize) }}
+    {{ macros.customfont("h2", typography.h2Font, typography.h2FontSize) }}
+    {{ macros.customfont("h3", typography.h3Font, typography.h3FontSize) }}
+    {{ macros.customfont("h4", typography.h4Font, typography.h4FontSize) }}
+    {{ macros.customfont("h5", typography.h5Font, typography.h5FontSize) }}
+    {{ macros.customfont("h6", typography.h6Font, typography.h6FontSize) }}
+    {% if typography.headerLineHeight > 0 %}
+      h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+        line-height: {{ typography.headerLineHeight|raw }};
+      }
+    {% endif %}
+		{% if site.linkColor|trim|length %}
+		a {
+			color: {{ site.linkColor }}!important;
+		}
+		#menu-btn {
+			color: {{ site.linkColor }}!important;
+		}
+		.link-thick:after, #menu-btn:after, #menu-normal a:after, #menu-normal ul.nav li.active a:after {
+			background: {{ site.linkColor }}!important;
+		}
+		{% endif %}
+		{% if site.linkHoverColor|trim|length %}
+		a:hover {
+			color: {{ site.linkHoverColor }}!important;
+		}
+		#menu-btn:hover {
+			color: {{ site.linkHoverColor }}!important;
+		}
+		.link-thick:hover:after, #menu-btn:hover:after, #menu-normal a:hover:after, #menu-normal ul.nav li.active a:hover:after {
+			background: {{ site.linkHoverColor }}!important;
+		}
+		{% endif %}
+		{% if menu.menuBgColor|trim|length %}
+			#menu-slide {
+				background: {{ menu.menuBgColor }};
+				{% if menu.menuTextColor|trim|length %}
+					color: {{ menu.menuTextColor }};
+				{% endif %}
+			}
+		{% elseif menu.menuTextColor|trim|length %}
+			#menu-slide {
+				color: {{ menu.menuTextColor }};
+			}
+		{% endif %}
+		{% if menu.menuLinkColor|trim|length %}
+			#menu-slide a, #menu-slide ul.nav li a, #menu-btn.open span {
+				color: {{ menu.menuLinkColor }}!important;
+			}
+			#menu-slide a.link-thick:after, #menu-slide ul.nav li a.link-thick:after, body #menu-btn.open:after {
+				background: {{ menu.menuLinkColor }}!important;
+			}
+		{% endif %}
+		{% if menu.menuLinkHoverColor|trim|length %}
+			#menu-slide a:hover, #menu-slide ul.nav li a:hover, #menu-btn.open:hover span {
+				color: {{ menu.menuLinkHoverColor }}!important;
+			}
+			#menu-slide ul.nav li a.link-thick:hover:after, body #menu-btn.open:hover:after {
+				background: {{ menu.menuLinkHoverColor }}!important;
+			}
+		{% endif %}
+	{% endset %}
+{% includeCss usercss %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% hook 'seomaticRender' %}
+  	<meta charset="utf-8">
+  	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  	{# <title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title> #}
+
+  	{# <meta name="description" content="{{ "The modul templates for Craft CMS"|t }}"> #}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	{% if site.favicon|length %}<link rel="icon" href="{{ site.favicon.first().url }}">{% endif %}
+
+  {% if typography.webFontSnippets is defined %}
+    {{ typography.webFontSnippets|raw }}
+  {% endif %}
+</head>
+<body class="{% if craft.request.isMobileBrowser(true) %}mobile{% else %}desktop{% endif %}">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+{% include "_includes/svg_defs" %}
+	<div id="wrap" class="is-entering">
+    {% include '_includes/loader' %}
+
+		{% block header %}
+			<div id="header" class="container-fluid{% if header.headerFixed %} fixed-top{% else %} pos-a-t{% endif %}">
+						{% include "_includes/nav" %}
+			</div>
+			{% include '_includes/nav_toggle_menu' %}
+		{% endblock %}
+
+		<div id="change">
+
+			{% if entry.customCode|length %}
+				{{ entry.customCode|raw }}
+			{% endif %}
+
+			{% block body %}
+				<div id="content">
+
+					{% include '_includes/styling' %}
+
+					{% block main %}
+						<div class="row">
+							<div class="col-12">
+								<h4>Default Content</h4>
+								<p>You should not see this.</p>
+							</div>
+						</div>
+					{% endblock %}
+				</div>
+			{% endblock %}
+			{% include '_includes/footer' %}
+		</div>
+
+	</div>
+  {% if site.googleAnalytics|trim|length %}
+    {{ site.googleAnalytics|raw }}
+  {% endif %}
+</body>
+</html>

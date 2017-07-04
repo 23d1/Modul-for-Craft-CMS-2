@@ -1,0 +1,7 @@
+{% if site.logo|length %}
+    {% spaceless %}
+        {{ site.logo|raw }}
+    {% endspaceless %}
+{% else %}
+    {{ siteName }}
+{% endif %}

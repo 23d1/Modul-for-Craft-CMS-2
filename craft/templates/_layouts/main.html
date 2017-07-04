@@ -185,7 +185,7 @@
     {% include '_includes/loader' %}
 
 		{% block header %}
-			<div id="header" class="container-fluid{% if header.headerFixed %} pos-f-t{% else %} pos-a-t{% endif %}">
+			<div id="header" class="container-fluid{% if header.headerFixed %} fixed-top{% else %} pos-a-t{% endif %}">
 						{% include "_includes/nav" %}
 			</div>
 			{% include '_includes/nav_toggle_menu' %}
@@ -204,7 +204,7 @@
 
 					{% block main %}
 						<div class="row">
-							<div class="col-xs-12">
+							<div class="col-12">
 								<h4>Default Content</h4>
 								<p>You should not see this.</p>
 							</div>

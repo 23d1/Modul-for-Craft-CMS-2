@@ -1,0 +1,4 @@
+{% for section in craft.sections.getAllSections() if section.type == 'structure' and section.handle != 'pages' %}
+  {{ loop.index > 1 ? ',' }}
+  { "value":"{{ section | raw }}" , "label":"{{ section | raw }} - {{ section.type }}" }
+{% endfor %}

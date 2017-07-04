@@ -1,0 +1,30 @@
+{% set image = item.imageFile.first() %}
+{% set video = item.videoFile.first() %}
+{% set shadow = item.shadow %}
+{% set bleed = item.bleed %}
+{% set transform = 'large' %}
+{% set height = item.maxHeight %}
+
+{% set originalWidth = image.getWidth(false) %}
+{% set transformedWidth = image.getWidth(transform) %}
+{% if transformedWidth < originalWidth %}
+  {% set poster = image.getUrl(transform) %}
+{% else %}
+  {% set poster = image.getUrl() %}
+{% endif %}
+
+<div class="video-holder{% if shadow %} shadow{% endif %}{% if bleed|length %} {{ bleed }}{% endif %}">
+  <div class="video-bg">
+    <div class="video-inline cover align-center align-middle">
+      <div class="video-padding"></div>
+      <video poster="{{ poster }}" playsinline autoplay muted loop>
+        <source src="{{ video.getUrl() }}" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  {% if height|length %}
+    <div class="img-bg vh-{{ height }}" style="background: url({{ poster }}) center center / cover no-repeat;"></div>
+  {% else %}
+    <img class="img-fluid lazyload" src="{{ poster }}" alt="{{ entry.title }}" data-width="{{ image.getWidth(transform) }}" data-height="{{ image.getHeight(transform) }}">
+  {% endif %}
+</div>

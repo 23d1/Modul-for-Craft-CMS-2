@@ -1,0 +1,23 @@
+{% spaceless %}
+  {% if row.rowType == 'masonry' %}
+    masonry-item
+  {% endif %}
+  {% if item.grid|length %}
+    {% if item.grid == 1 or item.grid == 2 or item.grid == 3 or item.grid == 4 or item.grid == 5 %}col-sm-6{% else %}col-sm-12 col-md-12{% endif %} col-lg-{{ item.grid }} col-xl-{{ item.grid }}
+  {% endif %}
+  {% if item.offset|length %}
+    offset-sm-0 offset-md-0 offset-lg-{{ item.offset }} offset-xl-{{ item.offset }}
+  {% endif %}
+  {% if item.noPadding %}
+    px-0 bleed-padding
+  {% endif %}
+  {% if item.pull|length %}
+    {{ item.pull }}
+  {% endif %}
+  {% if item.responsiveVisibility|length %}
+    {{ item.responsiveVisibility }}
+  {% endif %}
+  {% if item.classes|length %}
+    {{ item.classes }}
+  {% endif %}
+{% endspaceless %}

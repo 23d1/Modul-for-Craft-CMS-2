@@ -112,7 +112,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 * CSS
   * [Bootstrap 4 Alpha 5](https://v4-alpha.getbootstrap.com)
 * JavaScript / jQuery 3.1.1
-  * [lazysizes 2.0.6](https://github.com/aFarkas/lazysizes)
+  * [lazysizes 4.0.0rc1](https://github.com/aFarkas/lazysizes)
   * [jQuery Easing v1.3](http://gsgd.co.uk/sandbox/jquery/easing)
   * [Packery 2.1.1](http://packery.metafizzy.co)
   * [RoyalSlider 9.5.7](http://dimsemenov.com)
@@ -124,15 +124,9 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 ---
 
 ## To-do and known issues
-* Documentation of the back-end with front-end examples (way back on the back-burner).
 * Slideshows with "visible nearby" and no max-height set gets too much vertical padding.
-* CSS and Twig spaghetti needs cleaning up.
-* Pasting SVG code for the logo in the `Globals/Site` doesn't work yet.
-* Add more customization options to the backend.
+* Pasting SVG code for the logo in the `Globals/Site` doesn't work yet. Will likely be a different approach.
+* Add more customization options to the backend, like gutter widths and so forth.
 * Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
-* Add the front-end functionality for text content in slider blocks.
 * Make full render taxonomy/structure items page styling carry through.
 * Make menu toggle off enforceable on mobile devices.
-* Add background image functionality to rows (containers).
-* Update to the latest Bootstrap 4 Alpha.
-* Add thumbnail block; will be possible to override thumb settings on specified project in page/project layouts, for the ability to make more irregular grids of work, as opposed to floats and masonry only.

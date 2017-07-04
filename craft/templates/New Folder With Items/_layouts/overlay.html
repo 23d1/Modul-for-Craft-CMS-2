@@ -1,0 +1,90 @@
+{% if item.bleed == 'bleed-left' %}
+    {% set p = 'pl-0' %}
+{% elseif item.bleed == 'bleed-right' %}
+    {% set p = 'pr-0' %}
+{% elseif item.bleed == 'bleed-both' %}
+    {% set p = 'px-0' %}
+{% endif %}
+
+{% if overlay.overlayMatchAlignment %}
+    {% set matchAlignment = true %}
+{% endif %}
+
+{% if overlay.verticalAlign == 'middle' %}
+    {% set align = 'middle' %}
+{% elseif overlay.verticalAlign == 'bottom' %}
+    {% set align = 'bottom' %}
+{% else %}
+    {% set align = 'top' %}
+{% endif %}
+
+{% for row in overlay.children %}
+<div class="overlay-content {{ align }}">
+
+    <div class="container-fluid w-100{% if matchAlignment %} match-parent{% endif %}{% if p|length %} {{ p }}{% endif %}">
+      	<div class="row{% if row.classes|length %} {{ row.classes }}{% endif %}">
+
+  			{% for item in row.children %}
+  				{% switch item.type.handle %}
+  					{% case 'text' %}
+  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
+  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
+  								<div class="move">
+  								    {% include '_blocks/text' %}
+  								</div>
+  							</div>
+  						</div>
+
+  					{% case 'image' %}
+  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
+  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
+  								<div class="move">
+  								    {% include '_blocks/image' %}
+  								</div>
+  							</div>
+  						</div>
+
+  					{% case 'video' %}
+  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
+  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
+  								<div class="move">
+  								    {% include '_blocks/video' %}
+  								</div>
+  							</div>
+  						</div>
+
+                    {% case 'videoLoop' %}
+  						<div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
+  							<div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
+  								<div class="move">
+  								    {% include '_blocks/video_loop' %}
+  								</div>
+  							</div>
+  						</div>
+
+                    {% case 'spacer' %}
+                        {% include '_blocks/spacer' %}
+
+                    {% case 'separator' %}
+                    {% include '_blocks/separator' %}
+
+                    {% case 'clear' %}
+  						<div class="clearfix col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"></div>
+
+                    {% case 'code' %}
+                        <div class="{% include '_includes/col_classes' %}"{% if item.style|length %} style="{{ item.style }}"{% endif %}>
+                            <div class="hv-item {{ item.moveHorizontal }} {{ item.moveVertical }}" style="z-index: {{ item.layer }};">
+                                <div class="move">
+                                    {% include '_blocks/code' %}
+                                </div>
+                            </div>
+                        </div>
+
+  				{% endswitch %}
+  			{% endfor %}
+
+        </div>
+    </div>
+
+</div>
+{% endfor %}

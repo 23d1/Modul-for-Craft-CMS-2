@@ -435,6 +435,7 @@ $(document).ready(function() {
     // });
 
     // Menu toggle
+
     $('body').on('click', '#menu-btn, #menu-sandwich .menu-icon', function() {
         $('body').toggleClass('menu-open');
         setTimeout(function() {
@@ -449,17 +450,16 @@ $(document).ready(function() {
     });
     $('body').on('click', '#menu-slide a', function() {
         hidemenu();
-        //$('body').css('overflow', 'auto');
     });
     $('body').on('click', '#page-cover', function() {
         hidemenu();
-        //$('body').css('overflow', 'auto');
     });
 
     // Hide toggle-menu when clicking item
     function hidemenu() {
         $("#sandwich").prop("checked", false);
         $('body').removeClass('menu-open');
+        //$('body').css('overflow-y', 'auto');
     }
 
     // Set mobile
@@ -502,7 +502,7 @@ $(document).ready(function() {
 
     function slideobjects() {
         if (slide_objects) {
-            $("#content div.hv-item").each(function() {
+            $("#content div.slide").each(function() {
                 var elemvisibility = visibility($(this))[1];
                 0 === elemvisibility ? $(this).css("transform", "translate(0, 150px)") : 1 === elemvisibility && $(this).css("transform", "translate(0, -150px)"), new Waypoint.Inview({
                     element: $(this)[0],
