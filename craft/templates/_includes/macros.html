@@ -12,3 +12,18 @@
     }
   {% endif %}
 {% endmacro %}
+
+{% macro customDisplayFont(selector, font, size) %}
+  {% if font|length %}
+    .{{ selector }} {
+      font-family: {{ font }};
+      {% if size|length %}
+        font-size: {{ size }};
+      {% endif %}
+    }
+  {% elseif size|length %}
+    .{{ selector }} {
+      font-size: {{ size }};
+    }
+  {% endif %}
+{% endmacro %}

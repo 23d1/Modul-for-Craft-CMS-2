@@ -40,7 +40,15 @@
   typography.h5Font|length or
   typography.h5FontSize|length or
   typography.h6Font|length or
-  typography.h6FontSize|length
+  typography.h6FontSize|length or
+  typography.display1Font|length or
+  typography.display1FontSize|length or
+  typography.display2Font|length or
+  typography.display2FontSize|length or
+  typography.display3Font|length or
+  typography.display3FontSize|length or
+  typography.display4Font|length or
+  typography.display4FontSize|length
 %}
 	{% set usercss %}
 		{% if site.backgroundColor|trim|length %}
@@ -94,14 +102,18 @@
         line-height: {{ typography.defaultFontLineHeight|raw }};
       }
     {% endif %}
-    {{ macros.customfont("h1", typography.h1Font, typography.h1FontSize) }}
-    {{ macros.customfont("h2", typography.h2Font, typography.h2FontSize) }}
-    {{ macros.customfont("h3", typography.h3Font, typography.h3FontSize) }}
-    {{ macros.customfont("h4", typography.h4Font, typography.h4FontSize) }}
-    {{ macros.customfont("h5", typography.h5Font, typography.h5FontSize) }}
-    {{ macros.customfont("h6", typography.h6Font, typography.h6FontSize) }}
+    {{ macros.customFont("h1", typography.h1Font, typography.h1FontSize) }}
+    {{ macros.customFont("h2", typography.h2Font, typography.h2FontSize) }}
+    {{ macros.customFont("h3", typography.h3Font, typography.h3FontSize) }}
+    {{ macros.customFont("h4", typography.h4Font, typography.h4FontSize) }}
+    {{ macros.customFont("h5", typography.h5Font, typography.h5FontSize) }}
+    {{ macros.customFont("h6", typography.h6Font, typography.h6FontSize) }}
+    {{ macros.customDisplayFont("display-1", typography.display1Font, typography.display1FontSize) }}
+    {{ macros.customDisplayFont("display-2", typography.display2Font, typography.display2FontSize) }}
+    {{ macros.customDisplayFont("display-3", typography.display3Font, typography.display3FontSize) }}
+    {{ macros.customDisplayFont("display-4", typography.display4Font, typography.display4FontSize) }}
     {% if typography.headerLineHeight > 0 %}
-      h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+      h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .display-1, .display-2, .display-3, .display-4 {
         line-height: {{ typography.headerLineHeight|raw }};
       }
     {% endif %}
