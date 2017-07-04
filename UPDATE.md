@@ -1,10 +1,6 @@
-# Changes in 0.5.0 Beta
-#### This release requires a fresh install as there has been some major backend overhaul.
-* Major update to features, templates, CSS and JS as well as bug fixes all over.
+# Changes in 0.5.1 Beta
 * New features
-    * A new `Thumbnail` block that you can place anywhere and override settings for, like image/video/grid/offset/bleed etc. You can even override the thumbnail settings found in `Globals`.
-    * Rows can now have background images, with loads of useful settings.
-    * Added functionality to have overlay content on images, slideshows and videos. This content can be text, images, videos, video loops and so forth. It functions just like the standard page building blocks with rows and content blocks.
+    * Added more typography options under `Globals > Typography`
 * TODO for next update
     * Slideshows with "visible nearby" and no max-height set gets too much vertical padding.
     * Pasting SVG code for the logo in the `Globals/Site` doesn't work yet. Will likely be a different approach.
@@ -12,6 +8,15 @@
     * Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
     * Make full render taxonomy/structure items page styling carry through.
     * Make menu toggle off enforceable on mobile devices.
+    * Add ability to inherit page/post styling from another entry.
+
+# Changes in 0.5.0 Beta
+#### This release requires a fresh install as there has been some major backend overhaul.
+* Major update to features, templates, CSS and JS as well as bug fixes all over.
+* New features
+    * A new `Thumbnail` block that you can place anywhere and override settings for, like image/video/grid/offset/bleed etc. You can even override the thumbnail settings found in `Globals`.
+    * Rows can now have background images, with loads of useful settings.
+    * Added functionality to have overlay content on images, slideshows and videos. This content can be text, images, videos, video loops and so forth. It functions just like the standard page building blocks with rows and content blocks.
 
 # Changes in 0.4.4 Alpha
 * Major CSS and JS bug fixes as well as template cleanup
