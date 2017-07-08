@@ -1,11 +1,30 @@
 {% if entry is defined and craft.request.getSegment(1)|length %}
   {% set title = entry.title %}
+  {% set seomaticMeta = {
+    seoTitle: title
+  } %}
+{% else %}
+    {% if not craft.config.devMode %}
+        {% set seomaticMeta = {
+          seoTitle: title
+        } %}
+    {% endif %}
 {% endif %}
+
+{% set margin = layout.margin|replace({ "rem":"", "%":"", "cm":"", "em":"", "ex":"", "in":"", "pc":"", "pt":"", "px":"", "vh":"", "vw":""}) %}
+{% set marginUnit = layout.margin|replace({"0":"", "1":"", "2":"", "3":"", "4":"", "5":"", "6":"", "7":"", "8":"", "9":"", ".":"", ",":""}) %}
+{% set gridGutter = layout.gridGutter|replace({"rem":"", "%":"", "cm":"", "em":"", "ex":"", "in":"", "pc":"", "pt":"", "px":"", "vh":"", "vw":""}) %}
+{% set gridGutterUnit = layout.gridGutter|replace({"0":"", "1":"", "2":"", "3":"", "4":"", "5":"", "6":"", "7":"", "8":"", "9":"", ".":"", ",":""}) %}
 
 {% import '_includes/macros' as macros %}
 
 {% includeCssFile siteUrl ~ "css/royalslider/royalslider.css" %}
 {% includeCssFile siteUrl ~ "css/modul.min.css" %}
+{% if layout.customCss|length %}
+    {% for stylesheet in layout.customCss %}
+        {% includeCssFile stylesheet.url %}
+    {% endfor %}
+{% endif %}
 
 {% includeJsFile siteUrl ~ "js/jquery-3.1.1.min.js" %}
 {% includeJsFile siteUrl ~ "js/plugins.min.js" %}
@@ -13,14 +32,21 @@
 {% includeJsFile siteUrl ~ "js/ui.min.js" %}
 {% includeJs %}
 	var slideshow_speed = 600;
-  var header_autohide = {% if header.headerAutohide and header.headerFixed %}true{% else %}false{% endif %};
-  var slide_objects = {% if interface.slideObjectsIntoView %}true{% else %}false{% endif %};
+    var header_autohide = {% if layout.headerAutohide and layout.headerFixed %}true{% else %}false{% endif %};
+    var slide_objects = {% if interface.slideObjectsIntoView %}true{% else %}false{% endif %};
 {% endincludejs %}
 
-{% if (site.backgroundColor|trim|length or
-  site.textColor|trim|length or
-  site.linkColor|trim|length or
-  site.linkHoverColor|trim|length or
+{% if (layout.backgroundColor|trim|length or
+  layout.textColor|trim|length or
+  layout.linkColor|trim|length or
+  layout.linkHoverColor|trim|length or
+  layout.margin|length or
+  layout.gridGutter|length or
+  layout.backgroundImage|length or
+  layout.siteBackgroundSize|length or
+  layout.backgroundPosition|length or
+  layout.backgroundRepeat|length or
+  layout.backgroundAttachment|length or
   menu.menuBgColor|trim|length or
   menu.menuTextColor|trim|length or
   menu.menuLinkColor|trim|length or
@@ -51,122 +77,277 @@
   typography.display4FontSize|length
 %}
 	{% set usercss %}
-		{% if site.backgroundColor|trim|length %}
+		{% if layout.backgroundColor|trim|length %}
 			body {
-				background-color: {{ site.backgroundColor }};
-				{% if site.textColor|trim|length %}
-					color: {{ site.textColor }};
+				background-color: {{ layout.backgroundColor }};
+				{% if layout.textColor|trim|length %}
+					color: {{ layout.textColor }};
 				{% endif %}
-        {% if typography.defaultFont|length %}
-          font-family: {{ typography.defaultFont|raw }};
-        {% endif %}
-        {% if typography.defaultFontSize|length %}
-          font-size: {{ typography.defaultFontSize|raw }};
-        {% endif %}
-        {% if typography.defaultFontLineHeight > 0 %}
-          line-height: {{ typography.defaultFontLineHeight|raw }};
-        {% endif %}
+                {% if layout.backgroundImage|length %}
+                    background-image: url("{{ siteUrl ~ layout.backgroundImage.first().getUrl() }}");
+                {% endif %}
+                {% if layout.siteBackgroundSize|length %}
+                    background-size: {% if layout.siteBackgroundSize == "fitWidth" %}100% {% elseif layout.siteBackgroundSize == "fitHeight" %}auto 100%{% endif %};
+                {% endif %}
+                {% if layout.backgroundPosition|length %}
+                    background-position: {{ layout.backgroundPosition }};
+                {% endif %}
+                {% if layout.backgroundRepeat|length %}
+                    background-repeat: {{ layout.backgroundRepeat }};
+                {% endif %}
+                {% if layout.backgroundAttachment|length %}
+                    background-attachment: {{ layout.backgroundAttachment }};
+                {% endif %}
+                {% if typography.defaultFont|length %}
+                  font-family: {{ typography.defaultFont|raw }};
+                {% endif %}
+                {% if typography.defaultFontSize|length %}
+                  font-size: {{ typography.defaultFontSize|raw }};
+                {% endif %}
+                {% if typography.defaultFontLineHeight > 0 %}
+                    line-height: {{ typography.defaultFontLineHeight|raw }};
+                {% endif %}
 			}
-		{% elseif site.textColor|trim|length %}
+		{% elseif layout.textColor|trim|length %}
 			body {
-				color: {{ site.textColor }};
-        {% if typography.defaultFont|length %}
-          font-family: {{ typography.defaultFont|raw }};
-        {% endif %}
-        {% if typography.defaultFontSize|length %}
-          font-size: {{ typography.defaultFontSize|raw }};
-        {% endif %}
-        {% if typography.defaultFontLineHeight > 0 %}
-          line-height: {{ typography.defaultFontLineHeight|raw }};
-        {% endif %}
+				color: {{ layout.textColor }};
+                {% if layout.backgroundImage|length %}
+                    background-image: url("{{ siteUrl ~ layout.backgroundImage.first().getUrl() }}");
+                {% endif %}
+                {% if layout.siteBackgroundSize|length %}
+                    background-size: {% if layout.siteBackgroundSize == "fitWidth" %}100% {% elseif layout.siteBackgroundSize == "fitHeight" %}auto 100%{% endif %};
+                {% endif %}
+                {% if layout.backgroundPosition|length %}
+                    background-position: {{ layout.backgroundPosition }};
+                {% endif %}
+                {% if layout.backgroundRepeat|length %}
+                    background-repeat: {{ layout.backgroundRepeat }};
+                {% endif %}
+                {% if layout.backgroundAttachment|length %}
+                    background-attachment: {{ layout.backgroundAttachment }};
+                {% endif %}
+                {% if typography.defaultFont|length %}
+                    font-family: {{ typography.defaultFont|raw }};
+                {% endif %}
+                {% if typography.defaultFontSize|length %}
+                    font-size: {{ typography.defaultFontSize|raw }};
+                {% endif %}
+                {% if typography.defaultFontLineHeight > 0 %}
+                    line-height: {{ typography.defaultFontLineHeight|raw }};
+                {% endif %}
 			}
+        {% elseif layout.backgroundImage|length %}
+            body {
+                background-image: url("{{ siteUrl ~ layout.backgroundImage.first().getUrl() }}");
+                {% if layout.siteBackgroundSize|length %}
+                    background-size: {% if layout.siteBackgroundSize == "fitWidth" %}100% {% elseif layout.siteBackgroundSize == "fitHeight" %}auto 100%{% endif %};
+                {% endif %}
+                {% if layout.backgroundPosition|length %}
+                    background-position: {{ layout.backgroundPosition }};
+                {% endif %}
+                {% if layout.backgroundRepeat|length %}
+                    background-repeat: {{ layout.backgroundRepeat }};
+                {% endif %}
+                {% if layout.backgroundAttachment|length %}
+                    background-attachment: {{ layout.backgroundAttachment }};
+                {% endif %}
+            }
 		{% elseif typography.defaultFont|length %}
-      body {
-        font-family: {{ typography.defaultFont|raw }};
-        {% if typography.defaultFontSize|length %}
-          font-size: {{ typography.defaultFontSize|raw }};
+            body {
+                font-family: {{ typography.defaultFont|raw }};
+                {% if typography.defaultFontSize|length %}
+                    font-size: {{ typography.defaultFontSize|raw }};
+                {% endif %}
+                {% if typography.defaultFontLineHeight > 0 %}
+                    line-height: {{ typography.defaultFontLineHeight|raw }};
+                {% endif %}
+            }
+        {% elseif typography.defaultFontSize|length %}
+            body {
+                font-size: {{ typography.defaultFontSize|raw }};
+                {% if typography.defaultFontLineHeight > 0 %}
+                    line-height: {{ typography.defaultFontLineHeight|raw }};
+                {% endif %}
+            }
+        {% elseif typography.defaultFontLineHeight > 0 %}
+            body {
+                line-height: {{ typography.defaultFontLineHeight|raw }};
+            }
         {% endif %}
-        {% if typography.defaultFontLineHeight > 0 %}
-          line-height: {{ typography.defaultFontLineHeight|raw }};
+        {{ macros.customFont("h1", typography.h1Font, typography.h1FontSize) }}
+        {{ macros.customFont("h2", typography.h2Font, typography.h2FontSize) }}
+        {{ macros.customFont("h3", typography.h3Font, typography.h3FontSize) }}
+        {{ macros.customFont("h4", typography.h4Font, typography.h4FontSize) }}
+        {{ macros.customFont("h5", typography.h5Font, typography.h5FontSize) }}
+        {{ macros.customFont("h6", typography.h6Font, typography.h6FontSize) }}
+        {{ macros.customDisplayFont("display-1", typography.display1Font, typography.display1FontSize) }}
+        {{ macros.customDisplayFont("display-2", typography.display2Font, typography.display2FontSize) }}
+        {{ macros.customDisplayFont("display-3", typography.display3Font, typography.display3FontSize) }}
+        {{ macros.customDisplayFont("display-4", typography.display4Font, typography.display4FontSize) }}
+        {% if typography.headerLineHeight > 0 %}
+            h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .display-1, .display-2, .display-3, .display-4 {
+                line-height: {{ typography.headerLineHeight|raw }};
+            }
         {% endif %}
-      }
-    {% elseif typography.defaultFontSize|length %}
-      body {
-        font-size: {{ typography.defaultFontSize|raw }};
-        {% if typography.defaultFontLineHeight > 0 %}
-          line-height: {{ typography.defaultFontLineHeight|raw }};
-        {% endif %}
-      }
-    {% elseif typography.defaultFontLineHeight > 0 %}
-      body {
-        line-height: {{ typography.defaultFontLineHeight|raw }};
-      }
-    {% endif %}
-    {{ macros.customFont("h1", typography.h1Font, typography.h1FontSize) }}
-    {{ macros.customFont("h2", typography.h2Font, typography.h2FontSize) }}
-    {{ macros.customFont("h3", typography.h3Font, typography.h3FontSize) }}
-    {{ macros.customFont("h4", typography.h4Font, typography.h4FontSize) }}
-    {{ macros.customFont("h5", typography.h5Font, typography.h5FontSize) }}
-    {{ macros.customFont("h6", typography.h6Font, typography.h6FontSize) }}
-    {{ macros.customDisplayFont("display-1", typography.display1Font, typography.display1FontSize) }}
-    {{ macros.customDisplayFont("display-2", typography.display2Font, typography.display2FontSize) }}
-    {{ macros.customDisplayFont("display-3", typography.display3Font, typography.display3FontSize) }}
-    {{ macros.customDisplayFont("display-4", typography.display4Font, typography.display4FontSize) }}
-    {% if typography.headerLineHeight > 0 %}
-      h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .display-1, .display-2, .display-3, .display-4 {
-        line-height: {{ typography.headerLineHeight|raw }};
-      }
-    {% endif %}
-		{% if site.linkColor|trim|length %}
-		a {
-			color: {{ site.linkColor }}!important;
-		}
-		#menu-btn {
-			color: {{ site.linkColor }}!important;
-		}
-		.link-thick:after, #menu-btn:after, #menu-normal a:after, #menu-normal ul.nav li.active a:after {
-			background: {{ site.linkColor }}!important;
-		}
-		{% endif %}
-		{% if site.linkHoverColor|trim|length %}
-		a:hover {
-			color: {{ site.linkHoverColor }}!important;
-		}
-		#menu-btn:hover {
-			color: {{ site.linkHoverColor }}!important;
-		}
-		.link-thick:hover:after, #menu-btn:hover:after, #menu-normal a:hover:after, #menu-normal ul.nav li.active a:hover:after {
-			background: {{ site.linkHoverColor }}!important;
-		}
-		{% endif %}
-		{% if menu.menuBgColor|trim|length %}
-			#menu-slide {
-				background: {{ menu.menuBgColor }};
-				{% if menu.menuTextColor|trim|length %}
-					color: {{ menu.menuTextColor }};
-				{% endif %}
-			}
-		{% elseif menu.menuTextColor|trim|length %}
-			#menu-slide {
-				color: {{ menu.menuTextColor }};
-			}
-		{% endif %}
-		{% if menu.menuLinkColor|trim|length %}
-			#menu-slide a, #menu-slide ul.nav li a, #menu-btn.open span {
-				color: {{ menu.menuLinkColor }}!important;
-			}
-			#menu-slide a.link-thick:after, #menu-slide ul.nav li a.link-thick:after, body #menu-btn.open:after {
-				background: {{ menu.menuLinkColor }}!important;
-			}
-		{% endif %}
-		{% if menu.menuLinkHoverColor|trim|length %}
-			#menu-slide a:hover, #menu-slide ul.nav li a:hover, #menu-btn.open:hover span {
-				color: {{ menu.menuLinkHoverColor }}!important;
-			}
-			#menu-slide ul.nav li a.link-thick:hover:after, body #menu-btn.open:hover:after {
-				background: {{ menu.menuLinkHoverColor }}!important;
-			}
-		{% endif %}
+    		{% if layout.linkColor|trim|length %}
+    		a {
+    			color: {{ layout.linkColor }}!important;
+    		}
+    		#menu-btn {
+    			color: {{ layout.linkColor }}!important;
+    		}
+    		.link-thick:after, #menu-btn:after, #menu-normal a:after, #menu-normal ul.nav li.active a:after {
+    			background: {{ layout.linkColor }}!important;
+    		}
+    		{% endif %}
+    		{% if layout.linkHoverColor|trim|length %}
+    		a:hover {
+    			color: {{ layout.linkHoverColor }}!important;
+    		}
+    		#menu-btn:hover {
+    			color: {{ layout.linkHoverColor }}!important;
+    		}
+    		.link-thick:hover:after, #menu-btn:hover:after, #menu-normal a:hover:after, #menu-normal ul.nav li.active a:hover:after {
+    			background: {{ layout.linkHoverColor }}!important;
+    		}
+    		{% endif %}
+    		{% if menu.menuBgColor|trim|length %}
+    			#menu-slide {
+    				background: {{ menu.menuBgColor }};
+    				{% if menu.menuTextColor|trim|length %}
+    					color: {{ menu.menuTextColor }};
+    				{% endif %}
+    			}
+    		{% elseif menu.menuTextColor|trim|length %}
+    			#menu-slide {
+    				color: {{ menu.menuTextColor }};
+    			}
+    		{% endif %}
+    		{% if menu.menuLinkColor|trim|length %}
+    			#menu-slide a, #menu-slide ul.nav li a, #menu-btn.open span {
+    				color: {{ menu.menuLinkColor }}!important;
+    			}
+    			#menu-slide a.link-thick:after, #menu-slide ul.nav li a.link-thick:after, body #menu-btn.open:after {
+    				background: {{ menu.menuLinkColor }}!important;
+    			}
+    		{% endif %}
+    		{% if menu.menuLinkHoverColor|trim|length %}
+    			#menu-slide a:hover, #menu-slide ul.nav li a:hover, #menu-btn.open:hover span {
+    				color: {{ menu.menuLinkHoverColor }}!important;
+    			}
+    			#menu-slide ul.nav li a.link-thick:hover:after, body #menu-btn.open:hover:after {
+    				background: {{ menu.menuLinkHoverColor }}!important;
+    			}
+    		{% endif %}
+            {% if layout.margin|trim|length %}
+                .container-fluid {
+                    padding: 0 {{ margin / 2 }}{{ marginUnit }};
+                }
+
+                @media (min-width: 768px) {
+                    .container-fluid {
+                        padding: 0 {{ margin / 2 }}{{ marginUnit }};
+                    }
+                }
+
+                @media (min-width: 1024px) {
+                    .container-fluid {
+                        padding: 0 {{ margin }}{{ marginUnit }};
+                    }
+                }
+
+                @media (min-width: 1200px) {
+                    .container-fluid {
+                        padding: 0 {{ margin }}{{ marginUnit }};
+                    }
+                }
+                .bleed-left {
+                    margin-left: -{{ margin }}{{ marginUnit }};
+                }
+                .bleed-right {
+                    margin-right: -{{ margin }}{{ marginUnit }};
+                }
+                .bleed-both {
+                    margin: 0 -{{ margin }}{{ marginUnit }};
+                }
+                .bleed-padding .bleed-left {
+                    margin-left: -{{ margin }}{{ marginUnit }};
+                }
+
+                .bleed-padding .bleed-right {
+                    margin-right: -{{ margin }}{{ marginUnit }};
+                }
+                .bleed-padding .bleed-both {
+                    margin: 0 -{{ margin }}{{ marginUnit }};
+                }
+                @media (max-width: 1023px) {
+                    .bleed-left {
+                        margin-left: -{{ margin / 2 }}{{ marginUnit }};
+                    }
+                    .bleed-right {
+                        margin-right: -{{ margin / 2 }}{{ marginUnit }};
+                    }
+                    .bleed-both {
+                        margin: 0 -{{ margin / 2 }}{{ marginUnit }};
+                    }
+                }
+            {% endif %}
+            {% if layout.gridGutter|trim|length %}
+                .pull-top {
+                    margin-top: -{{ gridGutter / 4 }}{{ gridGutterUnit }};
+                }
+                .push-top .container-fluid:first-child {
+                    margin-top: -{{ gridGutter / 4 - 1 }}{{ gridGutterUnit }};
+                }
+                .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl {
+                    padding: {{ gridGutter / 4 }}{{ gridGutterUnit }};
+                }
+                .row {
+                    margin: 0 -{{ gridGutter / 4 }}{{ gridGutterUnit }};
+                }
+                @media (min-width: 544px) {
+                    .pull-top {
+                        margin-top: -{{ gridGutter / 4 }}{{ gridGutterUnit }};
+                    }
+                    .push-top .container-fluid:first-child {
+                        margin-top: -{{ gridGutter / 4 - 1 }}{{ gridGutterUnit }};
+                    }
+                    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl {
+                        padding: {{ gridGutter / 4 }}{{ gridGutterUnit }};
+                    }
+                    .row {
+                        margin: 0 -{{ gridGutter / 4 }}{{ gridGutterUnit }};
+                    }
+                }
+                @media (min-width: 768px) {
+                    .pull-top {
+                        margin-top: -{{ gridGutter / 3 }}{{ gridGutterUnit }};
+                    }
+                    .push-top .container-fluid:first-child {
+                        margin-top: -{{ gridGutter / 3 - 1 }}{{ gridGutterUnit }};
+                    }
+                    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl {
+                        padding: {{ gridGutter / 3 }}{{ gridGutterUnit }};
+                    }
+                    .row {
+                        margin: 0 -{{ gridGutter / 3 }}{{ gridGutterUnit }};
+                    }
+                }
+                @media (min-width: 1025px) {
+                    .pull-top {
+                        margin-top: -{{ gridGutter / 2 }}{{ gridGutterUnit }};
+                    }
+                    .push-top .container-fluid:first-child {
+                        margin-top: -{{ gridGutter / 2 - 1.5 }}{{ gridGutterUnit }};
+                    }
+                    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl {
+                        padding: {{ gridGutter / 2 }}{{ gridGutterUnit }};
+                    }
+                    .row {
+                        margin: 0 -{{ gridGutter / 2 }}{{ gridGutterUnit }};
+                    }
+                }
+            {% endif %}
 	{% endset %}
 {% includeCss usercss %}
 {% endif %}
@@ -174,19 +355,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% hook 'seomaticRender' %}
+  	<meta charset="utf-8">
+  	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title>
+  	{# <title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title> #}
 
-	<meta name="description" content="{{ "The module templates for Craft CMS"|t }}">
+  	{# <meta name="description" content="{{ "The modul templates for Craft CMS"|t }}"> #}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	{% if site.favicon|length %}<link rel="icon" href="{{ site.favicon.first().url }}">{% endif %}
 
-  {% if typography.webFontSnippets is defined %}
-    {{ typography.webFontSnippets|raw }}
-  {% endif %}
+    {% if typography.webFontSnippets is defined %}
+        {{ typography.webFontSnippets|raw }}
+    {% endif %}
 </head>
 <body class="{% if craft.request.isMobileBrowser(true) %}mobile{% else %}desktop{% endif %}">
 <!--[if lt IE 8]>
@@ -197,7 +379,7 @@
     {% include '_includes/loader' %}
 
 		{% block header %}
-			<div id="header" class="container-fluid{% if header.headerFixed %} fixed-top{% else %} pos-a-t{% endif %}">
+			<div id="header" class="container-fluid{% if layout.headerFixed %} fixed-top{% else %} pos-a-t{% endif %}">
 						{% include "_includes/nav" %}
 			</div>
 			{% include '_includes/nav_toggle_menu' %}

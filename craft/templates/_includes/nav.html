@@ -1,24 +1,24 @@
 {% set page = craft.request.getSegment(1) %}
-{% set nav = craft.amNav.getNavRaw("mainMenu") %}
-{% set navSub = craft.amNav.getNavRaw("subMenu") %}
+{% set nav = menu.mainMenu %}
+{% set navSub = menu.subMenu %}
 
 <nav style="font-weight: 500;">
 {% if
-  not header.navigationType|length
+  not menu.navigationType|length
 %}
   {% include '_includes/nav_toggle' %}
 {% elseif
-  header.navigationType == 'gridLeft' or
-  header.navigationType == 'gridLeftWide' or
-  header.navigationType == 'gridRight' or
-  header.navigationType == 'gridRightWide'
+  menu.navigationType == 'gridLeft' or
+  menu.navigationType == 'gridLeftWide' or
+  menu.navigationType == 'gridRight' or
+  menu.navigationType == 'gridRightWide'
 %}
   {% include '_includes/nav_grid' %}
 {% elseif
-  header.navigationType == 'floatLeft' or
-  header.navigationType == 'floatLeftWide' or
-  header.navigationType == 'floatRight' or
-  header.navigationType == 'floatRightWide'
+  menu.navigationType == 'floatLeft' or
+  menu.navigationType == 'floatLeftWide' or
+  menu.navigationType == 'floatRight' or
+  menu.navigationType == 'floatRightWide'
 %}
   {% include '_includes/nav_float' %}
 {% endif %}

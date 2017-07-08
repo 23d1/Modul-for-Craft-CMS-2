@@ -1,76 +1,53 @@
 <div class="row">
-  <div class="col-10{% if
-    header.navigationType == 'floatLeft' or
-    header.navigationType == 'floatRight'
-  %}
-    col-lg-6
-  {% else %}
-    col-lg-3
-  {% endif %}">
-    <a id="logo" class="link-thick" href="{{ url('/') }}">{%- include "_images/logo" with {'class': 'logo'} -%}</a>
-  </div>
+    <div class="col-10{% if menu.navigationType == 'floatLeft' or menu.navigationType == 'floatRight' %} col-lg-6{% else %} col-lg-3{% endif %}">
+        <a id="logo" class="link-thick" href="{{ url('/') }}">{%- include "_images/logo" with {'class': 'logo'} -%}</a>
+    </div>
 
-  <div class="hidden-md-down
-  {% if
-    header.navigationType == 'floatLeft' or
-    header.navigationType == 'floatRight'
-  %} col-lg-6{% else
-  %} col-lg-9{% endif %}">
+    {% if nav|length or navSub|length %}
+        <div class="hidden-md-down{% if menu.navigationType == 'floatLeft' or menu.navigationType == 'floatRight' %} col-lg-6{% else %} col-lg-9{% endif %}">
 
-    {% macro addNodeToNavigation(node, index) %}
-      {%- set nodeClasses = [] -%}
-      {%- if node.hasChildren -%}
-          {%- set nodeClasses = nodeClasses|merge(['has-children']) -%}
-      {%- endif -%}
-      {%- if node.active or node.hasActiveChild -%}
-          {%- set nodeClasses = nodeClasses|merge(['link-active']) -%}
-      {%- endif -%}
-      {%- if node.level == 1 and index == 1 -%}
-          {%- set nodeClasses = nodeClasses|merge(['first']) -%}
-      {%- endif -%}
-      {%- if node.listClass|length -%}
-          {%- set nodeClasses = nodeClasses|merge([node.listClass]) -%}
-      {%- endif -%}
+            {% if
+                menu.navigationType == 'floatLeft' or
+                menu.navigationType == 'floatLeftWide'
+            %}
+                {% set first = nav %}
+                {% set second = navSub %}
+            {% else %}
+                {% set first = navSub|reverse %}
+                {% set second = nav|reverse %}
+            {% endif %}
 
-      <div class="py-0 float-left {% if nodeClasses|length %}{{ nodeClasses|join(' ') }}{% endif %}{% if header.navigationType == 'floatRight' or header.navigationType == 'floatRightWide' %} text-right float-right pl-3{% else %} pr-3{% endif %}">
-        <a href="{{ node.url }}" class="link-thick" title="{{ node.name }}"{% if node.blank %} target="_blank"{% endif %}>{{ node.name }}</a>
-          {% if node.hasChildren %}
-            <div class="nav__level{{ (node.level + 1) }}">
-              {% for subnode in node.children %}
-                {{ _self.addNodeToNavigation(subnode, loop.index) }}
-              {% endfor %}
-            </div>
-          {% endif %}
-      </div>
-    {% endmacro %}
+            {% for item in first %}
+                {% switch item.type.handle %}
+                    {% case "entry" %}
+                        <div class="py-0 float-left {% if menu.navigationType == 'floatRight' or menu.navigationType == 'floatRightWide' %} text-right float-right pl-3{% else %} pr-3{% endif %}">
+                            <a href="{{ item.entry.first().url }}" class="link-thick{% if item.entry.first().slug == page or item.entry.first().url == craft.request.getUrl() %} link-active{% endif %}" title="{% if item.overrideName %}{{ item.overrideName }}{% else %}{{ item.entry.first().title }}{% endif %}">{% if item.overrideName %}{{ item.overrideName }}{% else %}{{ item.entry.first().title }}{% endif %}</a>
+                        </div>
 
-    {% if
-      header.navigationType == 'floatLeft' or
-      header.navigationType == 'floatLeftWide'
-    %}
-      {% set first = nav %}
-      {% set second = navSub %}
-    {% else %}
-      {% set first = navSub|reverse %}
-      {% set second = nav|reverse %}
+                    {% case "hyperlink" %}
+                        <div class="py-0 float-left {% if menu.navigationType == 'floatRight' or menu.navigationType == 'floatRightWide' %} text-right float-right pl-3{% else %} pr-3{% endif %}">
+                            <a href="{{ item.hyperlink }}" class="link-thick" title="{{ item.hyperlinkName }}"{% if item.hyperlinkTarget %} target="_blank"{% endif %}>{{ item.hyperlinkName }}</a>
+                        </div>
+                {% endswitch %}
+            {% endfor %}
+            {% for item in second %}
+                {% switch item.type.handle %}
+                    {% case "entry" %}
+                        <div class="py-0 float-left {% if menu.navigationType == 'floatRight' or menu.navigationType == 'floatRightWide' %} text-right float-right pl-3{% else %} pr-3{% endif %}">
+                            <a href="{{ item.entry.first().url }}" class="link-thick{% if item.entry.first().slug == page or item.entry.first().url == craft.request.getUrl() %} link-active{% endif %}" title="{% if item.overrideName %}{{ item.overrideName }}{% else %}{{ item.entry.first().title }}{% endif %}">{% if item.overrideName %}{{ item.overrideName }}{% else %}{{ item.entry.first().title }}{% endif %}</a>
+                        </div>
+
+                    {% case "hyperlink" %}
+                        <div class="py-0 float-left {% if menu.navigationType == 'floatRight' or menu.navigationType == 'floatRightWide' %} text-right float-right pl-3{% else %} pr-3{% endif %}">
+                            <a href="{{ item.hyperlink }}" class="link-thick" title="{{ item.hyperlinkName }}"{% if item.hyperlinkTarget %} target="_blank"{% endif %}>{{ item.hyperlinkName }}</a>
+                        </div>
+                {% endswitch %}
+            {% endfor %}
+
+        </div>
     {% endif %}
 
-    {% if first|length or second|length %}
-        {% if first|length %}
-          {% for node in first %}
-            {{ _self.addNodeToNavigation(node, loop.index) }}
-          {% endfor %}
-        {% endif %}
-        {% if second|length %}
-          {% for node in second %}
-              {{ _self.addNodeToNavigation(node, loop.index) }}
-          {% endfor %}
-        {% endif %}
-    {% endif %}
-
-  </div>
-
-  <div class="col-2 hidden-lg-up">
-    {% include '_includes/nav_toggler' %}
-  </div>
+    <div class="col-2 hidden-lg-up">
+        {% include '_includes/nav_toggler' %}
+    </div>
 </div>

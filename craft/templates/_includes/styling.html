@@ -2,8 +2,13 @@
 {% set textColor = entry.textColor %}
 {% set linkColor = entry.linkColor %}
 {% set linkHoverColor = entry.linkHoverColor %}
+{% set backgroundImage = entry.backgroundImage %}
+{% set backgroundSize = entry.siteBackgroundSize %}
+{% set backgroundPosition = entry.backgroundPosition %}
+{% set backgroundRepeat = entry.backgroundRepeat %}
+{% set backgroundAttachment = entry.backgroundAttachment %}
 
-{% if (bgColor|trim|length or textColor|trim|length or linkColor|trim|length or linkHoverColor|trim|length)  %}
+{% if (bgColor|trim|length or textColor|trim|length or linkColor|trim|length or linkHoverColor|trim|length) or backgroundImage|length  %}
   {% set styling = true %}
   <style>
     {% if bgColor|trim|length %}
@@ -11,6 +16,21 @@
         background-color: {{ bgColor }};
         {% if textColor|trim|length %}
           color: {{ textColor }} !important;
+        {% endif %}
+        {% if backgroundImage|length %}
+            background-image: url("{{ siteUrl ~ backgroundImage.first().getUrl() }}");
+        {% endif %}
+        {% if backgroundSize|length %}
+            background-size: {% if backgroundSize == "fitWidth" %}100% {% elseif layout.siteBackgroundSize == "fitHeight" %}auto 100%{% endif %};
+        {% endif %}
+        {% if backgroundPosition|length %}
+            background-position: {{ backgroundPosition }};
+        {% endif %}
+        {% if backgroundRepeat|length %}
+            background-repeat: {{ backgroundRepeat }};
+        {% endif %}
+        {% if backgroundAttachment|length %}
+            background-attachment: {{ backgroundAttachment }};
         {% endif %}
       }
 
@@ -20,7 +40,40 @@
     {% elseif textColor|trim|length %}
       body {
         color: {{ textColor }} !important;
+        {% if backgroundImage|length %}
+            background-image: url("{{ siteUrl ~ backgroundImage.first().getUrl() }}");
+        {% endif %}
+        {% if backgroundSize|length %}
+            background-size: {% if backgroundSize == "fitWidth" %}100% {% elseif backgroundSize == "fitHeight" %}auto 100%{% endif %};
+        {% endif %}
+        {% if backgroundPosition|length %}
+            background-position: {{ backgroundPosition }};
+        {% endif %}
+        {% if backgroundRepeat|length %}
+            background-repeat: {{ backgroundRepeat }};
+        {% endif %}
+        {% if backgroundAttachment|length %}
+            background-attachment: {{ backgroundAttachment }};
+        {% endif %}
       }
+    {% elseif backgroundImage|length %}
+        body {
+            {% if backgroundImage|length %}
+                background-image: url("{{ siteUrl ~ backgroundImage.first().getUrl() }}");
+            {% endif %}
+            {% if backgroundSize|length %}
+                background-size: {% if backgroundSize == "fitWidth" %}100% {% elseif backgroundSize == "fitHeight" %}auto 100%{% endif %};
+            {% endif %}
+            {% if backgroundPosition|length %}
+                background-position: {{ backgroundPosition }};
+            {% endif %}
+            {% if backgroundRepeat|length %}
+                background-repeat: {{ backgroundRepeat }};
+            {% endif %}
+            {% if backgroundAttachment|length %}
+                background-attachment: {{ backgroundAttachment }};
+            {% endif %}
+        }
     {% endif %}
     {% if linkColor|trim|length %}
       a, #header a, #menu-btn, #header .nav-item svg {

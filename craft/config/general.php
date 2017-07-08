@@ -10,5 +10,6 @@
 return array(
   'omitScriptNameInUrls' => true,
   'generateTransformsBeforePageLoad' => true,
-  'maxUploadFileSize' => 33554432
+  'maxUploadFileSize' => 33554432,
+  'extraAllowedFileExtensions' => 'css'
 );
