@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-10{% if menu.navigationType == 'gridLeft' or menu.navigationType == 'gridRight' %} col-lg-6{% else %} col-lg-3{% endif %}">
-        <a id="logo" class="link-thick" href="{{ url('/') }}">{%- include "_images/logo" with {'class': 'logo'} -%}</a>
+    <div class="{% if menu.mainMenu|length or menu.subMenu|length %}col-10{% if menu.navigationType == 'gridLeft' or menu.navigationType == 'gridRight' %} col-lg-6{% else %} col-lg-3{% endif %}{% else %}col-12{% endif %}">
+        {% include "_images/logo" with {'class': 'logo'} %}
     </div>
 
     {% if nav|length or navSub|length %}
@@ -45,9 +45,9 @@
             {% endfor %}
 
         </div>
+        <div class="col-2 hidden-lg-up">
+            {% include '_includes/nav_toggler' %}
+        </div>
     {% endif %}
 
-    <div class="col-2 hidden-lg-up">
-        {% include '_includes/nav_toggler' %}
-    </div>
 </div>

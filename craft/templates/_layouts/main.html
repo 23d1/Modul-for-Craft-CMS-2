@@ -1,14 +1,5 @@
 {% if entry is defined and craft.request.getSegment(1)|length %}
-  {% set title = entry.title %}
-  {% set seomaticMeta = {
-    seoTitle: title
-  } %}
-{% else %}
-    {% if not craft.config.devMode %}
-        {% set seomaticMeta = {
-          seoTitle: title
-        } %}
-    {% endif %}
+    {% set title = entry.title %}
 {% endif %}
 
 {% set margin = layout.margin|replace({ "rem":"", "%":"", "cm":"", "em":"", "ex":"", "in":"", "pc":"", "pt":"", "px":"", "vh":"", "vw":""}) %}
@@ -355,17 +346,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% hook 'seomaticRender' %}
   	<meta charset="utf-8">
   	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  	{# <title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title> #}
+  	<title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title>
 
-  	{# <meta name="description" content="{{ "The modul templates for Craft CMS"|t }}"> #}
+    {% if site.description|length %}
+        <meta name="description" content="{{ site.description|t }}">
+    {% endif %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	{% if site.favicon|length %}<link rel="icon" href="{{ site.favicon.first().url }}">{% endif %}
 
+    {% if typography.customFonts|length %}
+        {% for font in typography.customFonts %}
+            <link href="{{ font.url }}" rel="stylesheet">
+        {% endfor %}
+    {% endif %}
     {% if typography.webFontSnippets is defined %}
         {{ typography.webFontSnippets|raw }}
     {% endif %}
@@ -380,9 +377,9 @@
 
 		{% block header %}
 			<div id="header" class="container-fluid{% if layout.headerFixed %} fixed-top{% else %} pos-a-t{% endif %}">
-						{% include "_includes/nav" %}
+				{% include "_includes/nav" %}
 			</div>
-			{% include '_includes/nav_toggle_menu' %}
+			{% if menu.mainMenu|length or menu.subMenu|length %}{% include '_includes/nav_toggle_menu' %}{% endif %}
 		{% endblock %}
 
 		<div id="change">

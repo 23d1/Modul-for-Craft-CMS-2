@@ -162,7 +162,7 @@
   		{% if row.rowBgColor|trim|length %}</div>{% elseif row.rowTextColor|trim|length %}</div>{% endif %}
 
 {% endfor %}
-{% if craft.request.getSegment(2)|length %}
+{% if craft.request.getSegment(2)|length and interface.nextPrev %}
     {% include '_includes/nextprev' %}
 {% endif %}
 </div>

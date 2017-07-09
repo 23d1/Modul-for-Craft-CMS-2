@@ -1,3 +1,14 @@
+# Changes in 0.7.5 Beta
+#### This release requires a fresh install as there has been some major backend overhaul (again as is the nature of alpha and beta development).
+* New features
+    * Too many to list, explore it. Documentation is coming.
+* TODO for 1.0 release
+    * Code cleanup
+    * Backend cleanup
+    * Documentation
+    * More settings for the header (solid background, colors, etc.)
+    * Add more features overall
+
 # Changes in 0.5.1 Beta
 * New features
     * Added more typography options under `Globals > Typography`

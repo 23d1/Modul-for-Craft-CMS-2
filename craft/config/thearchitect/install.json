@@ -2,10 +2,11 @@
     "groups": [
         "Posts",
         "Styling",
+        "Layout",
         "Typography",
         "Site",
         "Footer",
-        "Header",
+        "Navigation",
         "Menu",
         "Interface",
         "Default",
@@ -16,7 +17,7 @@
             "name": "Homepage",
             "handle": "homepage",
             "type": "single",
-            "enableVersioning": 1,
+            "enableVersioning": "1",
             "typesettings": {
                 "template": "index",
                 "urlFormat": "__home__",
@@ -24,27 +25,27 @@
             }
         },
         {
-            "name": "News",
-            "handle": "news",
-            "type": "channel",
-            "enableVersioning": 1,
+            "name": "Pages",
+            "handle": "pages",
+            "type": "structure",
+            "enableVersioning": "1",
             "typesettings": {
-                "hasUrls": 1,
+                "hasUrls": "1",
                 "template": "index",
-                "urlFormat": "news\/{slug}",
+                "maxLevels": "1",
+                "urlFormat": "{slug}",
                 "nestedUrlFormat": null
             }
         },
         {
-            "name": "Pages",
-            "handle": "pages",
-            "type": "structure",
-            "enableVersioning": 1,
+            "name": "Resources",
+            "handle": "resources",
+            "type": "channel",
+            "enableVersioning": "1",
             "typesettings": {
-                "hasUrls": 1,
+                "hasUrls": "1",
                 "template": "index",
-                "maxLevels": 1,
-                "urlFormat": "{slug}",
+                "urlFormat": "resources\/{slug}",
                 "nestedUrlFormat": null
             }
         },
@@ -52,11 +53,11 @@
             "name": "Work",
             "handle": "work",
             "type": "structure",
-            "enableVersioning": 1,
+            "enableVersioning": "1",
             "typesettings": {
-                "hasUrls": 1,
+                "hasUrls": "1",
                 "template": "index",
-                "maxLevels": 1,
+                "maxLevels": "1",
                 "urlFormat": "work\/{slug}",
                 "nestedUrlFormat": null
             }
@@ -82,9 +83,20 @@
             "required": false,
             "type": "Number",
             "typesettings": {
-                "min": 0,
+                "min": "0",
                 "max": "",
-                "decimals": 1
+                "decimals": "1"
+            }
+        },
+        {
+            "group": "Styling",
+            "name": "Background Attachment",
+            "handle": "backgroundAttachment",
+            "instructions": "Set the background attachment.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/background_attachment' ignore missing %}"
             }
         },
         {
@@ -95,12 +107,70 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
+            }
+        },
+        {
+            "group": "Styling",
+            "name": "Background Image",
+            "handle": "backgroundImage",
+            "instructions": "Set a background image.",
+            "required": false,
+            "type": "Assets",
+            "typesettings": {
+                "useSingleFolder": "",
+                "sources": [
+                    "folder:1"
+                ],
+                "defaultUploadLocationSource": "files",
+                "defaultUploadLocationSubpath": "",
+                "singleUploadLocationSource": "files",
+                "singleUploadLocationSubpath": "",
+                "restrictFiles": "1",
+                "allowedKinds": [
+                    "image"
+                ],
+                "limit": "1",
+                "viewMode": "large",
+                "selectionLabel": ""
+            }
+        },
+        {
+            "group": "Styling",
+            "name": "Background Position",
+            "handle": "backgroundPosition",
+            "instructions": "Set the positioning of the background.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/background_position' ignore missing %}"
+            }
+        },
+        {
+            "group": "Styling",
+            "name": "Background Repeat",
+            "handle": "backgroundRepeat",
+            "instructions": "Set the background repeat.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/background_repeat' ignore missing %}"
+            }
+        },
+        {
+            "group": "Styling",
+            "name": "Background Size",
+            "handle": "backgroundSize",
+            "instructions": "Set the background sizing.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/background_size' ignore missing %}"
             }
         },
         {
@@ -112,6 +182,17 @@
             "type": "Lj_DynamicFields_Dropdown",
             "typesettings": {
                 "json": "{% include '_dynamicfields\/bleed' ignore missing %}"
+            }
+        },
+        {
+            "group": "Posts",
+            "name": "Blend Mode",
+            "handle": "blendMode",
+            "instructions": "Set the blending mode of the block.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/blend_mode' ignore missing %}"
             }
         },
         {
@@ -136,7 +217,7 @@
                 "placeholder": "",
                 "maxLength": "",
                 "multiline": "",
-                "initialRows": 4
+                "initialRows": "4"
             }
         },
         {
@@ -149,8 +230,52 @@
             "typesettings": {
                 "placeholder": "",
                 "maxLength": "",
-                "multiline": 1,
-                "initialRows": 24
+                "multiline": "1",
+                "initialRows": "24"
+            }
+        },
+        {
+            "group": "Layout",
+            "name": "Custom CSS",
+            "handle": "customCss",
+            "instructions": "Upload and select custom css files.",
+            "required": false,
+            "type": "Assets",
+            "typesettings": {
+                "useSingleFolder": "",
+                "sources": [
+                    "folder:39"
+                ],
+                "defaultUploadLocationSource": "files",
+                "defaultUploadLocationSubpath": "\/css",
+                "singleUploadLocationSource": "files",
+                "singleUploadLocationSubpath": "",
+                "restrictFiles": "1",
+                "limit": "",
+                "viewMode": "list",
+                "selectionLabel": ""
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Custom Fonts",
+            "handle": "customFonts",
+            "instructions": "Custom fonts should be following @font-face standards (woff and woff2 are good and modern formats\u2014try https:\/\/transfonter.org\/). Upload the font files, and the accompanying font.css, then select the font.css to load the fonts in the frontend.",
+            "required": false,
+            "type": "Assets",
+            "typesettings": {
+                "useSingleFolder": "",
+                "sources": [
+                    "folder:38"
+                ],
+                "defaultUploadLocationSource": "files",
+                "defaultUploadLocationSubpath": "",
+                "singleUploadLocationSource": "files",
+                "singleUploadLocationSubpath": "",
+                "restrictFiles": "",
+                "limit": "",
+                "viewMode": "list",
+                "selectionLabel": ""
             }
         },
         {
@@ -195,6 +320,20 @@
             }
         },
         {
+            "group": "Site",
+            "name": "Description",
+            "handle": "description",
+            "instructions": "",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "Enter your site's description.",
+                "maxLength": "",
+                "multiline": "1",
+                "initialRows": "12"
+            }
+        },
+        {
             "group": "Posts",
             "name": "Display",
             "handle": "display",
@@ -203,6 +342,118 @@
             "type": "Lj_DynamicFields_Dropdown",
             "typesettings": {
                 "json": "{% include '_dynamicfields\/display' ignore missing %}"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 1 Font",
+            "handle": "display1Font",
+            "instructions": "Paste or enter your font family override using CSS standards (excluding `font-family:`).",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "Same as Default Font",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 1 Font Size",
+            "handle": "display1FontSize",
+            "instructions": "Enter standard CSS values only\u2014for example `16px`, `1rem` or other font sizing units that are CSS standard.",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "6rem",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 2 Font",
+            "handle": "display2Font",
+            "instructions": "Paste or enter your font family override using CSS standards (excluding `font-family:`).",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "Same as Default Font",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 2 Font Size",
+            "handle": "display2FontSize",
+            "instructions": "Enter standard CSS values only\u2014for example `16px`, `1rem` or other font sizing units that are CSS standard.",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "5.5rem",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 3 Font",
+            "handle": "display3Font",
+            "instructions": "Paste or enter your font family override using CSS standards (excluding `font-family:`).",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "Same as Default Font",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 3 Font Size",
+            "handle": "display3FontSize",
+            "instructions": "Enter standard CSS values only\u2014for example `16px`, `1rem` or other font sizing units that are CSS standard.",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "4.5rem",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 4 Font",
+            "handle": "display4Font",
+            "instructions": "Paste or enter your font family override using CSS standards (excluding `font-family:`).",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "Same as Default Font",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Typography",
+            "name": "Display 4 Font Size",
+            "handle": "display4FontSize",
+            "instructions": "Enter standard CSS values only\u2014for example `16px`, `1rem` or other font sizing units that are CSS standard.",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "3.5rem",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
             }
         },
         {
@@ -219,6 +470,21 @@
             }
         },
         {
+            "group": "Posts",
+            "name": "Entry",
+            "handle": "singleEntry",
+            "instructions": "Select the entry you wish to use for the thumbnail.",
+            "required": false,
+            "type": "Entries",
+            "typesettings": {
+                "sources": [
+                    "work"
+                ],
+                "limit": "1",
+                "selectionLabel": ""
+            }
+        },
+        {
             "group": "Site",
             "name": "Favicon",
             "handle": "favicon",
@@ -227,16 +493,18 @@
             "type": "Assets",
             "typesettings": {
                 "useSingleFolder": "",
-                "sources": "*",
-                "defaultUploadLocationSource": "uploads",
+                "sources": [
+                    "folder:1"
+                ],
+                "defaultUploadLocationSource": "files",
                 "defaultUploadLocationSubpath": "",
-                "singleUploadLocationSource": "uploads",
+                "singleUploadLocationSource": "files",
                 "singleUploadLocationSubpath": "",
-                "restrictFiles": 1,
+                "restrictFiles": "1",
                 "allowedKinds": [
                     "image"
                 ],
-                "limit": 1,
+                "limit": "1",
                 "viewMode": "large",
                 "selectionLabel": ""
             }
@@ -251,8 +519,8 @@
             "typesettings": {
                 "placeholder": "",
                 "maxLength": "",
-                "multiline": 1,
-                "initialRows": 10
+                "multiline": "1",
+                "initialRows": "10"
             }
         },
         {
@@ -264,6 +532,20 @@
             "type": "Lj_DynamicFields_Dropdown",
             "typesettings": {
                 "json": "{% include '_dynamicfields\/grid' ignore missing %}"
+            }
+        },
+        {
+            "group": "Layout",
+            "name": "Grid Gutter Width",
+            "handle": "gridGutter",
+            "instructions": "Set the grid gutter width for the whole site. Enter any standard CSS value like 1%, 20px, 20em and 3rem, 2vw or 2vh. It's important to define the number and the unit without spaces.",
+            "required": false,
+            "type": "PlainText",
+            "typesettings": {
+                "placeholder": "3rem",
+                "maxLength": "",
+                "multiline": "",
+                "initialRows": "4"
             }
         },
         {
@@ -435,7 +717,7 @@
             }
         },
         {
-            "group": "Header",
+            "group": "Layout",
             "name": "Header Autohide",
             "handle": "headerAutohide",
             "instructions": "Hide the header automatically when the user scrolls down (it reappears when the user scrolls up or hits the bottom of the page). Only works for fixed navigation.",
@@ -446,14 +728,14 @@
             }
         },
         {
-            "group": "Header",
+            "group": "Layout",
             "name": "Header Fixed",
             "handle": "headerFixed",
             "instructions": "Keeps the header at the top of the window when scrolling.",
             "required": false,
             "type": "Lightswitch",
             "typesettings": {
-                "default": 1
+                "default": "1"
             }
         },
         {
@@ -492,16 +774,18 @@
             "type": "Assets",
             "typesettings": {
                 "useSingleFolder": "",
-                "sources": "*",
-                "defaultUploadLocationSource": "uploads",
+                "sources": [
+                    "folder:1"
+                ],
+                "defaultUploadLocationSource": "files",
                 "defaultUploadLocationSubpath": "",
-                "singleUploadLocationSource": "uploads",
+                "singleUploadLocationSource": "files",
                 "singleUploadLocationSubpath": "",
-                "restrictFiles": 1,
+                "restrictFiles": "1",
                 "allowedKinds": [
                     "image"
                 ],
-                "limit": 1,
+                "limit": "1",
                 "viewMode": "large",
                 "selectionLabel": ""
             }
@@ -525,9 +809,9 @@
             "required": false,
             "type": "Number",
             "typesettings": {
-                "min": 0,
+                "min": "0",
                 "max": "",
-                "decimals": 0
+                "decimals": "0"
             }
         },
         {
@@ -538,9 +822,9 @@
             "required": false,
             "type": "Number",
             "typesettings": {
-                "min": 0,
+                "min": "0",
                 "max": "",
-                "decimals": 0
+                "decimals": "0"
             }
         },
         {
@@ -551,10 +835,10 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
@@ -567,26 +851,137 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
         },
         {
-            "group": "Site",
+            "group": "Layout",
             "name": "Logo",
             "handle": "logo",
-            "instructions": "Paste your SVG code in this box. Only paste the code between the <svg><\/svg> tags.",
+            "instructions": "Upload your logo to go in the header instead of the site name. It's best to use an SVG. Make sure it is white, it will be the negative of whatever is behind.",
+            "required": false,
+            "type": "Assets",
+            "typesettings": {
+                "useSingleFolder": "",
+                "sources": [
+                    "folder:1"
+                ],
+                "defaultUploadLocationSource": "files",
+                "defaultUploadLocationSubpath": "",
+                "singleUploadLocationSource": "files",
+                "singleUploadLocationSubpath": "",
+                "restrictFiles": "1",
+                "allowedKinds": [
+                    "image"
+                ],
+                "limit": "1",
+                "viewMode": "large",
+                "selectionLabel": ""
+            }
+        },
+        {
+            "group": "Navigation",
+            "name": "Main Menu",
+            "handle": "mainMenu",
+            "instructions": "Here you add links to entries or custom URLs to the main menu.",
+            "required": false,
+            "type": "Matrix",
+            "typesettings": {
+                "maxBlocks": null,
+                "blockTypes": {
+                    "new1": {
+                        "name": "Entry",
+                        "handle": "entry",
+                        "fields": {
+                            "new1": {
+                                "name": "Entry",
+                                "handle": "entry",
+                                "instructions": "Select the entry you wish to link to.",
+                                "required": "0",
+                                "type": "Entries",
+                                "typesettings": {
+                                    "sources": [],
+                                    "limit": "1",
+                                    "selectionLabel": ""
+                                }
+                            },
+                            "new2": {
+                                "name": "Override Name",
+                                "handle": "overrideName",
+                                "instructions": "You can override the name that shows up in the menu.",
+                                "required": "0",
+                                "type": "PlainText",
+                                "typesettings": {
+                                    "placeholder": "Leave blank to not override.",
+                                    "maxLength": "",
+                                    "multiline": "",
+                                    "initialRows": "4"
+                                }
+                            }
+                        }
+                    },
+                    "new2": {
+                        "name": "Hyperlink",
+                        "handle": "hyperlink",
+                        "fields": {
+                            "new1": {
+                                "name": "Hyperlink",
+                                "handle": "hyperlink",
+                                "instructions": "Paste the URL here.",
+                                "required": "0",
+                                "type": "PlainText",
+                                "typesettings": {
+                                    "placeholder": "",
+                                    "maxLength": "",
+                                    "multiline": "",
+                                    "initialRows": "4"
+                                }
+                            },
+                            "new2": {
+                                "name": "Name",
+                                "handle": "hyperlinkName",
+                                "instructions": "Set the name that shows up in the menu.",
+                                "required": "0",
+                                "type": "PlainText",
+                                "typesettings": {
+                                    "placeholder": "",
+                                    "maxLength": "",
+                                    "multiline": "",
+                                    "initialRows": "4"
+                                }
+                            },
+                            "new3": {
+                                "name": "Open in a New Window",
+                                "handle": "hyperlinkTarget",
+                                "instructions": "",
+                                "required": "0",
+                                "type": "Lightswitch",
+                                "typesettings": {
+                                    "default": ""
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "group": "Layout",
+            "name": "Margin",
+            "handle": "margin",
+            "instructions": "Set the site's margin(s). Enter any standard CSS value like 3%, 40px, 30em and 30rem, 10vw or 20vh. It's important to define the number and the unit without spaces.",
             "required": false,
             "type": "PlainText",
             "typesettings": {
-                "placeholder": "",
+                "placeholder": "4.5rem",
                 "maxLength": "",
-                "multiline": 1,
-                "initialRows": 12
+                "multiline": "",
+                "initialRows": "4"
             }
         },
         {
@@ -608,10 +1003,10 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
-                "showAlpha": 1,
-                "showPalette": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
+                "showAlpha": "1",
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
@@ -640,10 +1035,10 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
@@ -656,10 +1051,10 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
@@ -672,16 +1067,16 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
         },
         {
-            "group": "Header",
+            "group": "Layout",
             "name": "Menu Toggle Type",
             "handle": "menuToggleType",
             "instructions": "Even if you set the navigation type to show as items in the header, it will responsively fall back to this option on smaller viewports.",
@@ -714,7 +1109,7 @@
             }
         },
         {
-            "group": "Header",
+            "group": "Layout",
             "name": "Navigation Type",
             "handle": "navigationType",
             "instructions": "Choose how to show your navigation items in the header.",
@@ -722,6 +1117,17 @@
             "type": "Lj_DynamicFields_Dropdown",
             "typesettings": {
                 "json": "{% include '_dynamicfields\/navigation_type' ignore missing %}"
+            }
+        },
+        {
+            "group": "Interface",
+            "name": "Next and Previous Links in Work Entries",
+            "handle": "nextPrev",
+            "instructions": "",
+            "required": false,
+            "type": "Lightswitch",
+            "typesettings": {
+                "default": "1"
             }
         },
         {
@@ -758,7 +1164,18 @@
             }
         },
         {
-            "group": "Site",
+            "group": "Posts",
+            "name": "Overlay Match Alignment",
+            "handle": "overlayMatchAlignment",
+            "instructions": "Force the child blocks of the overlay to inherit the overlay alignment (for middle and bottom alignment).",
+            "required": false,
+            "type": "Lightswitch",
+            "typesettings": {
+                "default": ""
+            }
+        },
+        {
+            "group": "Interface",
             "name": "Page Loader",
             "handle": "pageLoader",
             "instructions": "Use page loader for when navigating the site. This isn't necessary, but can briefly stimulate the impatient crowd.",
@@ -809,10 +1226,10 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
@@ -867,6 +1284,17 @@
             }
         },
         {
+            "group": "Styling",
+            "name": "Site Background Size",
+            "handle": "siteBackgroundSize",
+            "instructions": "Set the site background size.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/site_background_size' ignore missing %}"
+            }
+        },
+        {
             "group": "Interface",
             "name": "Slide Objects Into View",
             "handle": "slideObjectsIntoView",
@@ -909,8 +1337,94 @@
             "typesettings": {
                 "placeholder": "",
                 "maxLength": "",
-                "multiline": 1,
-                "initialRows": 4
+                "multiline": "1",
+                "initialRows": "4"
+            }
+        },
+        {
+            "group": "Navigation",
+            "name": "Sub Menu",
+            "handle": "subMenu",
+            "instructions": "Here you add links to entries or custom URLs to the main menu.",
+            "required": false,
+            "type": "Matrix",
+            "typesettings": {
+                "maxBlocks": null,
+                "blockTypes": {
+                    "new1": {
+                        "name": "Entry",
+                        "handle": "entry",
+                        "fields": {
+                            "new1": {
+                                "name": "Entry",
+                                "handle": "entry",
+                                "instructions": "Select the entry you wish to link to.",
+                                "required": "0",
+                                "type": "Entries",
+                                "typesettings": {
+                                    "sources": [],
+                                    "limit": "1",
+                                    "selectionLabel": ""
+                                }
+                            },
+                            "new2": {
+                                "name": "Override Name",
+                                "handle": "overrideName",
+                                "instructions": "You can override the name that shows up in the menu.",
+                                "required": "0",
+                                "type": "PlainText",
+                                "typesettings": {
+                                    "placeholder": "Leave blank to not override.",
+                                    "maxLength": "",
+                                    "multiline": "",
+                                    "initialRows": "4"
+                                }
+                            }
+                        }
+                    },
+                    "new2": {
+                        "name": "Hyperlink",
+                        "handle": "hyperlink",
+                        "fields": {
+                            "new1": {
+                                "name": "Hyperlink",
+                                "handle": "hyperlink",
+                                "instructions": "Paste the URL here.",
+                                "required": "0",
+                                "type": "PlainText",
+                                "typesettings": {
+                                    "placeholder": "",
+                                    "maxLength": "",
+                                    "multiline": "",
+                                    "initialRows": "4"
+                                }
+                            },
+                            "new2": {
+                                "name": "Name",
+                                "handle": "hyperlinkName",
+                                "instructions": "Set the name that shows up in the menu.",
+                                "required": "0",
+                                "type": "PlainText",
+                                "typesettings": {
+                                    "placeholder": "",
+                                    "maxLength": "",
+                                    "multiline": "",
+                                    "initialRows": "4"
+                                }
+                            },
+                            "new3": {
+                                "name": "Open Link in a New Window",
+                                "handle": "hyperlinkTarget",
+                                "instructions": "",
+                                "required": "0",
+                                "type": "Lightswitch",
+                                "typesettings": {
+                                    "default": ""
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         {
@@ -948,10 +1462,10 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
                 "showAlpha": "",
-                "showPalette": 1,
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "hex"
             }
@@ -964,10 +1478,10 @@
             "required": false,
             "type": "Spectrum_ColorPicker",
             "typesettings": {
-                "allowEmpty": 1,
-                "showInput": 1,
-                "showAlpha": 1,
-                "showPalette": 1,
+                "allowEmpty": "1",
+                "showInput": "1",
+                "showAlpha": "1",
+                "showPalette": "1",
                 "showPaletteOnly": "",
                 "preferredFormat": "rgb"
             }
@@ -1018,6 +1532,17 @@
         },
         {
             "group": "Posts",
+            "name": "Vertical Align",
+            "handle": "verticalAlign",
+            "instructions": "Set the vertical alignment of the content. Note that the vertical alignment is based off of the tallest block, meaning everything within the overlay block is top aligned.",
+            "required": false,
+            "type": "Lj_DynamicFields_Dropdown",
+            "typesettings": {
+                "json": "{% include '_dynamicfields\/vertical_align' ignore missing %}"
+            }
+        },
+        {
+            "group": "Posts",
             "name": "Video File",
             "handle": "videoFile",
             "instructions": "",
@@ -1025,16 +1550,18 @@
             "type": "Assets",
             "typesettings": {
                 "useSingleFolder": "",
-                "sources": "*",
-                "defaultUploadLocationSource": "uploads",
+                "sources": [
+                    "folder:1"
+                ],
+                "defaultUploadLocationSource": "files",
                 "defaultUploadLocationSubpath": "",
-                "singleUploadLocationSource": "uploads",
+                "singleUploadLocationSource": "files",
                 "singleUploadLocationSubpath": "",
-                "restrictFiles": 1,
+                "restrictFiles": "1",
                 "allowedKinds": [
                     "video"
                 ],
-                "limit": 1,
+                "limit": "1",
                 "viewMode": "list",
                 "selectionLabel": ""
             }
@@ -1043,14 +1570,14 @@
             "group": "Typography",
             "name": "Web Font Snippets",
             "handle": "webFontSnippets",
-            "instructions": "Add your external web font code snippets here (these are css stylesheet links).",
+            "instructions": "Add your external web font code snippets here. These are css stylesheet links and need to follow @font-face standards.",
             "required": false,
             "type": "PlainText",
             "typesettings": {
                 "placeholder": "<link href=\"link to font stylesheet\" rel=\"stylesheet\">",
                 "maxLength": "",
-                "multiline": 1,
-                "initialRows": 8
+                "multiline": "1",
+                "initialRows": "8"
             }
         },
         {
@@ -1067,18 +1594,18 @@
                         "Content"
                     ],
                     "sortOrder": [
-                        1
+                        "1"
                     ]
                 },
                 "blockTypes": {
                     "new0": {
-                        "sortOrder": 2,
+                        "sortOrder": "2",
                         "name": "Text",
                         "handle": "text",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 1,
+                        "topLevel": "1",
                         "fieldLayout": {
                             "Content": [
                                 "text"
@@ -1086,13 +1613,13 @@
                         }
                     },
                     "new1": {
-                        "sortOrder": 3,
+                        "sortOrder": "3",
                         "name": "Image",
                         "handle": "image",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 1,
+                        "topLevel": "1",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
@@ -1101,7 +1628,7 @@
                         }
                     },
                     "new2": {
-                        "sortOrder": 4,
+                        "sortOrder": "4",
                         "name": "Slideshow",
                         "handle": "slideshow",
                         "maxBlocks": null,
@@ -1109,27 +1636,17 @@
                             "slideshowSlide"
                         ],
                         "maxChildBlocks": null,
-                        "topLevel": 1,
-                        "fieldLayout": {
-                            "Content": [],
-                            "Settings": [
-                                "slideshowType",
-                                "transition",
-                                "autoplay",
-                                "autoplayTimer",
-                                "showArrows",
-                                "indicator"
-                            ]
-                        }
+                        "topLevel": "1",
+                        "fieldLayout": []
                     },
                     "new3": {
-                        "sortOrder": 5,
+                        "sortOrder": "5",
                         "name": "Slideshow Slide",
                         "handle": "slideshowSlide",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
@@ -1138,13 +1655,13 @@
                         }
                     },
                     "new4": {
-                        "sortOrder": 6,
+                        "sortOrder": "6",
                         "name": "Video",
                         "handle": "video",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 1,
+                        "topLevel": "1",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
@@ -1153,26 +1670,19 @@
                         }
                     },
                     "new5": {
-                        "sortOrder": 7,
+                        "sortOrder": "7",
                         "name": "Video Loop",
                         "handle": "videoLoop",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 1,
+                        "topLevel": "1",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
                                 "videoFile"
                             ]
-                        },
-                        "relabel": [
-                            {
-                                "field": "imageFile",
-                                "name": null,
-                                "instructions": "This is your poster\/fallback. Without it, the video loop will not work."
-                            }
-                        ]
+                        }
                     }
                 }
             }
@@ -1192,13 +1702,13 @@
                         "Utilities"
                     ],
                     "sortOrder": [
-                        2,
-                        5
+                        "2",
+                        "5"
                     ]
                 },
                 "blockTypes": {
                     "new0": {
-                        "sortOrder": 1,
+                        "sortOrder": "1",
                         "name": "Row",
                         "handle": "row",
                         "maxBlocks": null,
@@ -1211,7 +1721,7 @@
                             "code"
                         ],
                         "maxChildBlocks": null,
-                        "topLevel": 1,
+                        "topLevel": "1",
                         "fieldLayout": {
                             "Content": [
                                 "rowType"
@@ -1229,13 +1739,13 @@
                         }
                     },
                     "new1": {
-                        "sortOrder": 3,
+                        "sortOrder": "3",
                         "name": "Text",
                         "handle": "text",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "text",
@@ -1255,13 +1765,13 @@
                         }
                     },
                     "new2": {
-                        "sortOrder": 4,
+                        "sortOrder": "4",
                         "name": "Image",
                         "handle": "image",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
@@ -1284,13 +1794,13 @@
                         }
                     },
                     "new3": {
-                        "sortOrder": 6,
+                        "sortOrder": "6",
                         "name": "Spacer",
                         "handle": "spacer",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Spacer": [
                                 "grid",
@@ -1304,13 +1814,13 @@
                         }
                     },
                     "new4": {
-                        "sortOrder": 7,
+                        "sortOrder": "7",
                         "name": "Separator",
                         "handle": "separator",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Separator": [
                                 "grid",
@@ -1323,23 +1833,23 @@
                         }
                     },
                     "new5": {
-                        "sortOrder": 8,
+                        "sortOrder": "8",
                         "name": "Clear",
                         "handle": "clear",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": []
                     },
                     "new6": {
-                        "sortOrder": 9,
+                        "sortOrder": "9",
                         "name": "Code",
                         "handle": "code",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "customCode",
@@ -1373,16 +1883,20 @@
                 "groups": {
                     "name": [
                         "Content",
-                        "Utilities"
+                        "Utilities",
+                        "",
+                        ""
                     ],
                     "sortOrder": [
-                        2,
-                        12
+                        "2",
+                        "13",
+                        "18",
+                        "21"
                     ]
                 },
                 "blockTypes": {
                     "new0": {
-                        "sortOrder": 1,
+                        "sortOrder": "1",
                         "name": "Row",
                         "handle": "row",
                         "maxBlocks": null,
@@ -1392,6 +1906,7 @@
                             "slideshow",
                             "video",
                             "videoLoop",
+                            "thumbnail",
                             "taxonomy",
                             "structure",
                             "channel",
@@ -1401,14 +1916,18 @@
                             "code"
                         ],
                         "maxChildBlocks": null,
-                        "topLevel": 1,
+                        "topLevel": "1",
                         "fieldLayout": {
                             "Content": [
                                 "rowType"
                             ],
                             "Styling": [
                                 "rowBgColor",
-                                "rowTextColor"
+                                "rowTextColor",
+                                "imageFile",
+                                "backgroundPosition",
+                                "backgroundRepeat",
+                                "backgroundSize"
                             ],
                             "Settings": [
                                 "notFluidWidth",
@@ -1416,16 +1935,23 @@
                                 "classes",
                                 "style"
                             ]
-                        }
+                        },
+                        "relabel": [
+                            {
+                                "field": "imageFile",
+                                "name": "Background Image",
+                                "instructions": "Set a background image for the row."
+                            }
+                        ]
                     },
                     "new1": {
-                        "sortOrder": 3,
+                        "sortOrder": "3",
                         "name": "Text",
                         "handle": "text",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "text",
@@ -1445,13 +1971,15 @@
                         }
                     },
                     "new2": {
-                        "sortOrder": 4,
+                        "sortOrder": "4",
                         "name": "Image",
                         "handle": "image",
                         "maxBlocks": null,
-                        "childBlocks": "",
-                        "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "childBlocks": [
+                            "overlayContent"
+                        ],
+                        "maxChildBlocks": "1",
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
@@ -1475,15 +2003,16 @@
                         }
                     },
                     "new3": {
-                        "sortOrder": 5,
+                        "sortOrder": "5",
                         "name": "Slideshow",
                         "handle": "slideshow",
                         "maxBlocks": null,
                         "childBlocks": [
-                            "slideshowSlide"
+                            "slideshowSlide",
+                            "overlayContent"
                         ],
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "grid",
@@ -1510,28 +2039,38 @@
                         }
                     },
                     "new4": {
-                        "sortOrder": 6,
+                        "sortOrder": "6",
                         "name": "Slideshow Slide",
                         "handle": "slideshowSlide",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Slide": [
                                 "imageFile",
+                                "videoFile",
                                 "text"
                             ]
-                        }
+                        },
+                        "relabel": [
+                            {
+                                "field": "imageFile",
+                                "name": null,
+                                "instructions": "This will be your slide image. If you add video (below), this will be the video poster. The aspect ratio of the video should be the same aspect ratio as the image."
+                            }
+                        ]
                     },
                     "new5": {
-                        "sortOrder": 7,
+                        "sortOrder": "7",
                         "name": "Video",
                         "handle": "video",
                         "maxBlocks": null,
-                        "childBlocks": "",
-                        "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "childBlocks": [
+                            "overlayContent"
+                        ],
+                        "maxChildBlocks": "1",
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
@@ -1554,13 +2093,15 @@
                         }
                     },
                     "new6": {
-                        "sortOrder": 8,
+                        "sortOrder": "8",
                         "name": "Video Loop",
                         "handle": "videoLoop",
                         "maxBlocks": null,
-                        "childBlocks": "",
-                        "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "childBlocks": [
+                            "overlayContent"
+                        ],
+                        "maxChildBlocks": "1",
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "imageFile",
@@ -1591,13 +2132,30 @@
                         ]
                     },
                     "new7": {
-                        "sortOrder": 9,
+                        "sortOrder": "9",
+                        "name": "Thumbnail",
+                        "handle": "thumbnail",
+                        "maxBlocks": null,
+                        "childBlocks": [
+                            "override",
+                            "overrideGlobals"
+                        ],
+                        "maxChildBlocks": "2",
+                        "topLevel": "0",
+                        "fieldLayout": {
+                            "Content": [
+                                "singleEntry"
+                            ]
+                        }
+                    },
+                    "new8": {
+                        "sortOrder": "10",
                         "name": "Taxonomy",
                         "handle": "taxonomy",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "display",
@@ -1605,14 +2163,14 @@
                             ]
                         }
                     },
-                    "new8": {
-                        "sortOrder": 10,
+                    "new9": {
+                        "sortOrder": "11",
                         "name": "Structure",
                         "handle": "structure",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "structure",
@@ -1621,14 +2179,14 @@
                             ]
                         }
                     },
-                    "new9": {
-                        "sortOrder": 11,
+                    "new10": {
+                        "sortOrder": "12",
                         "name": "Channel",
                         "handle": "channel",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "channel",
@@ -1636,14 +2194,14 @@
                             ]
                         }
                     },
-                    "new10": {
-                        "sortOrder": 13,
+                    "new11": {
+                        "sortOrder": "14",
                         "name": "Spacer",
                         "handle": "spacer",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Spacer": [
                                 "grid",
@@ -1656,14 +2214,14 @@
                             ]
                         }
                     },
-                    "new11": {
-                        "sortOrder": 14,
+                    "new12": {
+                        "sortOrder": "15",
                         "name": "Separator",
                         "handle": "separator",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Separator": [
                                 "grid",
@@ -1676,26 +2234,26 @@
                             ]
                         }
                     },
-                    "new12": {
-                        "sortOrder": 15,
+                    "new13": {
+                        "sortOrder": "16",
                         "name": "Clear",
                         "handle": "clear",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Clear": []
                         }
                     },
-                    "new13": {
-                        "sortOrder": 16,
+                    "new14": {
+                        "sortOrder": "17",
                         "name": "Code",
                         "handle": "code",
                         "maxBlocks": null,
                         "childBlocks": "",
                         "maxChildBlocks": null,
-                        "topLevel": 0,
+                        "topLevel": "0",
                         "fieldLayout": {
                             "Content": [
                                 "customCode",
@@ -1713,6 +2271,98 @@
                                 "style"
                             ]
                         }
+                    },
+                    "new15": {
+                        "sortOrder": "19",
+                        "name": "Overlay Content",
+                        "handle": "overlayContent",
+                        "maxBlocks": null,
+                        "childBlocks": [
+                            "overlayRow"
+                        ],
+                        "maxChildBlocks": null,
+                        "topLevel": "0",
+                        "fieldLayout": {
+                            "Overlay Content": [
+                                "verticalAlign",
+                                "overlayMatchAlignment"
+                            ],
+                            "Settings": [
+                                "classes",
+                                "style"
+                            ]
+                        }
+                    },
+                    "new16": {
+                        "sortOrder": "20",
+                        "name": "Overlay Row",
+                        "handle": "overlayRow",
+                        "maxBlocks": null,
+                        "childBlocks": [
+                            "text",
+                            "image",
+                            "video",
+                            "videoLoop",
+                            "spacer",
+                            "separator",
+                            "clear",
+                            "code"
+                        ],
+                        "maxChildBlocks": null,
+                        "topLevel": "0",
+                        "fieldLayout": {
+                            "Content": [],
+                            "Settings": [
+                                "classes",
+                                "style"
+                            ]
+                        }
+                    },
+                    "new17": {
+                        "sortOrder": "22",
+                        "name": "Override",
+                        "handle": "override",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": "0",
+                        "fieldLayout": {
+                            "Override": [
+                                "imageFile",
+                                "videoFile",
+                                "grid",
+                                "offset",
+                                "bleed"
+                            ],
+                            "Settings": [
+                                "pull",
+                                "moveHorizontal",
+                                "moveVertical",
+                                "layer",
+                                "shadow",
+                                "noPadding",
+                                "maxHeight",
+                                "responsiveVisibility",
+                                "classes",
+                                "style"
+                            ]
+                        }
+                    },
+                    "new18": {
+                        "sortOrder": "23",
+                        "name": "Override Globals",
+                        "handle": "overrideGlobals",
+                        "maxBlocks": null,
+                        "childBlocks": "",
+                        "maxChildBlocks": null,
+                        "topLevel": "0",
+                        "fieldLayout": {
+                            "Override Globals": [
+                                "thumbTextPosition",
+                                "thumbTextSize",
+                                "thumbHoverOverlayColor"
+                            ]
+                        }
                     }
                 }
             }
@@ -1721,7 +2371,7 @@
     "entryTypes": [
         {
             "sectionHandle": "homepage",
-            "hasTitleField": 1,
+            "hasTitleField": "1",
             "titleLabel": "Title",
             "name": "Homepage",
             "handle": "homepage",
@@ -1732,6 +2382,11 @@
                 ],
                 "Styling": [
                     "backgroundColor",
+                    "backgroundImage",
+                    "siteBackgroundSize",
+                    "backgroundPosition",
+                    "backgroundRepeat",
+                    "backgroundAttachment",
                     "textColor",
                     "linkColor",
                     "linkHoverColor"
@@ -1739,24 +2394,18 @@
                 "Custom Code": [
                     "customCode"
                 ]
-            }
-        },
-        {
-            "sectionHandle": "news",
-            "hasTitleField": 1,
-            "titleLabel": "Title",
-            "name": "News",
-            "handle": "news",
-            "fieldLayout": {
-                "Content": [
-                    "channelPostContent",
-                    "tags"
-                ]
-            }
+            },
+            "relabel": [
+                {
+                    "field": "siteBackgroundSize",
+                    "name": "Background Size",
+                    "instructions": null
+                }
+            ]
         },
         {
             "sectionHandle": "pages",
-            "hasTitleField": 1,
+            "hasTitleField": "1",
             "titleLabel": "Title",
             "name": "Pages",
             "handle": "pages",
@@ -1768,6 +2417,11 @@
                 ],
                 "Styling": [
                     "backgroundColor",
+                    "backgroundImage",
+                    "siteBackgroundSize",
+                    "backgroundPosition",
+                    "backgroundRepeat",
+                    "backgroundAttachment",
                     "textColor",
                     "linkColor",
                     "linkHoverColor"
@@ -1775,11 +2429,31 @@
                 "Custom Code": [
                     "customCode"
                 ]
+            },
+            "relabel": [
+                {
+                    "field": "siteBackgroundSize",
+                    "name": "Background Size",
+                    "instructions": null
+                }
+            ]
+        },
+        {
+            "sectionHandle": "resources",
+            "hasTitleField": "1",
+            "titleLabel": "Title",
+            "name": "Resources",
+            "handle": "resources",
+            "fieldLayout": {
+                "Content": [
+                    "channelPostContent",
+                    "tags"
+                ]
             }
         },
         {
             "sectionHandle": "work",
-            "hasTitleField": 1,
+            "hasTitleField": "1",
             "titleLabel": "Title",
             "name": "Work",
             "handle": "work",
@@ -1803,6 +2477,11 @@
                 ],
                 "Styling": [
                     "backgroundColor",
+                    "backgroundImage",
+                    "siteBackgroundSize",
+                    "backgroundPosition",
+                    "backgroundRepeat",
+                    "backgroundAttachment",
                     "textColor",
                     "linkColor",
                     "linkHoverColor"
@@ -1810,22 +2489,44 @@
             },
             "relabel": [
                 {
-                    "field": "imageFile",
-                    "name": null,
-                    "instructions": "This will be your thumbnail. If you add video (below), this will be the video poster\/fallback, and the scale of the video is dictated by the dimensions of the thumbnail image."
+                    "field": "siteBackgroundSize",
+                    "name": "Background Size",
+                    "instructions": null
                 }
             ]
         }
     ],
     "sources": [
         {
-            "name": "Uploads",
-            "handle": "uploads",
+            "name": "Files",
+            "handle": "files",
             "type": "Local",
             "settings": {
-                "path": "uploads\/",
-                "publicURLs": 1,
-                "url": "\/uploads\/"
+                "path": "uploads\/files\/",
+                "publicURLs": "1",
+                "url": "\/uploads\/files\/"
+            },
+            "fieldLayout": []
+        },
+        {
+            "name": "Fonts",
+            "handle": "fonts",
+            "type": "Local",
+            "settings": {
+                "path": "uploads\/fonts\/",
+                "publicURLs": "1",
+                "url": "\/uploads\/fonts\/"
+            },
+            "fieldLayout": []
+        },
+        {
+            "name": "CSS",
+            "handle": "css",
+            "type": "Local",
+            "settings": {
+                "path": "uploads\/css\/",
+                "publicURLs": "1",
+                "url": "\/uploads\/css\/"
             },
             "fieldLayout": []
         }
@@ -1836,7 +2537,7 @@
             "handle": "large",
             "mode": "fit",
             "position": "center-center",
-            "width": 2560,
+            "width": "2560",
             "height": null,
             "quality": null,
             "format": null
@@ -1846,7 +2547,7 @@
             "handle": "medium",
             "mode": "fit",
             "position": "center-center",
-            "width": 1280,
+            "width": "1280",
             "height": null,
             "quality": null,
             "format": null
@@ -1856,7 +2557,7 @@
             "handle": "small",
             "mode": "fit",
             "position": "center-center",
-            "width": 640,
+            "width": "640",
             "height": null,
             "quality": null,
             "format": null
@@ -1873,31 +2574,14 @@
             }
         },
         {
-            "name": "Header",
-            "handle": "header",
-            "fieldLayout": {
-                "Content": [
-                    "headerFixed",
-                    "headerAutohide",
-                    "navigationType",
-                    "menuToggleType"
-                ]
-            }
-        },
-        {
-            "name": "Interface",
-            "handle": "interface",
-            "fieldLayout": {
-                "Content": [
-                    "slideObjectsIntoView"
-                ]
-            }
-        },
-        {
-            "name": "Menu",
+            "name": "Header and Menu",
             "handle": "menu",
             "fieldLayout": {
                 "Content": [
+                    "navigationType",
+                    "menuToggleType",
+                    "mainMenu",
+                    "subMenu",
                     "menuContent",
                     "menuBgColor",
                     "menuTextColor",
@@ -1907,18 +2591,59 @@
             }
         },
         {
+            "name": "Interface",
+            "handle": "interface",
+            "fieldLayout": {
+                "Content": [
+                    "pageLoader",
+                    "slideObjectsIntoView",
+                    "nextPrev"
+                ]
+            }
+        },
+        {
+            "name": "Layout",
+            "handle": "layout",
+            "fieldLayout": {
+                "Content": [
+                    "logo",
+                    "headerFixed",
+                    "headerAutohide",
+                    "customCss",
+                    "margin",
+                    "gridGutter",
+                    "backgroundColor",
+                    "backgroundImage",
+                    "siteBackgroundSize",
+                    "backgroundPosition",
+                    "backgroundRepeat",
+                    "backgroundAttachment",
+                    "textColor",
+                    "linkColor",
+                    "linkHoverColor"
+                ]
+            },
+            "relabel": [
+                {
+                    "field": "siteBackgroundSize",
+                    "name": "Background Size",
+                    "instructions": null
+                },
+                {
+                    "field": "imageFile",
+                    "name": "Background Image",
+                    "instructions": "Set a background image for the site."
+                }
+            ]
+        },
+        {
             "name": "Site",
             "handle": "site",
             "fieldLayout": {
                 "Content": [
                     "favicon",
-                    "pageLoader",
-                    "googleAnalytics",
-                    "logo",
-                    "backgroundColor",
-                    "textColor",
-                    "linkColor",
-                    "linkHoverColor"
+                    "description",
+                    "googleAnalytics"
                 ]
             }
         },
@@ -1938,6 +2663,7 @@
             "handle": "typography",
             "fieldLayout": {
                 "Content": [
+                    "customFonts",
                     "webFontSnippets",
                     "defaultFont",
                     "defaultFontSize",
@@ -1954,7 +2680,15 @@
                     "h5Font",
                     "h5FontSize",
                     "h6Font",
-                    "h6FontSize"
+                    "h6FontSize",
+                    "display1Font",
+                    "display1FontSize",
+                    "display2Font",
+                    "display2FontSize",
+                    "display3Font",
+                    "display3FontSize",
+                    "display4Font",
+                    "display4FontSize"
                 ]
             }
         }

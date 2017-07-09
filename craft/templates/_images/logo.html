@@ -1,17 +1,7 @@
-{% if site.logo|length %}
-{% spaceless %}
-<svg class="{{- class is defined ? class : '' -}}" preserveAspectRatio="xMinYMid meet" height="13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <title>
-    Logo
-  </title>
-  <defs>
-    <g id="ModulLogo">
-      {{ site.logo }}
-    </g>
-  </defs>
-  <use x="0" y="0" xlink:href="#ModulLogo" />
-</svg>
-{% endspaceless %}
-{% else %}
-  {{ siteName }}
-{% endif %}
+<a id="logo" class="link-thick" href="{{ url('/') }}">
+    {% if layout.logo | length %}
+        <img id="logo-image" src="{{ layout.logo.first().getUrl }}">
+    {% else %}
+        {{ siteName }}
+    {% endif %}
+</a>
