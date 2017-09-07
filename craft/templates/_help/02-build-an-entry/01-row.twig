@@ -1,0 +1,67 @@
+{# Title: Row #}
+{% set content %}
+# Row
+
+--------------------------------------------------------------------------------
+
+## Row content tab
+
+There are 9 types of **content** blocks and 4 types of **utility** blocks. The image, slideshow, video and video loop content blocks can have **overlays**.
+
+![Row content tab]({{ siteUrl ~ "help/screens/row-content.png" }})
+
+### The blocks
+
+All the **content** blocks have settings pertaining to the grid and how they are displayed within the grid. The grid is 12 columns, meaning a 6/12 grid settings is half the page width within the margins. If you then set the offset to 6/12 columns, the half-width content will start at half the page from the left and go to the far right margin. Certain content—like images, videos, video loops and slideshows—can bleed either to either the left, right or both sides (go all the way to the edge).
+
+#### Content
+
+-   [**Text**]({{ url("help/02-build-an-entry/02-text") }})  
+    Text can be formatted visually, as well as contain HTML code (use the `<>` icon).
+-   [**Image**]({{ url("help/02-build-an-entry/03-image") }})  
+-   [**Slideshow**]({{ url("help/02-build_an_entry/04-slideshow") }})  
+    A slideshow can have images and videos.
+-   [**Video**]({{ url("help/02-build-an-entry/05-video") }})  
+-   [**Video Loop**]({{ url("help/02-build-an-entry/06-video-loop") }})  
+    Like an animated gif, but better.
+-   [**Thumbnail**]({{ url("help/02-build-an-entry/07-thumbnail") }})  
+    Add a thumbnail to a work entry and override the settings specific to that entry (functions very close to images and video loops).
+-   [**Taxonomy**]({{ url("help/02-build-an-entry/08-taxonomy") }})  
+    It's the ability to add a list with any individual entry, or multiple entries in any order and render as `index`, `thumbs` or `full`.
+-   [**Structure**]({{ url("help/02-build-an-entry/09-structure") }})  
+    This loads a structure, like `Work` for example, and renders either as `index`, `thumbs` or `full`, with the ability to limit how many are shown.
+-   [**Channel**]({{ url("help/02-build-an-entry/10-channel") }})  
+    This loads a channel, like `news` for example, and renders the entries as a blog.
+
+-   You can add [**Overlay**]({{ url("help/02-build-an-entry/11-overlay") }}) content on images, slideshows, videos and video loops. It functions the same as the rows/blocks when building pages.
+
+#### Utilities
+
+-   [**Spacer**]({{ url("help/02-build-an-entry/12-spacer") }})  
+    Adds a vertical spacer in case you need to push content down.
+-   [**Separator**]({{ url("help/02-build-an-entry/13-separator") }})  
+    Adds a line that you can set the thickness and color of.
+-   [**Clear**]({{ url("help/02-build-an-entry/14-clear") }})  
+    A standard css clearfix for clearing left and right floats.
+-   [**Code**]({{ url("help/02-build-an-entry/15-code") }})  
+    This is great for embedding videos or adding custom stuff to the flow.
+
+--------------------------------------------------------------------------------
+
+## Row styling tab
+
+Similar to the styling tab for entries (at the top for work entries and pages) you can set the styling related to the row itself. This means you can break up the flow of the page with colors, images and so forth.
+
+![Row styling tab]({{ siteUrl ~ "help/screens/row-styling.png" }})
+
+--------------------------------------------------------------------------------
+
+## Row settings tab
+
+Here you can set some layout options for the row as well as add CSS classes and CSS styles.
+
+![Row styling tab]({{ siteUrl ~ "help/screens/row-settings.png" }})
+
+{% endset %}
+
+{{ content|markdown }}

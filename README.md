@@ -35,7 +35,9 @@ The username is `admin` and the password is `password`.
 
 ## Quick tutorial
 
-Start off by looking at the `Homepage` and `About` page. These are two very basic representations of what a page or post can look like. When you add things to the `Work structure`, things will not automatically show up somewhere, you have to create a page (look at the `Work` page in the `Pages structure`). If you decide to create more structures, you can then load them in like on the `Work` page (or any page/post). Keep in mind though, that in order for you to be able to add and render content, you need to add all the fields to that specific structure (look at the `Work` structure for guidance) or program your own version of that specific structure (or channel for that matter, if you want a news section or blog capabilities). Install, have a look around--and hopefully things will get a bit more clear.
+Start off by looking at the `Entries > Singles > Home` and `Entries > Pages > About` page. These are two very basic representations of what a page or post can look like. When you add things to the `Entries > Work` structure, things will not automatically show up somewhere, you have to create a page (look at the `Entries >  Pages > Work` page in the `Pages` structure). If you decide to create more structures, you can then load them in like on the `Work` page (or any page/post). Keep in mind though, that in order for you to be able to add and render content, you need to add all the fields to that specific structure (look at the `Work` structure for guidance) or program your own version of that specific structure (or channel for that matter, if you want a news section or blog capabilities). Install, have a look around--and hopefully things will get a bit more clear.
+
+**Please see the `Help` section in the sidebar for further information and basic tutorials.**
 
 --------------------------------------------------------------------------------
 
@@ -155,6 +157,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
   - [Redactor Extras](https://github.com/elliotlewis/Redactor-Extras)
   - [Spectrum FieldType](https://github.com/alecritson/craft-spectrum-fieldtype)
   - [The Architect](https://github.com/Pennebaker/craftcms-thearchitect)
+  - [Craft Help](https://github.com/70kft/craft-help)
 
 - CSS
 
@@ -176,8 +179,7 @@ Modul is built for Craft CMS, using the following dependencies, all of which are
 ## To-do and known issues
 
 - Slideshows with "visible nearby" and no max-height set gets too much vertical padding.
-- Pasting SVG code for the logo in the `Globals/Site` doesn't work yet. Will likely be a different approach.
-- Add more customization options to the backend, like gutter widths and so forth.
+- Add more customization options to the backend, like max-width on/off and max-width value.
 - Slide text fields in Slideshows do nothing at the moment, but I have something built that needs a bit more work for the next release.
 - Make full render taxonomy/structure items page styling carry through.
 - Make menu toggle off enforceable on mobile devices.

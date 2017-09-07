@@ -1,0 +1,111 @@
+{# Title: Getting started #}
+{% set content %}
+# Getting Started
+
+--------------------------------------------------------------------------------
+
+Start off by looking at the `Entries > Singles > Home` and `Entries > Pages > About` page. These are two very basic representations of what a page or post can look like. When you add things to the `Entries > Work` structure, things will not automatically show up somewhere, you have to create a page (look at the `Entries >  Pages > Work` page in the `Pages` structure). If you decide to create more structures, you can then load them in like on the `Work` page (or any page/post). Keep in mind though, that in order for you to be able to add and render content, you need to add all the fields to that specific structure (look at the `Work` structure for guidance) or program your own version of that specific structure (or channel for that matter, if you want a news section or blog capabilities). Install, have a look around--and hopefully things will get a bit more clear.
+
+--------------------------------------------------------------------------------
+
+## A brief summary of functionality
+
+- **Fully fluid and responsive.**
+- **Different block types can be added to rows of content.**
+
+- **Row** Either `Normal` (standard float: left; css) or `Masonry` (using jQuery Packery to fill gaps in columns)
+
+    - **Content**
+
+        - **Text**
+        - **Image**
+        - **Slideshow**
+        - **Video**
+        - **Video Loop** (like an animated gif, but better)
+        - **Thumbnail** (override thumbnail specific settings, and treat it more as an image)
+        - **Taxonomy** (should rename this eventually, it's the ability to add a list with any individual entry, or multiple entries in any order and render as index, thumbs or full)
+        - **Structure** (this loads a structure, like `Work` for example, and renders either as index, thumbs or full, with the ability to limit how many are shown)
+        - **Channel** (this loads a channel, like `news` for example, and renders the entries as a blog)
+        - You can add **Overlay** content on images, slideshows, videos and video loops. It functions the same as the rows/blocks when building pages.
+
+    - **Utilities**
+
+        - Spacer
+        - Separator
+        - Clear
+        - Code
+
+- **Singles > Homepage**
+
+    - This is the landing page
+    - Build landing page however you want
+    - Style landing page however you want
+
+- **Entries > Structures**
+
+    - **Pages**
+
+        - Add a page and build it however you want
+        - Style the page however you want
+
+    - **Work**
+
+        - The difference between this structure and the `Pages` structure is that you have a `thumbnail` tab. This is so you can render thumbnails when loading the structure/taxonomy or thumbnail on other pages.
+
+        - _If you add another structure, don't forget to set up the fields as they are set up in the `Work` structure. Just drag-and-drop to match._
+
+    - **Entries > Channels**
+
+        - **News**
+
+            - This is sort of like a blog structure.
+
+            - _If you add another channel, don't forget to set up the fields as they are set up in the `Work` structure. Just drag-and-drop to match._
+
+- **Globals**
+
+    - **Footer**
+
+        - Build your `Footer` in a similar fashion to how you build `Pages`
+
+    - **Header and Menu**
+
+        - Set the navigation type.
+
+            - Show menu items in header (responsively collapses to button)
+            - Menu button as text or sandwich icon
+
+        - Add entries to the menu(s)
+
+            - Add menu content (for the slide-out menu)
+            - Set styles (for the slide-out menu)
+
+    - **Interface**
+
+        - Set some sitewide settings like page loader and so forth.
+
+    - **Layout**
+
+        - Tweak site-wide layout settings and styles.
+
+    - **Site**
+
+        - Settings that affect the whole site
+        - Favicon
+        - Description
+        - Google Analytics
+
+    - **Thumbnails**
+
+        - Settings and styles for thumbnails (when rendering a structure as a grid--like the work section for example)
+
+    - **Typography**
+
+        - Add custom fonts
+        - Change font sizes
+        - Change line heights
+
+
+{% endset %}
+
+{{ content|markdown }}
