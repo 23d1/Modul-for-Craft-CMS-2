@@ -1,7 +1,7 @@
 {% macro customFont(selector, font, size) %}
   {% if font|length %}
     {{ selector }}, .{{ selector }} {
-      font-family: {{ font }};
+      font-family: {{ font|raw }};
       {% if size|length %}
         font-size: {{ size }};
       {% endif %}
@@ -16,7 +16,7 @@
 {% macro customDisplayFont(selector, font, size) %}
   {% if font|length %}
     .{{ selector }} {
-      font-family: {{ font }};
+      font-family: {{ font|raw }};
       {% if size|length %}
         font-size: {{ size }};
       {% endif %}
