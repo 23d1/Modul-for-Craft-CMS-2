@@ -1,3 +1,8 @@
+# Note about Modul 2—or rather—Modul 1.0 for Craft 3 on Nov 28, 2018
+
+I've been working on Modul 1.0 for Craft 3, but a crucial plugin (Neo) has gone commercial with a $49/year fee. This is not in line with my ideals for open source, and so until Pixel & Tonic allows an agency/developer license where I pay a fee, but can distribute freely this project will be put on hold.
+If there's enough interest, I will use SuperTable instead, which has similar functionality, but a lot less elegant in my opinion. Let me know, and I will seriously consider it.
+
 # Modul for Craft CMS
 
 Website builder template skeleton for Craft CMS aimed primarily at (but not limited to) creatives, designers, photographers and other visual thinkers who enjoys a nice and tidy grid structure, with the ability to tastefully break it.
