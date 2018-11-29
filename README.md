@@ -1,7 +1,7 @@
 # Note about Modul 1.0 for Craft 3 on Nov 28, 2018
 
-I've been working on Modul 1.0 for Craft 3, but a crucial plugin (Neo) has gone commercial with a $49/year fee. This is not in line with my ideals for open source, and so until Pixel & Tonic allows an agency/developer license where I pay a fee, but can distribute freely this project will be put on hold.
-If there's enough interest, I will use SuperTable instead, which has similar functionality, but a lot less elegant in my opinion. Let me know, and I will seriously consider it.
+I've been working on Modul 1.0 for Craft 3, but a crucial plugin (Neo) has gone commercial with a $49/year fee. This is not in line with my ideals for open source, and so until Pixel & Tonic allows an agency/developer license model for plugins where I pay a fee to develop with Neo, but can distribute freely this project will be put on hold.
+If there's enough interest, I will use SuperTable instead, which has similar functionality, but a lot less elegant in my opinion. Let me know, and I will seriously consider moving it to SuperTable.
 
 # Modul for Craft CMS
 
